@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ameno Café — Café de Especialidad & Eventos Premium | Minatitlán, Veracruz</title>
+  <meta name="description" content="Ameno Café: Tostaduría de café de especialidad y servicio de catering premium para bodas, eventos corporativos y reuniones privadas en Minatitlán, Veracruz.">
+  <meta name="keywords" content="café de especialidad, Minatitlán, Veracruz, catering premium, bodas, eventos corporativos, barra de café">
+  <meta property="og:title" content="Ameno Café — El Ritual del Grano, la Calma del Momento">
+  <meta property="og:description" content="Tostaduría de especialidad y catering premium en Minatitlán, Veracruz. Del campo veracruzano a tu evento.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_MX">
+  <link rel="canonical" href="https://amenocafe.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style type="text/tailwindcss">
+    @theme {
+      --color-hueso: #FAF9F6;
+      --color-cafe: #2C1B18;
+      --color-dorado: #D4A373;
+      --color-dorado-light: #E8C9A0;
+      --color-crema: #F5F0EB;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans: 'Montserrat', system-ui, sans-serif;
+    }
+
+    /* Base */
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-sans); background-color: var(--color-hueso); color: var(--color-cafe); }
+
+    /* Animations */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Stagger children */
+    .stagger > .fade-up:nth-child(1) { transition-delay: 0ms; }
+    .stagger > .fade-up:nth-child(2) { transition-delay: 120ms; }
+    .stagger > .fade-up:nth-child(3) { transition-delay: 240ms; }
+    .stagger > .fade-up:nth-child(4) { transition-delay: 360ms; }
+    .stagger > .fade-up:nth-child(5) { transition-delay: 480ms; }
+    .stagger > .fade-up:nth-child(6) { transition-delay: 600ms; }
+
+    /* Bento grid images */
+    .bento-img {
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .bento-img:hover { transform: scale(1.03); }
+
+    /* Custom select styling */
+    select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%232C1B18' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+    }
+
+    /* FAB */
+    .fab {
+      opacity: 0;
+      transform: translateY(20px) scale(0.8);
+      pointer-events: none;
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .fab.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+    .fab:hover { transform: translateY(-2px) scale(1.05); }
+
+    /* Hero parallax-like grain overlay */
+    .hero-grain {
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    }
+
+    /* Smooth underline on hover */
+    .link-underline {
+      position: relative;
+    }
+    .link-underline::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--color-dorado);
+      transition: width 0.3s ease;
+    }
+    .link-underline:hover::after { width: 100%; }
+
+    /* Cotizador range thumb */
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      height: 6px;
+      background: #E8C9A0;
+      border-radius: 999px;
+      outline: none;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #D4A373;
+      border: 3px solid #FAF9F6;
+      box-shadow: 0 2px 8px rgba(44, 27, 24, 0.2);
+      cursor: pointer;
+    }
+    input[type="range"]::-moz-range-thumb {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #D4A373;
+      border: 3px solid #FAF9F6;
+      box-shadow: 0 2px 8px rgba(44, 27, 24, 0.2);
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body class="antialiased">
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- NAV -->
+  <!-- ═══════════════════════════════════════════ -->
+  <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-500" id="navbar">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#" class="font-serif text-xl md:text-2xl font-semibold tracking-wide text-cafe">
+        Ameno<span class="text-dorado">.</span>
+      </a>
+      <div class="hidden md:flex items-center gap-8 text-sm font-medium tracking-wide">
+        <a href="#especialidad" class="link-underline hover:text-dorado transition-colors">Especialidad</a>
+        <a href="#eventos" class="link-underline hover:text-dorado transition-colors">Eventos</a>
+        <a href="#galeria" class="link-underline hover:text-dorado transition-colors">Galería</a>
+        <a href="#cotizar" class="link-underline hover:text-dorado transition-colors">Cotizar</a>
+      </div>
+      <a href="#cotizar" class="hidden md:inline-flex items-center gap-2 bg-cafe text-hueso text-sm font-medium px-5 py-2.5 rounded-full hover:bg-dorado transition-colors duration-300">
+        Cotizar Evento
+      </a>
+      <!-- Mobile menu button -->
+      <button id="menuBtn" class="md:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5" aria-label="Menú">
+        <span class="w-6 h-0.5 bg-cafe transition-all duration-300" id="menuLine1"></span>
+        <span class="w-6 h-0.5 bg-cafe transition-all duration-300" id="menuLine2"></span>
+        <span class="w-4 h-0.5 bg-cafe transition-all duration-300 ml-auto" id="menuLine3"></span>
+      </button>
+    </div>
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="md:hidden max-h-0 overflow-hidden transition-all duration-500 bg-hueso/95 backdrop-blur-md">
+      <div class="px-6 py-6 flex flex-col gap-4 text-center">
+        <a href="#especialidad" class="text-lg font-medium py-2 hover:text-dorado transition-colors mobile-link">Especialidad</a>
+        <a href="#eventos" class="text-lg font-medium py-2 hover:text-dorado transition-colors mobile-link">Eventos</a>
+        <a href="#galeria" class="text-lg font-medium py-2 hover:text-dorado transition-colors mobile-link">Galería</a>
+        <a href="#cotizar" class="bg-cafe text-hueso font-medium py-3 rounded-full hover:bg-dorado transition-colors mobile-link">Cotizar Evento</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- HERO -->
+  <!-- ═══════════════════════════════════════════ -->
+  <header id="hero" class="relative min-h-screen flex items-center overflow-hidden">
+    <!-- Background gradient -->
+    <div class="absolute inset-0 bg-gradient-to-br from-hueso via-crema to-hueso"></div>
+    <div class="absolute inset-0 hero-grain"></div>
+
+    <!-- Decorative circle -->
+    <div class="absolute -right-32 top-1/2 -translate-y-1/2 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full bg-dorado/5 blur-3xl"></div>
+    <div class="absolute -left-20 bottom-0 w-[300px] h-[300px] rounded-full bg-dorado/3 blur-2xl"></div>
+
+    <div class="relative max-w-7xl mx-auto px-6 pt-32 pb-20 md:pt-0 md:pb-0 w-full">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="stagger">
+          <p class="fade-up text-dorado font-medium tracking-[0.2em] uppercase text-xs md:text-sm mb-6">
+            Minatitlán, Veracruz — Tostaduría de Especialidad
+          </p>
+          <h1 class="fade-up font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium leading-[1.1] mb-8">
+            El Ritual del Grano,<br>
+            <span class="italic text-dorado">la Calma</span><br>
+            del Momento<span class="text-dorado">.</span>
+          </h1>
+          <p class="fade-up text-base md:text-lg text-cafe/70 max-w-md mb-10 font-light leading-relaxed">
+            Una experiencia sensorial donde cada taza cuenta una historia. Del campo veracruzano a tu paladar, con el cuidado que solo lo artesanal puede ofrecer.
+          </p>
+          <div class="fade-up flex flex-col sm:flex-row gap-4">
+            <a href="#especialidad" class="inline-flex items-center justify-center gap-2 bg-cafe text-hueso font-medium px-8 py-4 rounded-full hover:bg-dorado transition-all duration-300 text-sm tracking-wide">
+              Descubre la Barra
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </a>
+            <a href="#cotizar" class="inline-flex items-center justify-center gap-2 border border-cafe/20 text-cafe font-medium px-8 py-4 rounded-full hover:border-dorado hover:text-dorado transition-all duration-300 text-sm tracking-wide">
+              Cotizar Evento
+            </a>
+          </div>
+        </div>
+
+        <!-- Hero visual -->
+        <div class="fade-up relative hidden md:block">
+          <div class="relative w-full aspect-square max-w-lg mx-auto">
+            <!-- Abstract coffee cup composition -->
+            <div class="absolute inset-8 rounded-full bg-gradient-to-br from-dorado/20 to-dorado/5 animate-pulse" style="animation-duration: 4s"></div>
+            <div class="absolute inset-16 rounded-full bg-gradient-to-tr from-dorado/30 to-transparent"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <svg class="w-48 h-48 text-dorado/40" viewBox="0 0 200 200" fill="none">
+                <circle cx="100" cy="100" r="80" stroke="currentColor" stroke-width="0.5"/>
+                <circle cx="100" cy="100" r="60" stroke="currentColor" stroke-width="0.5"/>
+                <circle cx="100" cy="100" r="40" stroke="currentColor" stroke-width="1"/>
+                <path d="M100 20 Q140 60 100 100 Q60 140 100 180" stroke="currentColor" stroke-width="0.5" fill="none"/>
+                <path d="M20 100 Q60 60 100 100 Q140 140 180 100" stroke="currentColor" stroke-width="0.5" fill="none"/>
+              </svg>
+            </div>
+            <!-- Steam lines -->
+            <div class="absolute top-4 left-1/2 -translate-x-1/2 flex gap-3 opacity-30">
+              <div class="w-0.5 h-16 bg-gradient-to-t from-dorado to-transparent rounded-full animate-pulse" style="animation-delay: 0s; animation-duration: 3s"></div>
+              <div class="w-0.5 h-20 bg-gradient-to-t from-dorado to-transparent rounded-full animate-pulse" style="animation-delay: 0.5s; animation-duration: 3.5s"></div>
+              <div class="w-0.5 h-14 bg-gradient-to-t from-dorado to-transparent rounded-full animate-pulse" style="animation-delay: 1s; animation-duration: 2.8s"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50">
+        <span class="text-xs tracking-widest uppercase">Scroll</span>
+        <div class="w-5 h-8 border border-cafe/30 rounded-full flex justify-center pt-1.5">
+          <div class="w-1 h-2 bg-dorado rounded-full animate-bounce"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- BARRA DE ESPECIALIDAD -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section id="especialidad" class="py-24 md:py-32">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid md:grid-cols-2 gap-16 items-center">
+        <!-- Visual -->
+        <div class="fade-up relative">
+          <div class="aspect-[4/5] rounded-2xl bg-gradient-to-br from-dorado/10 to-crema overflow-hidden relative">
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="text-center p-8">
+                <svg class="w-24 h-24 mx-auto text-dorado/50 mb-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+                  <path d="M17 8h1a4 4 0 110 8h-1M3 8h14v9a4 4 0 01-4 4H7a4 4 0 01-4-4V8zM6 2v4M10 2v4M14 2v4"/>
+                </svg>
+                <p class="font-serif text-2xl text-cafe/40 italic">Barra de Especialidad</p>
+              </div>
+            </div>
+            <!-- Decorative corner -->
+            <div class="absolute top-4 left-4 w-12 h-12 border-t border-l border-dorado/30"></div>
+            <div class="absolute bottom-4 right-4 w-12 h-12 border-b border-r border-dorado/30"></div>
+          </div>
+        </div>
+
+        <!-- Copy -->
+        <div class="stagger">
+          <p class="fade-up text-dorado font-medium tracking-[0.2em] uppercase text-xs mb-4">Barra de Especialidad</p>
+          <h2 class="fade-up font-serif text-3xl md:text-4xl lg:text-5xl font-medium leading-tight mb-6">
+            Donde cada<br>taza es un <span class="italic text-dorado">ritual</span>
+          </h2>
+          <p class="fade-up text-cafe/65 leading-relaxed mb-8 font-light">
+            Nuestra barra no es solo un mostrador — es un escenario. Aquí, el barista se convierte en narrador: cada método de extracción, cada origen del grano y cada aroma cuentan la historia del café veracruzano en su máxima expresión.
+          </p>
+          <div class="fade-up space-y-4">
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-full bg-dorado/10 flex items-center justify-center shrink-0 mt-0.5">
+                <span class="text-dorado text-sm">01</span>
+              </div>
+              <div>
+                <h3 class="font-medium mb-1">Granos de Origen Único</h3>
+                <p class="text-sm text-cafe/55 font-light">Selección directa de fincas veracruzanas con trazabilidad completa.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-full bg-dorado/10 flex items-center justify-center shrink-0 mt-0.5">
+                <span class="text-dorado text-sm">02</span>
+              </div>
+              <div>
+                <h3 class="font-medium mb-1">Tueste Artesanal</h3>
+                <p class="text-sm text-cafe/55 font-light">Perfiles de tueste desarrollados para resaltar notas únicas de cada lote.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-full bg-dorado/10 flex items-center justify-center shrink-0 mt-0.5">
+                <span class="text-dorado text-sm">03</span>
+              </div>
+              <div>
+                <h3 class="font-medium mb-1">Métodos de Extracción</h3>
+                <p class="text-sm text-cafe/55 font-light">V60, Chemex, AeroPress y espresso — cada método revela un carácter distinto.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- ELEVAMOS TUS EVENTOS -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section id="eventos" class="py-24 md:py-32 bg-cafe text-hueso relative overflow-hidden">
+    <!-- Subtle pattern -->
+    <div class="absolute inset-0 opacity-5 hero-grain"></div>
+    <div class="absolute top-0 right-0 w-96 h-96 bg-dorado/5 rounded-full blur-3xl"></div>
+
+    <div class="relative max-w-7xl mx-auto px-6">
+      <div class="text-center mb-20 stagger">
+        <p class="fade-up text-dorado font-medium tracking-[0.2em] uppercase text-xs mb-4">Catering Premium</p>
+        <h2 class="fade-up font-serif text-3xl md:text-5xl lg:text-6xl font-medium leading-tight mb-6">
+          Elevamos tus<br><span class="italic text-dorado">Eventos</span>
+        </h2>
+        <p class="fade-up text-hueso/60 max-w-2xl mx-auto font-light leading-relaxed">
+          Del campo veracruzano a tu evento. Llevamos la experiencia completa de nuestra barra de especialidad a los momentos que más importan.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8 stagger">
+        <!-- Bodas -->
+        <div class="fade-up group">
+          <div class="border border-hueso/10 rounded-2xl p-8 md:p-10 hover:border-dorado/30 transition-all duration-500 h-full">
+            <div class="w-14 h-14 rounded-full bg-dorado/10 flex items-center justify-center mb-6 group-hover:bg-dorado/20 transition-colors">
+              <svg class="w-6 h-6 text-dorado" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/>
+              </svg>
+            </div>
+            <h3 class="font-serif text-2xl mb-3">Bodas</h3>
+            <p class="text-hueso/55 font-light leading-relaxed text-sm">
+              Tu día merece un café a la altura. Montamos una barra elegante que se integra con la estética de tu celebración — desde la ceremonia hasta el último brindis.
+            </p>
+            <div class="mt-6 pt-6 border-t border-hueso/10">
+              <ul class="space-y-2 text-sm text-hueso/45 font-light">
+                <li class="flex items-center gap-2">
+                  <span class="w-1 h-1 bg-dorado rounded-full"></span>
+                  Barra personalizada
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="w-1 h-1 bg-dorado rounded-full"></span>
+                  Baristas profesionales
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="w-1 h-1 bg-dorado rounded-full"></span>
+                  Menú de bebidas a medida
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Corporativos -->
+        <div class="fade-up group">
+          <div class="border border-dorado/30 rounded-2xl p-8 md:p-10 bg-dorado/5 hover:bg-dorado/10 transition-all duration-500 h-full relative">
+            <span class="absolute top-4 right-4 text-[10px] tracking-widest uppercase text-dorado bg-dorado/10 px-3 py-1 rounded-full">Popular</span>
+            <div class="w-14 h-14 rounded-full bg-dorado/10 flex items-center justify-center mb-6 group-hover:bg-dorado/20 transition-colors">
+              <svg class="w-6 h-6 text-dorado" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path d="M20.25 14.15v4.073c0 1.078-.86 1.96-1.926 2.022-6.9.403-12.471-5.168-12.068-12.068A1.977 1.977 0 018.227 6.25h4.073"/>
+                <path d="M15.75 3.75h4.5v4.5M20.25 3.75l-6 6"/>
+              </svg>
+            </div>
+            <h3 class="font-serif text-2xl mb-3">Eventos Corporativos</h3>
+            <p class="text-hueso/55 font-light leading-relaxed text-sm">
+              Impresiona a clientes y colaboradores. Nuestra barra móvil transforma cualquier reunión de negocios en una experiencia memorable que habla de tu marca.
+            </p>
+            <div class="mt-6 pt-6 border-t border-hueso/10">
+              <ul class="space-y-2 text-sm text-hueso/45 font-light">
+                <li class="flex items-center gap-2">
+                  <span class="w-1 h-1 bg-dorado rounded-full"></span>
+                  Branding personalizable
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="w-1 h-1 bg-dorado rounded-full"></span>
+                  Setup en 30 minutos
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="w-1 h-1 bg-dorado rounded-full"></span>
+                  Desde 20 hasta 500+ personas
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reuniones Privadas -->
+        <div class="fade-up group">
+          <div class="border border-hueso/10 rounded-2xl p-8 md:p-10 hover:border-dorado/30 transition-all duration-500 h-full">
+            <div class="w-14 h-14 rounded-full bg-dorado/10 flex items-center justify-center mb-6 group-hover:bg-dorado/20 transition-colors">
+              <svg class="w-6 h-6 text-dorado" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197"/>
+              </svg>
+            </div>
+            <h3 class="font-serif text-2xl mb-3">Reuniones Privadas</h3>
+            <p class="text-hueso/55 font-light leading-relaxed text-sm">
+              Para esos momentos íntimos que merecen algo especial. Catas privadas, cumpleaños selectos o simplemente una tarde entre amigos con café excepcional.
+            </p>
+            <div class="mt-6 pt-6 border-t border-hueso/10">
+              <ul class="space-y-2 text-sm text-hueso/45 font-light">
+                <li class="flex items-center gap-2">
+                  <span class="w-1 h-1 bg-dorado rounded-full"></span>
+                  Catas guiadas
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="w-1 h-1 bg-dorado rounded-full"></span>
+                  Experiencia personalizada
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="w-1 h-1 bg-dorado rounded-full"></span>
+                  Grupos de 5 a 30 personas
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- FRASE DIVISORIA -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="py-20 md:py-28">
+    <div class="max-w-4xl mx-auto px-6 text-center fade-up">
+      <blockquote class="font-serif text-2xl md:text-4xl lg:text-5xl italic leading-snug text-cafe/80">
+        "No vendemos café.<br>Creamos <span class="text-dorado not-italic">momentos</span><br>que se quedan contigo."
+      </blockquote>
+      <div class="mt-8 w-12 h-0.5 bg-dorado mx-auto"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- BENTO GRID GALLERY -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section id="galeria" class="py-24 md:py-32 bg-crema">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-16 stagger">
+        <p class="fade-up text-dorado font-medium tracking-[0.2em] uppercase text-xs mb-4">Galería</p>
+        <h2 class="fade-up font-serif text-3xl md:text-5xl font-medium">
+          Nuestra <span class="italic text-dorado">Esencia</span>
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-[160px] md:auto-rows-[200px] stagger">
+        <!-- Tall left -->
+        <div class="fade-up col-span-1 row-span-2 rounded-2xl overflow-hidden bento-img bg-gradient-to-br from-dorado/20 to-cafe/10 relative group">
+          <div class="absolute inset-0 flex items-end p-5">
+            <div class="bg-cafe/60 backdrop-blur-sm rounded-xl px-4 py-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <p class="text-hueso text-xs font-medium">Grano de Origen</p>
+            </div>
+          </div>
+          <div class="absolute inset-0 flex items-center justify-center">
+            <svg class="w-16 h-16 text-cafe/15" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          </div>
+        </div>
+
+        <!-- Top row -->
+        <div class="fade-up col-span-1 row-span-1 rounded-2xl overflow-hidden bento-img bg-gradient-to-tr from-dorado/15 to-crema relative group">
+          <div class="absolute inset-0 flex items-center justify-center">
+            <p class="font-serif text-cafe/25 text-lg italic">Tueste</p>
+          </div>
+        </div>
+        <div class="fade-up col-span-2 row-span-1 rounded-2xl overflow-hidden bento-img bg-gradient-to-r from-cafe/5 to-dorado/10 relative group">
+          <div class="absolute inset-0 flex items-center justify-center">
+            <p class="font-serif text-cafe/20 text-xl italic">Barra de Eventos</p>
+          </div>
+        </div>
+
+        <!-- Bottom row -->
+        <div class="fade-up col-span-2 row-span-1 rounded-2xl overflow-hidden bento-img bg-gradient-to-l from-dorado/20 to-cafe/5 relative group">
+          <div class="absolute inset-0 flex items-center justify-center">
+            <p class="font-serif text-cafe/20 text-xl italic">El Proceso</p>
+          </div>
+        </div>
+        <div class="fade-up col-span-1 row-span-1 rounded-2xl overflow-hidden bento-img bg-gradient-to-bl from-dorado/25 to-crema relative group">
+          <div class="absolute inset-0 flex items-center justify-center">
+            <p class="font-serif text-cafe/25 text-lg italic">Latte Art</p>
+          </div>
+        </div>
+
+        <!-- Extra row for larger screens -->
+        <div class="fade-up col-span-2 row-span-1 rounded-2xl overflow-hidden bento-img bg-gradient-to-br from-cafe/8 to-dorado/15 relative group hidden md:block">
+          <div class="absolute inset-0 flex items-center justify-center">
+            <p class="font-serif text-cafe/20 text-xl italic">Montaje de Evento</p>
+          </div>
+        </div>
+        <div class="fade-up col-span-2 row-span-1 rounded-2xl overflow-hidden bento-img bg-gradient-to-tl from-dorado/10 to-crema relative group hidden md:block">
+          <div class="absolute inset-0 flex items-center justify-center">
+            <p class="font-serif text-cafe/20 text-xl italic">Textura del Grano</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- COTIZADOR INTERACTIVO -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section id="cotizar" class="py-24 md:py-32">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid md:grid-cols-2 gap-16 items-center">
+        <!-- Copy side -->
+        <div class="stagger">
+          <p class="fade-up text-dorado font-medium tracking-[0.2em] uppercase text-xs mb-4">Cotiza tu Evento</p>
+          <h2 class="fade-up font-serif text-3xl md:text-4xl lg:text-5xl font-medium leading-tight mb-6">
+            Platícanos<br>tu <span class="italic text-dorado">idea</span>
+          </h2>
+          <p class="fade-up text-cafe/65 font-light leading-relaxed mb-8">
+            Cada evento es único y merece una propuesta a la medida. Cuéntanos qué tienes en mente y te preparamos una cotización sin compromiso. Respondemos en menos de 24 horas.
+          </p>
+          <div class="fade-up flex items-center gap-4 text-sm text-cafe/50">
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-dorado" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              Sin compromiso
+            </div>
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-dorado" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              Respuesta en &lt;24h
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive cotizador -->
+        <div class="fade-up">
+          <div class="bg-white rounded-3xl p-8 md:p-10 shadow-sm border border-cafe/5">
+            <form id="cotizadorForm" class="space-y-8" onsubmit="return false;">
+              <!-- Tipo de evento -->
+              <div>
+                <label class="block text-sm font-medium mb-3 tracking-wide">Tipo de Evento</label>
+                <div class="grid grid-cols-3 gap-3" id="eventTypeGroup">
+                  <button type="button" data-type="Boda" class="event-type-btn border border-cafe/10 rounded-xl py-3 px-2 text-center text-sm hover:border-dorado hover:bg-dorado/5 transition-all duration-300 focus:outline-none">
+                    <svg class="w-6 h-6 mx-auto mb-1.5 text-cafe/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                      <path d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/>
+                    </svg>
+                    <span>Boda</span>
+                  </button>
+                  <button type="button" data-type="Evento Corporativo" class="event-type-btn border border-cafe/10 rounded-xl py-3 px-2 text-center text-sm hover:border-dorado hover:bg-dorado/5 transition-all duration-300 focus:outline-none">
+                    <svg class="w-6 h-6 mx-auto mb-1.5 text-cafe/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                      <path d="M20.25 14.15v4.073c0 1.078-.86 1.96-1.926 2.022-6.9.403-12.471-5.168-12.068-12.068A1.977 1.977 0 018.227 6.25h4.073"/>
+                      <path d="M15.75 3.75h4.5v4.5M20.25 3.75l-6 6"/>
+                    </svg>
+                    <span>Corporativo</span>
+                  </button>
+                  <button type="button" data-type="Reunion Privada" class="event-type-btn border border-cafe/10 rounded-xl py-3 px-2 text-center text-sm hover:border-dorado hover:bg-dorado/5 transition-all duration-300 focus:outline-none">
+                    <svg class="w-6 h-6 mx-auto mb-1.5 text-cafe/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                      <path d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197"/>
+                    </svg>
+                    <span>Privada</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Número de personas -->
+              <div>
+                <label class="block text-sm font-medium mb-3 tracking-wide">
+                  Número de Personas: <span id="personasValue" class="text-dorado font-semibold">50</span>
+                </label>
+                <input type="range" id="personasRange" min="5" max="500" value="50" step="5" class="w-full cursor-pointer">
+                <div class="flex justify-between text-xs text-cafe/40 mt-2 font-light">
+                  <span>5</span>
+                  <span>100</span>
+                  <span>250</span>
+                  <span>500+</span>
+                </div>
+              </div>
+
+              <!-- Preview message -->
+              <div class="bg-crema rounded-xl p-4 border border-cafe/5">
+                <p class="text-xs text-cafe/40 mb-1 font-medium tracking-wide uppercase">Tu mensaje:</p>
+                <p id="previewMsg" class="text-sm text-cafe/70 font-light leading-relaxed">
+                  Hola Ameno Café, me gustaría cotizar un evento tipo <strong id="previewType" class="text-cafe">—</strong> para <strong id="previewPersonas" class="text-cafe">50</strong> personas.
+                </p>
+              </div>
+
+              <!-- CTA -->
+              <a id="whatsappLink" href="#" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-3 w-full bg-[#25D366] text-white font-medium py-4 rounded-full hover:bg-[#20BD5A] transition-all duration-300 text-sm tracking-wide opacity-50 pointer-events-none" aria-label="Enviar cotización por WhatsApp">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                </svg>
+                Cotizar por WhatsApp
+              </a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- PIE DE PÁGINA -->
+  <!-- ═══════════════════════════════════════════ -->
+  <footer class="bg-cafe text-hueso py-16 md:py-20">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid md:grid-cols-3 gap-12 mb-16">
+        <!-- Brand -->
+        <div>
+          <a href="#" class="font-serif text-2xl font-semibold tracking-wide">
+            Ameno<span class="text-dorado">.</span>
+          </a>
+          <p class="text-hueso/50 font-light mt-4 leading-relaxed text-sm max-w-xs">
+            Tostaduría de café de especialidad y catering premium. Cada taza, una historia veracruzana.
+          </p>
+        </div>
+
+        <!-- Navegación -->
+        <div>
+          <h4 class="font-medium tracking-wide text-sm mb-4 text-dorado">Navegación</h4>
+          <ul class="space-y-3 text-sm text-hueso/50 font-light">
+            <li><a href="#especialidad" class="hover:text-dorado transition-colors">Barra de Especialidad</a></li>
+            <li><a href="#eventos" class="hover:text-dorado transition-colors">Eventos</a></li>
+            <li><a href="#galeria" class="hover:text-dorado transition-colors">Galería</a></li>
+            <li><a href="#cotizar" class="hover:text-dorado transition-colors">Cotizar</a></li>
+          </ul>
+        </div>
+
+        <!-- Contacto -->
+        <div>
+          <h4 class="font-medium tracking-wide text-sm mb-4 text-dorado">Encuéntranos</h4>
+          <ul class="space-y-3 text-sm text-hueso/50 font-light">
+            <li class="flex items-start gap-2">
+              <svg class="w-4 h-4 mt-0.5 shrink-0 text-dorado/60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/>
+                <path d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/>
+              </svg>
+              Minatitlán, Veracruz, México
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="w-4 h-4 mt-0.5 shrink-0 text-dorado/60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              Lun – Sáb: 8:00 am – 8:00 pm
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="w-4 h-4 mt-0.5 shrink-0 text-dorado/60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/>
+              </svg>
+              hola@amenocafe.com
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-hueso/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+        <p class="text-xs text-hueso/30 font-light">
+          &copy; 2026 Ameno Café. Todos los derechos reservados.
+        </p>
+        <div class="flex items-center gap-6">
+          <a href="#" class="text-hueso/30 hover:text-dorado transition-colors" aria-label="Instagram">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+          <a href="#" class="text-hueso/30 hover:text-dorado transition-colors" aria-label="Facebook">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="#" class="text-hueso/30 hover:text-dorado transition-colors" aria-label="TikTok">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- FAB WhatsApp -->
+  <!-- ═══════════════════════════════════════════ -->
+  <a id="fab" href="#cotizar" class="fab fixed bottom-6 right-6 z-40 w-14 h-14 bg-[#25D366] rounded-full flex items-center justify-center shadow-lg shadow-[#25D366]/30" aria-label="Cotizar por WhatsApp">
+    <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </a>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- JAVASCRIPT -->
+  <!-- ═══════════════════════════════════════════ -->
+  <script>
+    (() => {
+      'use strict';
+
+      // ── CONFIG ──
+      const WHATSAPP_NUMBER = '521234567890'; // Replace with actual number
+
+      // ── Allowed event types (whitelist for safety) ──
+      const ALLOWED_TYPES = new Set(['Boda', 'Evento Corporativo', 'Reunion Privada']);
+
+      // ── INTERSECTION OBSERVER — Fade-in-up animations ──
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+      );
+
+      document.querySelectorAll('.fade-up').forEach((el) => observer.observe(el));
+
+      // ── NAVBAR — Background on scroll ──
+      const navbar = document.getElementById('navbar');
+      const fab = document.getElementById('fab');
+
+      const handleScroll = () => {
+        const scrollY = window.scrollY;
+
+        // Navbar background
+        if (scrollY > 50) {
+          navbar.classList.add('bg-hueso/95', 'backdrop-blur-md', 'shadow-sm');
+        } else {
+          navbar.classList.remove('bg-hueso/95', 'backdrop-blur-md', 'shadow-sm');
+        }
+
+        // FAB visibility
+        if (scrollY > window.innerHeight * 0.5) {
+          fab.classList.add('show');
+        } else {
+          fab.classList.remove('show');
+        }
+      };
+
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      handleScroll();
+
+      // ── MOBILE MENU ──
+      const menuBtn = document.getElementById('menuBtn');
+      const mobileMenu = document.getElementById('mobileMenu');
+      const menuLine1 = document.getElementById('menuLine1');
+      const menuLine2 = document.getElementById('menuLine2');
+      const menuLine3 = document.getElementById('menuLine3');
+      let menuOpen = false;
+
+      menuBtn.addEventListener('click', () => {
+        menuOpen = !menuOpen;
+        if (menuOpen) {
+          mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 'px';
+          menuLine1.classList.add('rotate-45', 'translate-y-[8px]');
+          menuLine2.classList.add('opacity-0');
+          menuLine3.classList.add('-rotate-45', '-translate-y-[8px]', 'w-6');
+        } else {
+          mobileMenu.style.maxHeight = '0';
+          menuLine1.classList.remove('rotate-45', 'translate-y-[8px]');
+          menuLine2.classList.remove('opacity-0');
+          menuLine3.classList.remove('-rotate-45', '-translate-y-[8px]', 'w-6');
+        }
+      });
+
+      // Close mobile menu on link click
+      document.querySelectorAll('.mobile-link').forEach((link) => {
+        link.addEventListener('click', () => {
+          menuOpen = false;
+          mobileMenu.style.maxHeight = '0';
+          menuLine1.classList.remove('rotate-45', 'translate-y-[8px]');
+          menuLine2.classList.remove('opacity-0');
+          menuLine3.classList.remove('-rotate-45', '-translate-y-[8px]', 'w-6');
+        });
+      });
+
+      // ── COTIZADOR INTERACTIVO ──
+      const eventBtns = document.querySelectorAll('.event-type-btn');
+      const personasRange = document.getElementById('personasRange');
+      const personasValue = document.getElementById('personasValue');
+      const previewType = document.getElementById('previewType');
+      const previewPersonas = document.getElementById('previewPersonas');
+      const whatsappLink = document.getElementById('whatsappLink');
+
+      let selectedType = '';
+      let selectedPersonas = 50;
+
+      // Event type selection
+      eventBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const type = btn.dataset.type;
+          if (!ALLOWED_TYPES.has(type)) return;
+
+          eventBtns.forEach((b) => {
+            b.classList.remove('border-dorado', 'bg-dorado/10', 'text-dorado');
+            b.classList.add('border-cafe/10');
+          });
+          btn.classList.remove('border-cafe/10');
+          btn.classList.add('border-dorado', 'bg-dorado/10', 'text-dorado');
+          selectedType = type;
+          updateCotizador();
+        });
+      });
+
+      // Personas range
+      personasRange.addEventListener('input', (e) => {
+        selectedPersonas = parseInt(e.target.value, 10);
+        personasValue.textContent = String(selectedPersonas);
+        updateCotizador();
+      });
+
+      function updateCotizador() {
+        // Update preview using textContent (safe DOM manipulation)
+        previewType.textContent = selectedType || '—';
+        previewPersonas.textContent = String(selectedPersonas);
+
+        if (selectedType) {
+          const message = encodeURIComponent(
+            'Hola Ameno Cafe, me gustaria cotizar un evento tipo ' + selectedType + ' para ' + selectedPersonas + ' personas.'
+          );
+          whatsappLink.href = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + message;
+          whatsappLink.classList.remove('opacity-50', 'pointer-events-none');
+        } else {
+          whatsappLink.classList.add('opacity-50', 'pointer-events-none');
+        }
+      }
+
+      // ── SMOOTH SCROLL for anchor links ──
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener('click', (e) => {
+          const href = anchor.getAttribute('href');
+          if (href && href.length > 1) {
+            const target = document.getElementById(href.substring(1));
+            if (target) {
+              e.preventDefault();
+              target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }
+        });
+      });
+    })();
+  </script>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CafeOrCoffeeShop",
+    "name": "Ameno Café",
+    "description": "Tostaduría de café de especialidad y servicio de catering premium en Minatitlán, Veracruz.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Minatitlán",
+      "addressRegion": "Veracruz",
+      "addressCountry": "MX"
+    },
+    "servesCuisine": "Café de Especialidad",
+    "priceRange": "$$",
+    "openingHours": "Mo-Sa 08:00-20:00",
+    "url": "https://amenocafe.com"
+  }
+  </script>
+
+</body>
+</html>
