@@ -178,7 +178,7 @@
     .quote-section {
       background-image:
         linear-gradient(rgba(250, 249, 246, 0.84), rgba(250, 249, 246, 0.84)),
-        url("assets/quote-beans-bg.png");
+        image-set(url("assets/quote-beans-bg.avif") type("image/avif"), url("assets/quote-beans-bg.webp") type("image/webp"));
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
@@ -343,7 +343,10 @@
   <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-500" id="navbar">
     <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
       <a href="#" class="block">
-        <img src="assets/logo.png?v=2" alt="Ameno Café" class="h-8 md:h-10 w-auto">
+        <picture>
+          <source srcset="assets/logo.avif" type="image/avif">
+          <img src="assets/logo.webp" alt="Ameno Café" class="h-8 md:h-10 w-auto">
+        </picture>
       </a>
       <div class="hidden md:flex items-center gap-8 text-sm font-medium tracking-wide">
         <a href="#especialidad" class="link-underline hover:text-dorado transition-colors">Especialidad</a>
@@ -413,11 +416,14 @@
         <div class="fade-up relative hidden md:block">
           <div class="relative w-full aspect-square max-w-lg mx-auto">
             <div class="hero-art-shell absolute inset-2 md:inset-0 flex items-center justify-center">
-              <img
-                src="assets/hero-mandala.webp"
-                alt="Ilustración ceremonial de café para Ameno Café"
-                class="hero-art p-6 md:p-8"
-              >
+              <picture>
+                <source srcset="assets/hero-mandala.avif" type="image/avif">
+                <img
+                  src="assets/hero-mandala.webp"
+                  alt="Ilustración ceremonial de café para Ameno Café"
+                  class="hero-art p-6 md:p-8"
+                >
+              </picture>
             </div>
           </div>
         </div>
@@ -442,11 +448,14 @@
         <!-- Visual -->
         <div class="fade-up relative">
           <div class="aspect-[3/4] rounded-2xl overflow-hidden relative shadow-xl">
-            <img
-              src="assets/barra.webp"
-              alt="Equipo Ameno Café en la barra de especialidad"
-              class="w-full h-full object-cover object-bottom"
-            >
+            <picture>
+              <source srcset="assets/barra.avif" type="image/avif">
+              <img
+                src="assets/barra.webp"
+                alt="Equipo Ameno Café en la barra de especialidad"
+                class="w-full h-full object-cover object-bottom"
+              >
+            </picture>
             <!-- Warm overlay -->
             <div class="absolute inset-0 bg-gradient-to-t from-cafe/30 via-transparent to-transparent"></div>
             <!-- Decorative corner accents -->
@@ -647,31 +656,31 @@
       <div class="gallery-collage stagger">
         <div class="gallery-grid">
           <figure class="fade-up gallery-card gallery-card--a aspect-[4/5] md:aspect-auto">
-            <img src="assets/gallery-1.webp" alt="Preparación de iced latte Ameno Café">
+            <picture><source srcset="assets/gallery-1.avif" type="image/avif"><img src="assets/gallery-1.webp" alt="Preparación de iced latte Ameno Café"></picture>
           </figure>
 
           <figure class="fade-up gallery-card gallery-card--b aspect-[4/3] md:aspect-auto">
-            <img src="assets/gallery-3.webp" alt="Bebida fría Ameno Café sostenida en mano">
+            <picture><source srcset="assets/gallery-3.avif" type="image/avif"><img src="assets/gallery-3.webp" alt="Bebida fría Ameno Café sostenida en mano"></picture>
           </figure>
 
           <figure class="fade-up gallery-card gallery-card--c aspect-[16/10] md:aspect-auto">
-            <img src="assets/gallery-2.webp" alt="Detalle de jarra sirviendo café sobre bebida fría">
+            <picture><source srcset="assets/gallery-2.avif" type="image/avif"><img src="assets/gallery-2.webp" alt="Detalle de jarra sirviendo café sobre bebida fría"></picture>
           </figure>
 
           <figure class="fade-up gallery-card gallery-card--d aspect-[16/10] md:aspect-auto">
-            <img src="assets/gallery-5.webp" alt="Barra Ameno Café en montaje nocturno" style="object-position: center 24%;">
+            <picture><source srcset="assets/gallery-5.avif" type="image/avif"><img src="assets/gallery-5.webp" alt="Barra Ameno Café en montaje nocturno" style="object-position: center 24%;"></picture>
           </figure>
 
           <figure class="fade-up gallery-card gallery-card--e aspect-[4/5] md:aspect-auto">
-            <img src="assets/gallery-equipo.png" alt="Equipo de Ameno Café posando con mandiles de la marca" style="object-position: center 28%;">
+            <picture><source srcset="assets/gallery-equipo.avif" type="image/avif"><img src="assets/gallery-equipo.webp" alt="Equipo de Ameno Café posando con mandiles de la marca" style="object-position: center 28%;"></picture>
           </figure>
 
           <figure class="fade-up gallery-card gallery-card--f aspect-[16/10] md:aspect-auto">
-            <img src="assets/gallery-6.webp" alt="Barra iluminada de Ameno Café durante evento">
+            <picture><source srcset="assets/gallery-6.avif" type="image/avif"><img src="assets/gallery-6.webp" alt="Barra iluminada de Ameno Café durante evento"></picture>
           </figure>
 
           <figure class="fade-up gallery-card gallery-card--g aspect-[4/5] md:aspect-auto">
-            <img src="assets/gallery-4.webp" alt="Barista de Ameno Café preparando bebida">
+            <picture><source srcset="assets/gallery-4.avif" type="image/avif"><img src="assets/gallery-4.webp" alt="Barista de Ameno Café preparando bebida"></picture>
           </figure>
         </div>
         <span class="gallery-accent" aria-hidden="true"></span>
@@ -787,12 +796,18 @@
         <!-- Brand -->
         <div>
           <a href="#" class="block">
-            <img src="assets/logo.png?v=2" alt="Ameno Café" class="h-10 w-auto brightness-0 invert opacity-80">
+            <picture>
+              <source srcset="assets/logo.avif" type="image/avif">
+              <img src="assets/logo.webp" alt="Ameno Café" class="h-10 w-auto brightness-0 invert opacity-80">
+            </picture>
           </a>
           <p class="text-hueso/50 font-light mt-4 leading-relaxed text-sm max-w-xs">
             Tostaduría de especialidad y catering premium. Pop-ups en Minatitlán y Coatzacoalcos — cada taza, una historia veracruzana.
           </p>
-          <img src="assets/hero-mandala.webp" alt="Emblema de café Ameno Café" class="footer-emblem mt-6">
+          <picture>
+            <source srcset="assets/hero-mandala.avif" type="image/avif">
+            <img src="assets/hero-mandala.webp" alt="Emblema de café Ameno Café" class="footer-emblem mt-6">
+          </picture>
         </div>
 
         <!-- Navegación -->
