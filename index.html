@@ -251,30 +251,18 @@
     .hero-art-shell {
       position: relative;
     }
-    .hero-art-shell::before {
-      content: "";
-      position: absolute;
-      inset: 6%;
-      border-radius: 999px;
-      border: 1px solid rgba(212, 163, 115, 0.18);
-      pointer-events: none;
-      animation: ring-spin 300s linear infinite;
-    }
     .hero-art {
       width: 100%;
       height: 100%;
       object-fit: contain;
-      filter: drop-shadow(0 20px 32px rgba(160, 110, 68, 0.16));
+      transform-origin: center center;
       animation: mandala-spin 150s linear infinite;
     }
     @keyframes mandala-spin {
       to { transform: rotate(360deg); }
     }
-    @keyframes ring-spin {
-      to { transform: rotate(-360deg); }
-    }
     @media (prefers-reduced-motion: reduce) {
-      .hero-art, .hero-art-shell::before { animation: none; }
+      .hero-art { animation: none; }
     }
     .nodo-link {
       position: relative;
@@ -394,7 +382,7 @@
   <!-- ═══════════════════════════════════════════ -->
   <!-- HERO -->
   <!-- ═══════════════════════════════════════════ -->
-  <header id="hero" class="relative min-h-screen flex items-center overflow-hidden">
+  <header id="hero" class="relative min-h-screen flex items-start md:items-center overflow-hidden">
     <!-- Background gradient -->
     <div class="absolute inset-0 bg-gradient-to-br from-hueso via-crema to-hueso"></div>
     <div class="absolute inset-0 hero-grain"></div>
@@ -403,9 +391,9 @@
     <div class="absolute -right-32 top-1/2 -translate-y-1/2 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full bg-dorado/5 blur-3xl"></div>
     <div class="absolute -left-20 bottom-0 w-[300px] h-[300px] rounded-full bg-dorado/3 blur-2xl"></div>
 
-    <div class="relative max-w-7xl mx-auto px-6 pt-32 pb-20 md:pt-0 md:pb-0 w-full">
+    <div class="relative max-w-7xl mx-auto px-6 pt-24 sm:pt-28 pb-32 sm:pb-36 md:pt-0 md:pb-0 w-full">
       <div class="grid md:grid-cols-2 gap-12 items-center">
-        <div class="stagger">
+        <div class="stagger relative z-10">
           <p class="fade-up text-dorado font-medium tracking-[0.2em] uppercase text-xs md:text-sm mb-6">
             Minatitlán & Coatzacoalcos — Tostaduría de Especialidad
           </p>
@@ -429,11 +417,11 @@
         </div>
 
         <!-- Hero visual -->
-        <div class="fade-up relative">
-          <div class="relative w-2/3 sm:w-1/2 md:w-full aspect-square mx-auto">
+        <div class="fade-up absolute top-24 -right-16 flex justify-center pointer-events-none opacity-[0.05] sm:opacity-[0.07] md:relative md:top-auto md:right-auto md:block md:opacity-100">
+          <div class="relative w-[58vw] max-w-[252px] aspect-square mx-auto md:w-[118%] lg:w-[124%] md:max-w-none md:mx-0 md:ml-auto">
             <div class="hero-art-shell absolute inset-0 flex items-center justify-center">
               <img
-                src="assets/hero-mandala.webp"
+                src="assets/hero-rotating.webp"
                 alt="Ilustración ceremonial de café para Ameno Café"
                 class="hero-art p-2 md:p-4"
               >
