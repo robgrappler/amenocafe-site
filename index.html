@@ -49,13 +49,103 @@
     .stagger > .fade-up:nth-child(5) { transition-delay: 480ms; }
     .stagger > .fade-up:nth-child(6) { transition-delay: 600ms; }
 
-    /* Bento grid images */
-    .bento-img {
-      background-size: cover;
-      background-position: center;
-      transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    /* Gallery collage */
+    .gallery-collage {
+      position: relative;
+      overflow: hidden;
+      border-radius: 2rem;
+      border: 1px solid rgba(44, 27, 24, 0.08);
+      background: rgba(255, 255, 255, 0.9);
+      padding: 0.75rem;
+      box-shadow: 0 32px 90px rgba(44, 27, 24, 0.08);
     }
-    .bento-img:hover { transform: scale(1.03); }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+    }
+    .gallery-card {
+      overflow: hidden;
+      border-radius: 1.5rem;
+      border: 1px solid rgba(44, 27, 24, 0.08);
+      background: rgba(44, 27, 24, 0.04);
+      box-shadow: 0 18px 34px rgba(44, 27, 24, 0.12);
+      transition: box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .gallery-card:hover {
+      box-shadow: 0 26px 44px rgba(44, 27, 24, 0.16);
+    }
+    .gallery-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .gallery-card:hover img {
+      transform: scale(1.04);
+    }
+    .gallery-accent {
+      position: absolute;
+      display: none;
+      width: 0.9rem;
+      height: 5.5rem;
+      right: 16%;
+      bottom: 1rem;
+      border-radius: 999px;
+      background: var(--color-hueso);
+      transform: rotate(8deg);
+      box-shadow: 0 10px 25px rgba(44, 27, 24, 0.08);
+    }
+
+    @media (min-width: 768px) {
+      .gallery-collage {
+        padding: 1.25rem;
+      }
+      .gallery-grid {
+        grid-template-columns: 1.15fr 1.15fr 1.45fr 1.05fr 1.2fr;
+        grid-template-rows: 1.05fr 1.05fr 0.85fr 1fr 1fr;
+        gap: 1rem;
+        height: 640px;
+      }
+      .gallery-card--a {
+        grid-column: 1;
+        grid-row: 1 / span 3;
+        transform: rotate(-1.6deg);
+      }
+      .gallery-card--b {
+        grid-column: 2;
+        grid-row: 1;
+        transform: rotate(-0.8deg);
+      }
+      .gallery-card--c {
+        grid-column: 3 / span 2;
+        grid-row: 1;
+        transform: rotate(0.7deg);
+      }
+      .gallery-card--d {
+        grid-column: 2 / span 3;
+        grid-row: 2 / span 2;
+        transform: rotate(-0.6deg);
+      }
+      .gallery-card--e {
+        grid-column: 5;
+        grid-row: 1 / span 5;
+        transform: rotate(1.2deg);
+      }
+      .gallery-card--f {
+        grid-column: 1 / span 2;
+        grid-row: 4 / span 2;
+        transform: rotate(0.6deg);
+      }
+      .gallery-card--g {
+        grid-column: 3 / span 2;
+        grid-row: 4 / span 2;
+        transform: rotate(-1deg);
+      }
+      .gallery-accent {
+        display: block;
+      }
+    }
 
     /* Custom select styling */
     select {
@@ -82,6 +172,120 @@
     /* Hero parallax-like grain overlay */
     .hero-grain {
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    }
+
+    /* Quote background */
+    .quote-section {
+      background-image:
+        linear-gradient(rgba(250, 249, 246, 0.84), rgba(250, 249, 246, 0.84)),
+        image-set(url("assets/quote-beans-bg.avif") type("image/avif"), url("assets/quote-beans-bg.webp") type("image/webp"));
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    /* Cotizador section depth */
+    .cotizar-section {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 12% 18%, rgba(44, 27, 24, 0.08), transparent 24%),
+        radial-gradient(circle at 88% 78%, rgba(212, 163, 115, 0.18), transparent 28%),
+        linear-gradient(180deg, #f8f3ed 0%, #f1e8dc 100%);
+    }
+    .cotizar-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.1;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      background-size: 220px 220px;
+      mix-blend-mode: multiply;
+    }
+    .cotizar-orb {
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(70px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .cotizar-orb--left {
+      width: 280px;
+      height: 280px;
+      top: 4rem;
+      left: -5rem;
+      background: rgba(44, 27, 24, 0.08);
+    }
+    .cotizar-orb--right {
+      width: 320px;
+      height: 320px;
+      right: -7rem;
+      bottom: 1rem;
+      background: rgba(212, 163, 115, 0.16);
+    }
+    .cotizar-card {
+      background: rgba(255, 252, 249, 0.88);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(44, 27, 24, 0.1);
+      box-shadow: 0 24px 70px rgba(44, 27, 24, 0.1);
+    }
+    .cotizar-note {
+      background: rgba(245, 240, 235, 0.78);
+      border: 1px solid rgba(44, 27, 24, 0.09);
+    }
+    .hero-art-shell {
+      position: relative;
+      border-radius: 2rem;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(212, 163, 115, 0.2), rgba(212, 163, 115, 0.02) 62%, transparent 78%);
+      box-shadow: 0 36px 100px rgba(44, 27, 24, 0.12);
+    }
+    .hero-art-shell::before {
+      content: "";
+      position: absolute;
+      inset: 6%;
+      border-radius: 999px;
+      border: 1px solid rgba(212, 163, 115, 0.18);
+      pointer-events: none;
+    }
+    .hero-art {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 20px 32px rgba(160, 110, 68, 0.16));
+    }
+    .footer-emblem {
+      width: 9rem;
+      opacity: 0.72;
+      filter: brightness(1.06) drop-shadow(0 10px 22px rgba(0, 0, 0, 0.22));
+    }
+    .nodo-link {
+      position: relative;
+      color: rgba(250, 249, 246, 0.78);
+      transition: color 0.25s ease, text-shadow 0.25s ease;
+    }
+    .nodo-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -0.12rem;
+      width: 100%;
+      height: 1px;
+      background: #5EE4A7;
+      transform: scaleX(0.2);
+      transform-origin: left;
+      opacity: 0;
+      transition: transform 0.25s ease, opacity 0.25s ease, box-shadow 0.25s ease;
+    }
+    .nodo-link:hover {
+      color: #5EE4A7;
+      text-shadow: 0 0 12px rgba(94, 228, 167, 0.45);
+    }
+    .nodo-link:hover::after {
+      opacity: 1;
+      transform: scaleX(1);
+      box-shadow: 0 0 12px rgba(94, 228, 167, 0.55);
     }
 
     /* Smooth underline on hover */
@@ -139,7 +343,10 @@
   <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-500" id="navbar">
     <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
       <a href="#" class="block">
-        <img src="assets/logo.webp" alt="Ameno Café" class="h-8 md:h-10 w-auto" style="mix-blend-mode:multiply;">
+        <picture>
+          <source srcset="assets/logo.avif" type="image/avif">
+          <img src="assets/logo.webp" alt="Ameno Café" class="h-8 md:h-10 w-auto">
+        </picture>
       </a>
       <div class="hidden md:flex items-center gap-8 text-sm font-medium tracking-wide">
         <a href="#especialidad" class="link-underline hover:text-dorado transition-colors">Especialidad</a>
@@ -181,26 +388,44 @@
     <div class="absolute -left-20 bottom-0 w-[300px] h-[300px] rounded-full bg-dorado/3 blur-2xl"></div>
 
     <div class="relative max-w-7xl mx-auto px-6 pt-32 pb-20 md:pt-0 md:pb-0 w-full">
-      <div class="max-w-3xl stagger">
-        <p class="fade-up text-dorado font-medium tracking-[0.2em] uppercase text-xs md:text-sm mb-6">
-          Minatitlán & Coatzacoalcos — Tostaduría de Especialidad
-        </p>
-        <h1 class="fade-up font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-medium leading-[1.05] mb-8">
-          El Ritual del Grano,<br>
-          <span class="italic text-dorado">la Calma</span><br>
-          del Momento<span class="text-dorado">.</span>
-        </h1>
-        <p class="fade-up text-base md:text-lg text-cafe/70 max-w-lg mb-10 font-light leading-relaxed">
-          Una experiencia sensorial donde cada taza cuenta una historia. Del campo veracruzano a tu paladar, con el cuidado que solo lo artesanal puede ofrecer.
-        </p>
-        <div class="fade-up flex flex-col sm:flex-row gap-4">
-          <a href="#especialidad" class="inline-flex items-center justify-center gap-2 bg-cafe text-hueso font-medium px-8 py-4 rounded-full hover:bg-dorado transition-all duration-300 text-sm tracking-wide">
-            Descubre la Barra
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-          </a>
-          <a href="#cotizar" class="inline-flex items-center justify-center gap-2 border border-cafe/20 text-cafe font-medium px-8 py-4 rounded-full hover:border-dorado hover:text-dorado transition-all duration-300 text-sm tracking-wide">
-            Cotizar Evento
-          </a>
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="stagger">
+          <p class="fade-up text-dorado font-medium tracking-[0.2em] uppercase text-xs md:text-sm mb-6">
+            Minatitlán & Coatzacoalcos — Tostaduría de Especialidad
+          </p>
+          <h1 class="fade-up font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium leading-[1.1] mb-8">
+            El Ritual del Grano,<br>
+            <span class="italic text-dorado">la Calma</span><br>
+            del Momento<span class="text-dorado">.</span>
+          </h1>
+          <p class="fade-up text-base md:text-lg text-cafe/70 max-w-md mb-10 font-light leading-relaxed">
+            Una experiencia sensorial donde cada taza cuenta una historia. Del campo veracruzano a tu paladar, con el cuidado que solo lo artesanal puede ofrecer.
+          </p>
+          <div class="fade-up flex flex-col sm:flex-row gap-4">
+            <a href="#especialidad" class="inline-flex items-center justify-center gap-2 bg-cafe text-hueso font-medium px-8 py-4 rounded-full hover:bg-dorado transition-all duration-300 text-sm tracking-wide">
+              Descubre la Barra
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </a>
+            <a href="#cotizar" class="inline-flex items-center justify-center gap-2 border border-cafe/20 text-cafe font-medium px-8 py-4 rounded-full hover:border-dorado hover:text-dorado transition-all duration-300 text-sm tracking-wide">
+              Cotizar Evento
+            </a>
+          </div>
+        </div>
+
+        <!-- Hero visual -->
+        <div class="fade-up relative hidden md:block">
+          <div class="relative w-full aspect-square max-w-lg mx-auto">
+            <div class="hero-art-shell absolute inset-2 md:inset-0 flex items-center justify-center">
+              <picture>
+                <source srcset="assets/hero-mandala.avif" type="image/avif">
+                <img
+                  src="assets/hero-mandala.webp"
+                  alt="Ilustración ceremonial de café para Ameno Café"
+                  class="hero-art p-6 md:p-8"
+                >
+              </picture>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -223,11 +448,14 @@
         <!-- Visual -->
         <div class="fade-up relative">
           <div class="aspect-[3/4] rounded-2xl overflow-hidden relative shadow-xl">
-            <img
-              src="assets/barra.webp"
-              alt="Equipo Ameno Café en la barra de especialidad"
-              class="w-full h-full object-cover object-bottom"
-            >
+            <picture>
+              <source srcset="assets/barra.avif" type="image/avif">
+              <img
+                src="assets/barra.webp"
+                alt="Equipo Ameno Café en la barra de especialidad"
+                class="w-full h-full object-cover object-bottom"
+              >
+            </picture>
             <!-- Warm overlay -->
             <div class="absolute inset-0 bg-gradient-to-t from-cafe/30 via-transparent to-transparent"></div>
             <!-- Decorative corner accents -->
@@ -404,7 +632,7 @@
   <!-- ═══════════════════════════════════════════ -->
   <!-- FRASE DIVISORIA -->
   <!-- ═══════════════════════════════════════════ -->
-  <section class="py-20 md:py-28">
+  <section class="quote-section py-20 md:py-28">
     <div class="max-w-4xl mx-auto px-6 text-center fade-up">
       <blockquote class="font-serif text-2xl md:text-4xl lg:text-5xl italic leading-snug text-cafe/80">
         "No vendemos café.<br>Creamos <span class="text-dorado not-italic">momentos</span><br>que se quedan contigo."
@@ -425,73 +653,37 @@
         </h2>
       </div>
 
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-[160px] md:auto-rows-[220px] stagger">
+      <div class="gallery-collage stagger">
+        <div class="gallery-grid">
+          <figure class="fade-up gallery-card gallery-card--a aspect-[4/5] md:aspect-auto">
+            <picture><source srcset="assets/gallery-1.avif" type="image/avif"><img src="assets/gallery-1.webp" alt="Preparación de iced latte Ameno Café"></picture>
+          </figure>
 
-        <!-- Tall left — iced latte pour (portrait action) -->
-        <div class="fade-up col-span-1 row-span-2 rounded-2xl overflow-hidden relative group">
-          <img src="assets/gallery-1.webp" alt="Preparación de iced latte Ameno Café" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105">
-          <div class="absolute inset-0 bg-gradient-to-t from-cafe/50 via-transparent to-transparent"></div>
-          <div class="absolute inset-0 flex items-end p-4">
-            <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <p class="text-hueso text-xs font-medium tracking-wide">Iced Latte</p>
-            </div>
-          </div>
-        </div>
+          <figure class="fade-up gallery-card gallery-card--b aspect-[4/3] md:aspect-auto">
+            <picture><source srcset="assets/gallery-3.avif" type="image/avif"><img src="assets/gallery-3.webp" alt="Bebida fría Ameno Café sostenida en mano"></picture>
+          </figure>
 
-        <!-- Top row right — espresso drop (portrait, dark) -->
-        <div class="fade-up col-span-1 row-span-1 rounded-2xl overflow-hidden relative group">
-          <img src="assets/gallery-3.webp" alt="Espresso drop Ameno Café" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105">
-          <div class="absolute inset-0 bg-gradient-to-t from-cafe/40 via-transparent to-transparent"></div>
-        </div>
+          <figure class="fade-up gallery-card gallery-card--c aspect-[16/10] md:aspect-auto">
+            <picture><source srcset="assets/gallery-2.avif" type="image/avif"><img src="assets/gallery-2.webp" alt="Detalle de jarra sirviendo café sobre bebida fría"></picture>
+          </figure>
 
-        <!-- Top row wide — outdoor event setup (landscape) -->
-        <div class="fade-up col-span-2 row-span-1 rounded-2xl overflow-hidden relative group">
-          <img src="assets/gallery-2.webp" alt="Barra Ameno Café en evento exterior" class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105">
-          <div class="absolute inset-0 bg-gradient-to-t from-cafe/30 via-transparent to-transparent"></div>
-          <div class="absolute inset-0 flex items-end p-4">
-            <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <p class="text-hueso text-xs font-medium tracking-wide">Barra de Eventos</p>
-            </div>
-          </div>
-        </div>
+          <figure class="fade-up gallery-card gallery-card--d aspect-[16/10] md:aspect-auto">
+            <picture><source srcset="assets/gallery-5.avif" type="image/avif"><img src="assets/gallery-5.webp" alt="Barra Ameno Café en montaje nocturno" style="object-position: center 24%;"></picture>
+          </figure>
 
-        <!-- Bottom row wide — barista pouring (landscape crop) -->
-        <div class="fade-up col-span-2 row-span-1 rounded-2xl overflow-hidden relative group">
-          <img src="assets/gallery-5.webp" alt="Barista Ameno Café preparando bebida" class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105">
-          <div class="absolute inset-0 bg-gradient-to-t from-cafe/40 via-transparent to-transparent"></div>
-          <div class="absolute inset-0 flex items-end p-4">
-            <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <p class="text-hueso text-xs font-medium tracking-wide">El Ritual</p>
-            </div>
-          </div>
-        </div>
+          <figure class="fade-up gallery-card gallery-card--e aspect-[4/5] md:aspect-auto">
+            <picture><source srcset="assets/gallery-equipo.avif" type="image/avif"><img src="assets/gallery-equipo.webp" alt="Equipo de Ameno Café posando con mandiles de la marca" style="object-position: center 28%;"></picture>
+          </figure>
 
-        <!-- Bottom row right — hand holding drink -->
-        <div class="fade-up col-span-1 row-span-1 rounded-2xl overflow-hidden relative group">
-          <img src="assets/gallery-4.webp" alt="Bebida especial Ameno Café" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105">
-          <div class="absolute inset-0 bg-gradient-to-t from-cafe/30 via-transparent to-transparent"></div>
-        </div>
+          <figure class="fade-up gallery-card gallery-card--f aspect-[16/10] md:aspect-auto">
+            <picture><source srcset="assets/gallery-6.avif" type="image/avif"><img src="assets/gallery-6.webp" alt="Barra iluminada de Ameno Café durante evento"></picture>
+          </figure>
 
-        <!-- Extra row — gallery-6 wide + gallery-3 fill -->
-        <div class="fade-up col-span-2 row-span-1 rounded-2xl overflow-hidden relative group hidden md:block">
-          <img src="assets/gallery-6.webp" alt="Preparación artesanal Ameno Café" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105">
-          <div class="absolute inset-0 bg-gradient-to-t from-cafe/40 via-transparent to-transparent"></div>
-          <div class="absolute inset-0 flex items-end p-4">
-            <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <p class="text-hueso text-xs font-medium tracking-wide">Artesanal</p>
-            </div>
-          </div>
+          <figure class="fade-up gallery-card gallery-card--g aspect-[4/5] md:aspect-auto">
+            <picture><source srcset="assets/gallery-4.avif" type="image/avif"><img src="assets/gallery-4.webp" alt="Barista de Ameno Café preparando bebida"></picture>
+          </figure>
         </div>
-        <div class="fade-up col-span-2 row-span-1 rounded-2xl overflow-hidden relative group hidden md:block">
-          <img src="assets/gallery-2.webp" alt="Ameno Café en tu evento" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105">
-          <div class="absolute inset-0 bg-gradient-to-t from-cafe/30 via-transparent to-transparent"></div>
-          <div class="absolute inset-0 flex items-end p-4">
-            <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <p class="text-hueso text-xs font-medium tracking-wide">Tu Evento, Nuestro Café</p>
-            </div>
-          </div>
-        </div>
-
+        <span class="gallery-accent" aria-hidden="true"></span>
       </div>
     </div>
   </section>
@@ -499,8 +691,10 @@
   <!-- ═══════════════════════════════════════════ -->
   <!-- COTIZADOR INTERACTIVO -->
   <!-- ═══════════════════════════════════════════ -->
-  <section id="cotizar" class="py-24 md:py-32">
-    <div class="max-w-7xl mx-auto px-6">
+  <section id="cotizar" class="cotizar-section py-24 md:py-32">
+    <div class="cotizar-orb cotizar-orb--left" aria-hidden="true"></div>
+    <div class="cotizar-orb cotizar-orb--right" aria-hidden="true"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-6">
       <div class="grid md:grid-cols-2 gap-16 items-center">
         <!-- Copy side -->
         <div class="stagger">
@@ -529,7 +723,7 @@
 
         <!-- Interactive cotizador -->
         <div class="fade-up">
-          <div class="bg-white rounded-3xl p-8 md:p-10 shadow-sm border border-cafe/5">
+          <div class="cotizar-card rounded-3xl p-8 md:p-10">
             <form id="cotizadorForm" class="space-y-8" onsubmit="return false;">
               <!-- Tipo de evento -->
               <div>
@@ -572,7 +766,7 @@
               </div>
 
               <!-- Preview message -->
-              <div class="bg-crema rounded-xl p-4 border border-cafe/5">
+              <div class="cotizar-note rounded-xl p-4">
                 <p class="text-xs text-cafe/40 mb-1 font-medium tracking-wide uppercase">Tu mensaje:</p>
                 <p id="previewMsg" class="text-sm text-cafe/70 font-light leading-relaxed">
                   Hola Ameno Café, me gustaría cotizar un evento tipo <strong id="previewType" class="text-cafe">—</strong> para <strong id="previewPersonas" class="text-cafe">50</strong> personas.
@@ -602,11 +796,18 @@
         <!-- Brand -->
         <div>
           <a href="#" class="block">
-            <img src="assets/logo.webp" alt="Ameno Café" class="h-10 w-auto brightness-0 invert opacity-80">
+            <picture>
+              <source srcset="assets/logo.avif" type="image/avif">
+              <img src="assets/logo.webp" alt="Ameno Café" class="h-10 w-auto brightness-0 invert opacity-80">
+            </picture>
           </a>
           <p class="text-hueso/50 font-light mt-4 leading-relaxed text-sm max-w-xs">
             Tostaduría de especialidad y catering premium. Pop-ups en Minatitlán y Coatzacoalcos — cada taza, una historia veracruzana.
           </p>
+          <picture>
+            <source srcset="assets/hero-mandala.avif" type="image/avif">
+            <img src="assets/hero-mandala.webp" alt="Emblema de café Ameno Café" class="footer-emblem mt-6">
+          </picture>
         </div>
 
         <!-- Navegación -->
@@ -661,11 +862,17 @@
       </div>
 
       <div class="border-t border-hueso/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-        <p class="text-xs text-hueso/30 font-light">
-          &copy; 2026 Ameno Café. Todos los derechos reservados.
-        </p>
+        <div class="text-center md:text-left space-y-2">
+          <p class="text-xs text-hueso/30 font-light">
+            &copy; 2026 Ameno Café. Todos los derechos reservados.
+          </p>
+          <p class="text-xs text-hueso/40 font-light tracking-[0.08em] uppercase">
+            Diseñado entre ritual, grano y detalle por
+            <a href="https://nodoalfa.com" target="_blank" rel="noopener noreferrer" class="nodo-link font-medium normal-case tracking-normal">Nodo Alfa</a>
+          </p>
+        </div>
         <div class="flex items-center gap-6">
-          <a href="#" class="text-hueso/30 hover:text-dorado transition-colors" aria-label="Instagram">
+          <a href="https://www.instagram.com/_amenocafe/" target="_blank" rel="noopener noreferrer" class="text-hueso/30 hover:text-dorado transition-colors" aria-label="Instagram">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
           </a>
           <a href="#" class="text-hueso/30 hover:text-dorado transition-colors" aria-label="Facebook">
@@ -682,7 +889,7 @@
   <!-- ═══════════════════════════════════════════ -->
   <!-- FAB WhatsApp -->
   <!-- ═══════════════════════════════════════════ -->
-  <a id="fab" href="#cotizar" class="fab fixed bottom-6 right-6 z-40 w-14 h-14 bg-[#25D366] rounded-full flex items-center justify-center shadow-lg shadow-[#25D366]/30" aria-label="Cotizar por WhatsApp">
+  <a id="fab" href="https://wa.me/5215578688247" target="_blank" rel="noopener noreferrer" class="fab fixed bottom-6 right-6 z-40 w-14 h-14 bg-[#25D366] rounded-full flex items-center justify-center shadow-lg shadow-[#25D366]/30" aria-label="Cotizar por WhatsApp">
     <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
     </svg>
@@ -696,7 +903,7 @@
       'use strict';
 
       // ── CONFIG ──
-      const WHATSAPP_NUMBER = '521234567890'; // Replace with actual number
+      const WHATSAPP_NUMBER = '5215578688247';
 
       // ── Allowed event types (whitelist for safety) ──
       const ALLOWED_TYPES = new Set(['Boda', 'Evento Corporativo', 'Reunion Privada']);
