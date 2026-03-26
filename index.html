@@ -222,18 +222,22 @@
       <div class="grid md:grid-cols-2 gap-16 items-center">
         <!-- Visual -->
         <div class="fade-up relative">
-          <div class="aspect-[4/5] rounded-2xl bg-gradient-to-br from-dorado/10 to-crema overflow-hidden relative">
-            <div class="absolute inset-0 flex items-center justify-center">
-              <div class="text-center p-8">
-                <svg class="w-24 h-24 mx-auto text-dorado/50 mb-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
-                  <path d="M17 8h1a4 4 0 110 8h-1M3 8h14v9a4 4 0 01-4 4H7a4 4 0 01-4-4V8zM6 2v4M10 2v4M14 2v4"/>
-                </svg>
-                <p class="font-serif text-2xl text-cafe/40 italic">Barra de Especialidad</p>
-              </div>
-            </div>
-            <!-- Decorative corner -->
-            <div class="absolute top-4 left-4 w-12 h-12 border-t border-l border-dorado/30"></div>
-            <div class="absolute bottom-4 right-4 w-12 h-12 border-b border-r border-dorado/30"></div>
+          <div class="aspect-[4/5] rounded-2xl overflow-hidden relative shadow-xl">
+            <img
+              src="assets/barra.png"
+              alt="Equipo Ameno Café en la barra de especialidad"
+              class="w-full h-full object-cover object-center"
+            >
+            <!-- Warm overlay -->
+            <div class="absolute inset-0 bg-gradient-to-t from-cafe/30 via-transparent to-transparent"></div>
+            <!-- Decorative corner accents -->
+            <div class="absolute top-4 left-4 w-12 h-12 border-t border-l border-dorado/60"></div>
+            <div class="absolute bottom-4 right-4 w-12 h-12 border-b border-r border-dorado/60"></div>
+          </div>
+          <!-- Floating tag -->
+          <div class="absolute -bottom-5 -right-5 bg-hueso border border-dorado/20 rounded-xl px-5 py-3 shadow-lg hidden md:block">
+            <p class="text-xs text-cafe/50 font-medium tracking-widest uppercase mb-0.5">Minatitlán</p>
+            <p class="font-serif text-cafe text-sm italic">Restaurante Katz</p>
           </div>
         </div>
 
