@@ -250,10 +250,6 @@
     }
     .hero-art-shell {
       position: relative;
-      border-radius: 2rem;
-      background:
-        radial-gradient(circle at 50% 50%, rgba(212, 163, 115, 0.2), rgba(212, 163, 115, 0.02) 62%, transparent 78%);
-      box-shadow: 0 36px 100px rgba(44, 27, 24, 0.12);
     }
     .hero-art-shell::before {
       content: "";
@@ -262,12 +258,23 @@
       border-radius: 999px;
       border: 1px solid rgba(212, 163, 115, 0.18);
       pointer-events: none;
+      animation: ring-spin 300s linear infinite;
     }
     .hero-art {
       width: 100%;
       height: 100%;
       object-fit: contain;
       filter: drop-shadow(0 20px 32px rgba(160, 110, 68, 0.16));
+      animation: mandala-spin 150s linear infinite;
+    }
+    @keyframes mandala-spin {
+      to { transform: rotate(360deg); }
+    }
+    @keyframes ring-spin {
+      to { transform: rotate(-360deg); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-art, .hero-art-shell::before { animation: none; }
     }
     .nodo-link {
       position: relative;
@@ -422,15 +429,15 @@
         </div>
 
         <!-- Hero visual -->
-        <div class="fade-up relative hidden md:block">
-          <div class="relative w-full aspect-square max-w-lg mx-auto">
-            <div class="hero-art-shell absolute inset-2 md:inset-0 flex items-center justify-center">
+        <div class="fade-up relative">
+          <div class="relative w-2/3 sm:w-1/2 md:w-full aspect-square mx-auto">
+            <div class="hero-art-shell absolute inset-0 flex items-center justify-center">
               <picture>
                 <source srcset="assets/hero-mandala.avif" type="image/avif">
                 <img
                   src="assets/hero-mandala.webp"
                   alt="Ilustración ceremonial de café para Ameno Café"
-                  class="hero-art p-6 md:p-8"
+                  class="hero-art p-2 md:p-4"
                 >
               </picture>
             </div>
