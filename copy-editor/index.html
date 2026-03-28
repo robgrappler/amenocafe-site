@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<!-- copy-editor/index.html - Static route entry for the Ameno Cafe live copy editor workflow. -->
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ameno Cafe | Copy Editor</title>
+  <meta name="description" content="Editor en vivo para ajustar el copy del sitio de Ameno Cafe con preview de diseno en tiempo real.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/components/site/ameno-routes.css">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script type="module">
+    import { createRoot, html } from '/src/lib/browserReact.js';
+    import { CopyEditorApp } from '/src/components/editor/CopyEditorApp.js';
+
+    const root = createRoot(document.getElementById('app'));
+    root.render(html`<${CopyEditorApp} />`);
+  </script>
+</body>
+</html>

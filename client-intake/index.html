@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<!-- client-intake/index.html - Static route entry for the Ameno Cafe client onboarding intake workflow. -->
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ameno Cafe | Client Intake</title>
+  <meta name="description" content="Formulario de onboarding para recopilar informacion de negocio y copywriting para el sitio de Ameno Cafe.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/components/site/ameno-routes.css">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script type="module">
+    import { createRoot, html } from '/src/lib/browserReact.js';
+    import { ClientIntakeApp } from '/src/components/editor/ClientIntakeApp.js';
+
+    const root = createRoot(document.getElementById('app'));
+    root.render(html`<${ClientIntakeApp} />`);
+  </script>
+</body>
+</html>
