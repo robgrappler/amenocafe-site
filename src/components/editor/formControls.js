@@ -55,7 +55,7 @@ export function TogglePill({ label, checked, onToggle }) {
   `;
 }
 
-export function ActionButton({ label, onClick, variant = 'primary', type = 'button' }) {
+export function ActionButton({ label, onClick, variant = 'primary', type = 'button', disabled = false }) {
   const className =
     variant === 'secondary'
       ? 'secondary-button'
@@ -64,6 +64,6 @@ export function ActionButton({ label, onClick, variant = 'primary', type = 'butt
         : 'action-button';
 
   return html`
-    <button type=${type} className=${className} onClick=${onClick}>${label}</button>
+    <button type=${type} className=${className} onClick=${onClick} disabled=${disabled}>${label}</button>
   `;
 }

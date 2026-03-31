@@ -1,10 +1,12 @@
 // src/components/editor/CopyEditorApp.js - Copy editor with section-by-section screenshot references, autosave, export, and reset.
 import { html, useEffect, useMemo, useState } from '../../lib/browserReact.js';
 import {
+  buildNetlifyDraftSubmission,
   STORAGE_KEYS,
   buildExportPayload,
   createCopyEditorState,
   deepClone,
+  resolveDraftSaveEndpoint,
   resetCopyEditorState,
 } from '../../lib/editorState.js';
 import { ActionButton, TextArea, TextInput, TogglePill } from './formControls.js';
@@ -77,9 +79,28 @@ function CopyEditorSection({ children, ...props }) {
   return SectionCard({ ...props, children });
 }
 
+function formatSaveTime(date) {
+  return date.toLocaleTimeString('es-MX', {
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+}
+
+function getSaveMessageClass(status) {
+  if (status === 'error') {
+    return 'text-[color:#9f2d2d]';
+  }
+
+  if (status === 'success') {
+    return 'text-[color:rgba(32,96,64,0.86)]';
+  }
+
+  return 'text-[color:rgba(44,27,24,0.62)]';
+}
+
 function ScreenshotReference({ imageSrc, imageAlt, device }) {
   return html`
-    <div className="space-y-3">
+    <div className="space-y-3 pt-2">
       <div>
         <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[var(--color-dorado)]">Referencia visual</p>
         <p className="mt-1 text-xs leading-5 text-[color:rgba(44,27,24,0.58)]">
@@ -166,12 +187,22 @@ export function CopyEditorApp() {
   const storedIntakeDraft = useMemo(() => readStoredJson(STORAGE_KEYS.intake), []);
   const [content, setContent] = useState(() => createCopyEditorState(storedEditorDraft, storedIntakeDraft));
   const [device, setDevice] = useState('desktop');
+  const [saveState, setSaveState] = useState({ status: 'idle', message: '' });
 
   useEffect(() => {
     saveStoredJson(STORAGE_KEYS.copyEditor, content);
   }, [content]);
 
   function updateValue(path, value) {
+    setSaveState((current) =>
+      current.status === 'success'
+        ? {
+            status: 'dirty',
+            message: 'Hay cambios locales pendientes de guardar en Netlify.',
+          }
+        : current,
+    );
+
     setContent((current) => {
       const next = deepClone(current);
       setPath(next, path, value);
@@ -188,6 +219,44 @@ export function CopyEditorApp() {
     downloadJson('ameno-copy-editor-export.json', payload);
   }
 
+  async function saveDraftRemotely() {
+    setSaveState({
+      status: 'saving',
+      message: 'Guardando borrador en Netlify...',
+    });
+
+    const fields = buildNetlifyDraftSubmission({
+      draftType: 'copy-editor',
+      payload: content,
+      sourceRoute: '/copy-editor/',
+      draftLabel: content.brand.name ? `Copy editor - ${content.brand.name}` : 'Copy editor Ameno Cafe',
+    });
+
+    try {
+      const response = await fetch(resolveDraftSaveEndpoint('/copy-editor/'), {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams(fields).toString(),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Netlify form request failed with ${response.status}`);
+      }
+
+      setSaveState({
+        status: 'success',
+        message: `Guardado en Netlify a las ${formatSaveTime(new Date())}.`,
+      });
+    } catch (_error) {
+      setSaveState({
+        status: 'error',
+        message: 'No se pudo guardar en Netlify desde este entorno. El autosave local sigue activo.',
+      });
+    }
+  }
+
   function resetDefaults() {
     const confirmed = window.confirm('Esto reemplazara el borrador actual con el copy original del sitio. ¿Continuar?');
     if (!confirmed) {
@@ -196,10 +265,18 @@ export function CopyEditorApp() {
 
     setContent(resetCopyEditorState());
     window.localStorage.removeItem(STORAGE_KEYS.copyEditor);
+    setSaveState({
+      status: 'dirty',
+      message: 'El copy se reseteo localmente. Guarda si quieres subir esta version a Netlify.',
+    });
   }
 
   function applyIntakeDraft() {
     setContent(createCopyEditorState(null, storedIntakeDraft));
+    setSaveState({
+      status: 'dirty',
+      message: 'Se aplico el intake local. Guarda para enviar esta version a Netlify.',
+    });
   }
 
   const intakeAvailable = Boolean(storedIntakeDraft);
@@ -211,44 +288,49 @@ export function CopyEditorApp() {
           <div className="space-y-3">
             <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[var(--color-dorado)]">Copy Editor</p>
             <div className="space-y-2">
-              <h1 className="ameno-serif text-4xl leading-tight md:text-5xl">Edita cada seccion con su screenshot al lado</h1>
+              <h1 className="ameno-serif text-4xl leading-tight md:text-5xl">Edita cada seccion con su referencia visual</h1>
               <p className="max-w-3xl text-sm leading-7 text-[color:rgba(44,27,24,0.68)]">
-                Cada bloque muestra una captura de referencia de la landing actual para que el cliente escriba sobre algo concreto, sin perder contexto visual ni recorrer un preview largo.
+                Cada bloque mantiene la captura del sitio actual dentro de la misma tarjeta para editar el copy con contexto visual, pero en un flujo mas limpio y continuo.
               </p>
+              <p className="max-w-3xl text-xs leading-6 text-[color:rgba(44,27,24,0.56)]">
+                El autosave local sigue activo en este navegador. Usa Guardar borrador para enviar esta version a Netlify sin descargar JSON.
+              </p>
+              ${saveState.message
+                ? html`<p className=${`max-w-3xl text-xs leading-6 ${getSaveMessageClass(saveState.status)}`}>${saveState.message}</p>`
+                : null}
             </div>
           </div>
           <div className="flex flex-wrap gap-3">
             ${intakeAvailable ? html`<${ActionButton} label="Aplicar intake guardado" variant="secondary" onClick=${applyIntakeDraft} />` : null}
+            <${ActionButton} label=${saveState.status === 'saving' ? 'Guardando...' : 'Guardar borrador'} variant="secondary" onClick=${saveDraftRemotely} disabled=${saveState.status === 'saving'} />
             <${ActionButton} label="Exportar JSON" variant="secondary" onClick=${exportJson} />
             <${ActionButton} label="Reset a copy original" variant="ghost" onClick=${resetDefaults} />
           </div>
         </div>
       </header>
 
-      <main className="mx-auto max-w-7xl gap-6 px-5 pb-10 md:px-6 xl:flex xl:items-start">
-        <aside className="space-y-6 xl:w-96 xl:flex-none">
-          <${CopyEditorSection}
-            eyebrow="Control"
-            title="Secciones y referencias"
-            description="Activa u oculta bloques opcionales del editor y cambia la referencia visual entre desktop y movil."
-          >
-            <div className="grid gap-3 sm:grid-cols-2">
-              <${TogglePill} label="Barra de especialidad" checked=${content.visibility.specialty} onToggle=${() => updateValue('visibility.specialty', !content.visibility.specialty)} />
-              <${TogglePill} label="Eventos" checked=${content.visibility.events} onToggle=${() => updateValue('visibility.events', !content.visibility.events)} />
-              <${TogglePill} label="Frase" checked=${content.visibility.quote} onToggle=${() => updateValue('visibility.quote', !content.visibility.quote)} />
-              <${TogglePill} label="Galeria" checked=${content.visibility.gallery} onToggle=${() => updateValue('visibility.gallery', !content.visibility.gallery)} />
-              <${TogglePill} label="Cotizacion" checked=${content.visibility.contact} onToggle=${() => updateValue('visibility.contact', !content.visibility.contact)} />
-              <${TogglePill} label="Footer" checked=${content.visibility.footer} onToggle=${() => updateValue('visibility.footer', !content.visibility.footer)} />
-            </div>
-            <div className="grid gap-3 sm:grid-cols-2">
-              <${ActionButton} label="Referencia desktop" variant=${device === 'desktop' ? 'primary' : 'secondary'} onClick=${() => setDevice('desktop')} />
-              <${ActionButton} label="Referencia movil" variant=${device === 'mobile' ? 'primary' : 'secondary'} onClick=${() => setDevice('mobile')} />
-            </div>
-            <p className="text-xs leading-6 text-[color:rgba(44,27,24,0.56)]">Autosave local activo. Los screenshots son referencias fijas tomadas de la landing actual.</p>
-          </${CopyEditorSection}>
-        </aside>
+      <main className="mx-auto max-w-7xl space-y-6 px-5 pb-10 md:px-6">
+        <${CopyEditorSection}
+          eyebrow="Control"
+          title="Secciones y referencias"
+          description="Activa u oculta bloques opcionales del editor y cambia la referencia visual entre desktop y movil."
+        >
+          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+            <${TogglePill} label="Barra de especialidad" checked=${content.visibility.specialty} onToggle=${() => updateValue('visibility.specialty', !content.visibility.specialty)} />
+            <${TogglePill} label="Eventos" checked=${content.visibility.events} onToggle=${() => updateValue('visibility.events', !content.visibility.events)} />
+            <${TogglePill} label="Frase" checked=${content.visibility.quote} onToggle=${() => updateValue('visibility.quote', !content.visibility.quote)} />
+            <${TogglePill} label="Galeria" checked=${content.visibility.gallery} onToggle=${() => updateValue('visibility.gallery', !content.visibility.gallery)} />
+            <${TogglePill} label="Cotizacion" checked=${content.visibility.contact} onToggle=${() => updateValue('visibility.contact', !content.visibility.contact)} />
+            <${TogglePill} label="Footer" checked=${content.visibility.footer} onToggle=${() => updateValue('visibility.footer', !content.visibility.footer)} />
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2">
+            <${ActionButton} label="Referencia desktop" variant=${device === 'desktop' ? 'primary' : 'secondary'} onClick=${() => setDevice('desktop')} />
+            <${ActionButton} label="Referencia movil" variant=${device === 'mobile' ? 'primary' : 'secondary'} onClick=${() => setDevice('mobile')} />
+          </div>
+          <p className="text-xs leading-6 text-[color:rgba(44,27,24,0.56)]">Autosave local activo. Los screenshots son referencias fijas tomadas de la landing actual.</p>
+        </${CopyEditorSection}>
 
-        <section className="space-y-6 xl:min-w-0 xl:flex-1">
+        <section className="space-y-6">
           <${EditorSectionLayout}
             sectionKey="hero"
             device=${device}

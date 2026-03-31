@@ -13,6 +13,17 @@
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 <body>
+  <form name="ameno-client-drafts" method="POST" data-netlify="true" hidden>
+    <input type="hidden" name="form-name" value="ameno-client-drafts">
+    <input type="text" name="draftType">
+    <input type="text" name="sourceRoute">
+    <input type="text" name="draftLabel">
+    <input type="text" name="businessName">
+    <input type="text" name="contactName">
+    <input type="email" name="contactEmail">
+    <input type="text" name="whatsapp">
+    <textarea name="payloadJson"></textarea>
+  </form>
   <div id="app"></div>
 
   <script type="module">

@@ -1,10 +1,12 @@
 // src/components/editor/ClientIntakeApp.js - Client onboarding intake form with autosave, export, and handoff into the copy editor.
 import { html, useEffect, useState } from '../../lib/browserReact.js';
 import {
+  buildNetlifyDraftSubmission,
   STORAGE_KEYS,
   buildExportPayload,
   createClientIntakeState,
   deepClone,
+  resolveDraftSaveEndpoint,
   resetClientIntakeState,
 } from '../../lib/editorState.js';
 import { ActionButton, TextArea, TextInput } from './formControls.js';
@@ -49,14 +51,43 @@ function IntakeSection({ children, ...props }) {
   return SectionCard({ ...props, children });
 }
 
+function formatSaveTime(date) {
+  return date.toLocaleTimeString('es-MX', {
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+}
+
+function getSaveMessageClass(status) {
+  if (status === 'error') {
+    return 'text-[color:#9f2d2d]';
+  }
+
+  if (status === 'success') {
+    return 'text-[color:rgba(32,96,64,0.86)]';
+  }
+
+  return 'text-[color:rgba(44,27,24,0.62)]';
+}
+
 export function ClientIntakeApp() {
   const [intake, setIntake] = useState(() => createClientIntakeState(readStoredJson(STORAGE_KEYS.intake)));
+  const [saveState, setSaveState] = useState({ status: 'idle', message: '' });
 
   useEffect(() => {
     saveStoredJson(STORAGE_KEYS.intake, intake);
   }, [intake]);
 
   function updateValue(path, value) {
+    setSaveState((current) =>
+      current.status === 'success'
+        ? {
+            status: 'dirty',
+            message: 'Hay cambios locales pendientes de guardar en Netlify.',
+          }
+        : current,
+    );
+
     setIntake((current) => {
       const next = deepClone(current);
       setPath(next, path, value);
@@ -73,11 +104,54 @@ export function ClientIntakeApp() {
     const next = resetClientIntakeState();
     setIntake(next);
     window.localStorage.removeItem(STORAGE_KEYS.intake);
+    setSaveState({
+      status: 'dirty',
+      message: 'El intake se reseteo localmente. Guarda si quieres subir esta version a Netlify.',
+    });
   }
 
   function exportJson() {
     const payload = buildExportPayload('client-intake', intake);
     downloadJson('ameno-client-intake.json', payload);
+  }
+
+  async function saveDraftRemotely() {
+    setSaveState({
+      status: 'saving',
+      message: 'Guardando borrador en Netlify...',
+    });
+
+    const fields = buildNetlifyDraftSubmission({
+      draftType: 'client-intake',
+      payload: intake,
+      sourceRoute: '/client-intake/',
+      draftLabel: intake.business.businessName ? `Intake - ${intake.business.businessName}` : 'Intake Ameno Cafe',
+      contactName: intake.business.ownerName,
+    });
+
+    try {
+      const response = await fetch(resolveDraftSaveEndpoint('/client-intake/'), {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams(fields).toString(),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Netlify form request failed with ${response.status}`);
+      }
+
+      setSaveState({
+        status: 'success',
+        message: `Guardado en Netlify a las ${formatSaveTime(new Date())}.`,
+      });
+    } catch (_error) {
+      setSaveState({
+        status: 'error',
+        message: 'No se pudo guardar en Netlify desde este entorno. El autosave local sigue activo.',
+      });
+    }
   }
 
   function openEditor() {
@@ -93,12 +167,19 @@ export function ClientIntakeApp() {
             <div className="space-y-2">
               <h1 className="ameno-serif text-4xl leading-tight md:text-5xl">Onboarding simple para aterrizar el nuevo copy</h1>
               <p className="max-w-3xl text-sm leading-7 text-[color:rgba(44,27,24,0.68)]">
-                Este formulario guarda avances automaticamente. Cuando termines, exporta el JSON o abre el copy editor para revisar la redaccion directamente sobre el diseno actual.
+                Este formulario guarda avances automaticamente. Cuando termines, abre el copy editor para revisar la redaccion directamente sobre el diseno actual.
               </p>
+              <p className="max-w-3xl text-xs leading-6 text-[color:rgba(44,27,24,0.56)]">
+                El autosave local sigue activo en este navegador. Usa Guardar borrador para enviar una copia recuperable a Netlify sin descargar archivos.
+              </p>
+              ${saveState.message
+                ? html`<p className=${`max-w-3xl text-xs leading-6 ${getSaveMessageClass(saveState.status)}`}>${saveState.message}</p>`
+                : null}
             </div>
           </div>
           <div className="flex flex-wrap gap-3">
             <${ActionButton} label="Abrir copy editor" onClick=${openEditor} />
+            <${ActionButton} label=${saveState.status === 'saving' ? 'Guardando...' : 'Guardar borrador'} variant="secondary" onClick=${saveDraftRemotely} disabled=${saveState.status === 'saving'} />
             <${ActionButton} label="Exportar intake JSON" variant="secondary" onClick=${exportJson} />
             <${ActionButton} label="Reset formulario" variant="ghost" onClick=${resetDraft} />
           </div>
@@ -190,43 +271,6 @@ export function ClientIntakeApp() {
             <${TextArea} label="Secciones prioritarias" rows=${3} value=${intake.requests.prioritySections} onChange=${(value) => updateValue('requests.prioritySections', value)} />
             <${TextArea} label="Elementos que deben mantenerse" rows=${3} value=${intake.requests.mustKeep} onChange=${(value) => updateValue('requests.mustKeep', value)} />
           </div>
-        </${IntakeSection}>
-
-        <${IntakeSection}
-          eyebrow="Copy sugerido"
-          title="Borrador por seccion"
-          description="No hace falta escribir todo perfecto. Estas respuestas sirven para precargar el copy editor."
-        >
-          <div className="grid gap-4 md:grid-cols-2">
-            <${TextInput} label="Hero eyebrow" value=${intake.preferredCopy.heroEyebrow} onChange=${(value) => updateValue('preferredCopy.heroEyebrow', value)} />
-            <${TextInput} label="Hero titulo lead" value=${intake.preferredCopy.heroTitleLead} onChange=${(value) => updateValue('preferredCopy.heroTitleLead', value)} />
-          </div>
-          <div className="grid gap-4 md:grid-cols-2">
-            <${TextInput} label="Hero acento" value=${intake.preferredCopy.heroTitleAccent} onChange=${(value) => updateValue('preferredCopy.heroTitleAccent', value)} />
-            <${TextInput} label="Hero cierre" value=${intake.preferredCopy.heroTitleTail} onChange=${(value) => updateValue('preferredCopy.heroTitleTail', value)} />
-          </div>
-          <${TextArea} label="Hero descripcion" rows=${3} value=${intake.preferredCopy.heroBody} onChange=${(value) => updateValue('preferredCopy.heroBody', value)} />
-          <div className="grid gap-4 md:grid-cols-2">
-            <${TextInput} label="Especialidad titulo" value=${intake.preferredCopy.specialtyTitleLead} onChange=${(value) => updateValue('preferredCopy.specialtyTitleLead', value)} />
-            <${TextInput} label="Especialidad acento" value=${intake.preferredCopy.specialtyTitleAccent} onChange=${(value) => updateValue('preferredCopy.specialtyTitleAccent', value)} />
-          </div>
-          <${TextArea} label="Especialidad descripcion" rows=${3} value=${intake.preferredCopy.specialtyBody} onChange=${(value) => updateValue('preferredCopy.specialtyBody', value)} />
-          <div className="grid gap-4 md:grid-cols-2">
-            <${TextInput} label="Eventos titulo" value=${intake.preferredCopy.eventsTitleLead} onChange=${(value) => updateValue('preferredCopy.eventsTitleLead', value)} />
-            <${TextInput} label="Eventos acento" value=${intake.preferredCopy.eventsTitleAccent} onChange=${(value) => updateValue('preferredCopy.eventsTitleAccent', value)} />
-          </div>
-          <${TextArea} label="Eventos descripcion" rows=${3} value=${intake.preferredCopy.eventsBody} onChange=${(value) => updateValue('preferredCopy.eventsBody', value)} />
-          <${TextArea} label="Frase divisoria" rows=${3} value=${intake.preferredCopy.quoteText} onChange=${(value) => updateValue('preferredCopy.quoteText', value)} />
-          <div className="grid gap-4 md:grid-cols-2">
-            <${TextInput} label="Galeria titulo" value=${intake.preferredCopy.galleryTitleLead} onChange=${(value) => updateValue('preferredCopy.galleryTitleLead', value)} />
-            <${TextInput} label="Galeria acento" value=${intake.preferredCopy.galleryTitleAccent} onChange=${(value) => updateValue('preferredCopy.galleryTitleAccent', value)} />
-          </div>
-          <div className="grid gap-4 md:grid-cols-2">
-            <${TextInput} label="Contacto titulo" value=${intake.preferredCopy.contactTitleLead} onChange=${(value) => updateValue('preferredCopy.contactTitleLead', value)} />
-            <${TextInput} label="Contacto acento" value=${intake.preferredCopy.contactTitleAccent} onChange=${(value) => updateValue('preferredCopy.contactTitleAccent', value)} />
-          </div>
-          <${TextArea} label="Contacto descripcion" rows=${3} value=${intake.preferredCopy.contactBody} onChange=${(value) => updateValue('preferredCopy.contactBody', value)} />
-          <${TextArea} label="Footer descripcion" rows=${3} value=${intake.preferredCopy.footerBody} onChange=${(value) => updateValue('preferredCopy.footerBody', value)} />
         </${IntakeSection}>
 
         <${IntakeSection}

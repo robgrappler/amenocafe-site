@@ -7,6 +7,8 @@ export const STORAGE_KEYS = {
   copyEditor: 'ameno-copy-editor-v1',
 };
 
+export const NETLIFY_DRAFT_FORM_NAME = 'ameno-client-drafts';
+
 function isPlainObject(value) {
   return Object.prototype.toString.call(value) === '[object Object]';
 }
@@ -44,6 +46,25 @@ export function mergeWithDefaults(defaults, overrides) {
   return result;
 }
 
+function mergeKnownFields(defaults, overrides) {
+  if (Array.isArray(defaults)) {
+    return Array.isArray(overrides) ? deepClone(overrides) : deepClone(defaults);
+  }
+
+  if (!isPlainObject(defaults)) {
+    return overrides === undefined ? defaults : overrides;
+  }
+
+  const result = {};
+  const source = isPlainObject(overrides) ? overrides : {};
+
+  for (const key of Object.keys(defaults)) {
+    result[key] = mergeKnownFields(defaults[key], source[key]);
+  }
+
+  return result;
+}
+
 function setIfPresent(target, key, value) {
   const nextValue = typeof value === 'string' ? value.trim() : value;
   if (!nextValue) {
@@ -54,9 +75,8 @@ function setIfPresent(target, key, value) {
 }
 
 export function mapIntakeToContent(intakeDraft) {
-  const intake = mergeWithDefaults(DEFAULT_CLIENT_INTAKE, intakeDraft ?? {});
+  const intake = mergeKnownFields(DEFAULT_CLIENT_INTAKE, intakeDraft ?? {});
   const mapped = {};
-  const preferredCopy = intake.preferredCopy;
 
   if (intake.business.businessName || intake.socialLinks.instagram || intake.contact.whatsapp) {
     mapped.brand = {};
@@ -70,38 +90,6 @@ export function mapIntakeToContent(intakeDraft) {
     setIfPresent(mapped.brand.socialLinks, 'tiktok', intake.socialLinks.tiktok);
   }
 
-  mapped.hero = {};
-  setIfPresent(mapped.hero, 'eyebrow', preferredCopy.heroEyebrow);
-  setIfPresent(mapped.hero, 'titleLineOne', preferredCopy.heroTitleLead);
-  setIfPresent(mapped.hero, 'titleAccent', preferredCopy.heroTitleAccent);
-  setIfPresent(mapped.hero, 'titleLineTwo', preferredCopy.heroTitleTail);
-  setIfPresent(mapped.hero, 'body', preferredCopy.heroBody);
-
-  mapped.specialty = {};
-  setIfPresent(mapped.specialty, 'titleLead', preferredCopy.specialtyTitleLead);
-  setIfPresent(mapped.specialty, 'titleAccent', preferredCopy.specialtyTitleAccent);
-  setIfPresent(mapped.specialty, 'body', preferredCopy.specialtyBody);
-
-  mapped.events = {};
-  setIfPresent(mapped.events, 'titleLead', preferredCopy.eventsTitleLead);
-  setIfPresent(mapped.events, 'titleAccent', preferredCopy.eventsTitleAccent);
-  setIfPresent(mapped.events, 'body', preferredCopy.eventsBody);
-
-  mapped.quote = {};
-  setIfPresent(mapped.quote, 'text', preferredCopy.quoteText);
-
-  mapped.gallery = {};
-  setIfPresent(mapped.gallery, 'titleLead', preferredCopy.galleryTitleLead);
-  setIfPresent(mapped.gallery, 'titleAccent', preferredCopy.galleryTitleAccent);
-
-  mapped.contact = {};
-  setIfPresent(mapped.contact, 'titleLead', preferredCopy.contactTitleLead);
-  setIfPresent(mapped.contact, 'titleAccent', preferredCopy.contactTitleAccent);
-  setIfPresent(mapped.contact, 'body', preferredCopy.contactBody);
-
-  mapped.footer = {};
-  setIfPresent(mapped.footer, 'body', preferredCopy.footerBody);
-
   return mapped;
 }
 
@@ -113,7 +101,7 @@ export function createCopyEditorState(savedDraft = null, intakeDraft = null) {
 }
 
 export function createClientIntakeState(savedDraft = null) {
-  return mergeWithDefaults(DEFAULT_CLIENT_INTAKE, savedDraft ?? {});
+  return mergeKnownFields(DEFAULT_CLIENT_INTAKE, savedDraft ?? {});
 }
 
 export function resetCopyEditorState() {
@@ -131,4 +119,63 @@ export function buildExportPayload(type, payload) {
     exportedAt: new Date().toISOString(),
     payload: deepClone(payload),
   };
+}
+
+function pickTrimmedValue(...values) {
+  for (const value of values) {
+    if (typeof value !== 'string') {
+      continue;
+    }
+
+    const trimmed = value.trim();
+    if (trimmed) {
+      return trimmed;
+    }
+  }
+
+  return '';
+}
+
+export function buildNetlifyDraftSubmission({
+  draftType,
+  payload,
+  sourceRoute,
+  draftLabel = '',
+  businessName = '',
+  contactName = '',
+  contactEmail = '',
+  whatsapp = '',
+}) {
+  const exportPayload = buildExportPayload(draftType, payload);
+  const resolvedBusinessName = pickTrimmedValue(
+    businessName,
+    payload?.business?.businessName,
+    payload?.brand?.legalName,
+    payload?.brand?.name,
+  );
+  const resolvedContactName = pickTrimmedValue(contactName, payload?.business?.ownerName);
+  const resolvedContactEmail = pickTrimmedValue(contactEmail, payload?.contact?.email);
+  const resolvedWhatsapp = pickTrimmedValue(whatsapp, payload?.contact?.whatsapp, payload?.brand?.whatsappNumber);
+
+  return {
+    'form-name': NETLIFY_DRAFT_FORM_NAME,
+    draftType,
+    sourceRoute,
+    draftLabel: draftLabel.trim(),
+    businessName: resolvedBusinessName,
+    contactName: resolvedContactName,
+    contactEmail: resolvedContactEmail,
+    whatsapp: resolvedWhatsapp,
+    payloadJson: JSON.stringify(exportPayload, null, 2),
+  };
+}
+
+export function resolveDraftSaveEndpoint(sourceRoute) {
+  const trimmed = typeof sourceRoute === 'string' ? sourceRoute.trim() : '';
+
+  if (!trimmed) {
+    return '/';
+  }
+
+  return trimmed.startsWith('/') ? trimmed : `/${trimmed}`;
 }

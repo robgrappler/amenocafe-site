@@ -5,8 +5,8 @@ Single-site static landing page for Ameno Cafe, plus two internal authoring rout
 ## Routes
 
 - `/` - current production landing page in `index.html`
-- `/client-intake/` - onboarding form for business details, copy requests, and assets
-- `/copy-editor/` - copy editor with autosave, export JSON, reset, and screenshot references per section
+- `/client-intake/` - onboarding form for business details, copy requests, assets, and Netlify draft saves
+- `/copy-editor/` - copy editor with autosave, Netlify draft saves, export JSON, reset, and screenshot references per section
 
 ## Local Preview
 
@@ -21,8 +21,9 @@ open http://localhost:8080/copy-editor/
 
 1. Fill in `/client-intake/` to capture business details, tone of voice, section-level copy requests, and notes.
 2. The intake draft autosaves locally in the browser.
-3. Open `/copy-editor/` to preload the current site copy, optionally apply the intake draft, and edit section by section with a screenshot reference next to each editable block.
-4. Export JSON from either page when you want a portable handoff artifact.
+3. Use `Guardar borrador` on either route to send the current draft from that route into Netlify Forms for recovery without downloading a file.
+4. Open `/copy-editor/` to preload the current site copy, optionally apply the intake draft, and edit section by section with a screenshot reference next to each editable block.
+5. Export JSON from either page when you want a portable handoff artifact.
 
 ## Project Structure
 
