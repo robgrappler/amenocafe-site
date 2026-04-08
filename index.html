@@ -83,6 +83,11 @@
       background: rgba(255, 253, 250, 0.9);
     }
 
+    .hero-art-mask {
+      -webkit-mask-image: radial-gradient(ellipse 78% 82% at 58% 48%, black 42%, transparent 100%);
+      mask-image: radial-gradient(ellipse 78% 82% at 58% 48%, black 42%, transparent 100%);
+    }
+
     @keyframes dot-pulse {
       0%, 100% { box-shadow: 0 0 0 6px rgba(212, 163, 115, 0.15); }
       50%       { box-shadow: 0 0 0 10px rgba(212, 163, 115, 0.05); }
@@ -183,7 +188,7 @@
 
         <div class="relative flex justify-center lg:justify-end">
           <div class="pointer-events-none absolute inset-0 -z-10 rounded-full bg-dorado/10 blur-3xl scale-110"></div>
-          <picture class="relative block w-full max-w-[24rem] sm:max-w-[30rem] lg:max-w-[38rem]">
+          <picture class="relative block w-full max-w-[24rem] sm:max-w-[30rem] lg:max-w-[38rem] hero-art-mask">
             <source srcset="assets/Gemini_Generated_Image_zdr2uuzdr2uuzdr2.avif" type="image/avif">
             <source srcset="assets/Gemini_Generated_Image_zdr2uuzdr2uuzdr2.webp" type="image/webp">
             <img
