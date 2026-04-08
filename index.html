@@ -83,7 +83,7 @@
       background: rgba(255, 253, 250, 0.9);
     }
 
-@keyframes dot-pulse {
+    @keyframes dot-pulse {
       0%, 100% { box-shadow: 0 0 0 6px rgba(212, 163, 115, 0.15); }
       50%       { box-shadow: 0 0 0 10px rgba(212, 163, 115, 0.05); }
     }
@@ -132,7 +132,7 @@
         class="page-photo h-full w-full object-cover object-center"
       >
     </picture>
-    <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(252,251,248,0.92)_0%,rgba(252,251,248,0.80)_45%,rgba(252,251,248,0.60)_100%)]"></div>
+    <div class="absolute inset-0 bg-[linear-gradient(160deg,rgba(252,251,248,0.94)_0%,rgba(252,251,248,0.82)_40%,rgba(252,251,248,0.60)_100%)]"></div>
   </div>
   <div class="fixed inset-0 grain opacity-40 pointer-events-none"></div>
   <div class="pointer-events-none fixed -left-28 top-24 h-72 w-72 rounded-full bg-dorado/10 blur-3xl float-slow"></div>
@@ -149,8 +149,8 @@
       </a>
     </header>
 
-    <section class="max-w-7xl mx-auto px-6 pb-10 pt-12 sm:pt-16 lg:pt-20">
-      <div class="grid items-center gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+    <section class="max-w-7xl mx-auto px-6 pb-10 pt-8 sm:pt-14 lg:pt-20">
+      <div class="grid items-center gap-6 lg:gap-10 lg:grid-cols-[0.8fr_1.2fr]">
         <div class="max-w-2xl">
           <p class="fade-up text-dorado font-medium tracking-[0.24em] uppercase text-xs sm:text-sm mb-6">
             Minatitlán, Veracruz
@@ -188,7 +188,7 @@
             <img
               src="assets/hero-art.webp"
               alt="Ameno Café"
-              class="w-full h-auto"
+              class="w-full h-auto max-h-[65vw] object-contain lg:max-h-none"
             >
           </picture>
         </div>
