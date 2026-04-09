@@ -1,304 +1,526 @@
-<!DOCTYPE html>
-<html lang="es-MX">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ameno Café — Próximamente</title>
-  <meta name="description" content="Ameno Café está preparando una nueva experiencia de café de especialidad y eventos premium en Minatitlán, Veracruz.">
-  <meta name="keywords" content="Ameno Café, café de especialidad, Minatitlán, Veracruz, próximamente">
-  <meta property="og:title" content="Ameno Café — Próximamente">
-  <meta property="og:description" content="Una nueva etapa para Ameno Café está en camino. Café de especialidad, eventos y una experiencia más cuidada.">
-  <meta property="og:type" content="website">
-  <meta property="og:locale" content="es_MX">
-  <meta property="og:image" content="https://amenocafe.com/assets/share-image.webp">
-  <meta property="og:image:width" content="2572">
-  <meta property="og:image:height" content="1664">
-  <link rel="canonical" href="https://amenocafe.com">
-  <link rel="icon" type="image/png" href="assets/logo.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <style type="text/tailwindcss">
-    @theme {
-      --color-hueso: #FAF9F6;
-      --color-cafe: #2C1B18;
-      --color-dorado: #D4A373;
-      --color-dorado-light: #E8C9A0;
-      --color-crema: #F5F0EB;
-      --font-serif: 'Playfair Display', Georgia, serif;
-      --font-sans: 'Montserrat', system-ui, sans-serif;
-    }
 
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: var(--font-sans);
-      background:
-        linear-gradient(180deg, #fcfbf8 0%, #f4efe7 100%);
-      color: var(--color-cafe);
-    }
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ameno Café | Próximamente</title>
+    <meta
+      name="description"
+      content="Ameno Café llevará la experiencia del café de especialidad a tu evento. Próximamente: barra de café para eventos privados, corporativos y celebraciones."
+    />
+    <style>
+      :root {
+        --bg: #f6efe7;
+        --bg-2: #fbf7f2;
+        --surface: rgba(255, 252, 247, 0.58);
+        --surface-strong: rgba(255, 252, 247, 0.72);
+        --text: #5f4536;
+        --text-soft: #7f6758;
+        --border: rgba(145, 114, 92, 0.18);
+        --accent: #7f573d;
+        --accent-2: #96684a;
+        --shadow: 0 14px 40px rgba(95, 69, 54, 0.08);
+        --radius-xl: 32px;
+        --radius-lg: 18px;
+        --container: 1160px;
+      }
 
-    .page-photo {
-      filter: blur(18px) saturate(0.72) brightness(1.08);
-      opacity: 0.22;
-      transform: scale(1.08);
-      mix-blend-mode: soft-light;
-    }
+      * {
+        box-sizing: border-box;
+      }
 
-    .grain {
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.22'/%3E%3C/svg%3E");
-      mix-blend-mode: soft-light;
-    }
+      html {
+        scroll-behavior: smooth;
+      }
 
-    .float-slow {
-      animation: float-slow 12s ease-in-out infinite;
-    }
-    .float-delayed {
-      animation: float-slow 15s ease-in-out infinite;
-      animation-delay: -4s;
-    }
-    @keyframes float-slow {
-      0%, 100% { transform: translate3d(0, 0, 0); }
-      50% { transform: translate3d(0, -14px, 0); }
-    }
+      body {
+        margin: 0;
+        color: var(--text);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background:
+          radial-gradient(circle at top, rgba(255,255,255,0.45), transparent 34%),
+          radial-gradient(circle at 20% 30%, rgba(255,255,255,0.26), transparent 18%),
+          radial-gradient(circle at 80% 20%, rgba(255,255,255,0.18), transparent 22%),
+          linear-gradient(180deg, #faf6f1 0%, var(--bg) 52%, #f2e8de 100%);
+        min-height: 100vh;
+        position: relative;
+      }
 
-    .fade-up {
-      opacity: 0;
-      transform: translateY(24px);
-      animation: fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    }
-    @keyframes fade-up {
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .delay-1 { animation-delay: 90ms; }
-    .delay-2 { animation-delay: 180ms; }
-    .delay-3 { animation-delay: 270ms; }
-    .delay-4 { animation-delay: 360ms; }
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.18;
+        background-image:
+          repeating-radial-gradient(circle at 50% 50%, rgba(120, 92, 75, 0.04) 0 2px, transparent 2px 24px),
+          repeating-linear-gradient(0deg, rgba(120, 92, 75, 0.02) 0 1px, transparent 1px 5px),
+          repeating-linear-gradient(90deg, rgba(120, 92, 75, 0.015) 0 1px, transparent 1px 4px);
+        mix-blend-mode: multiply;
+      }
 
-    .chip {
-      border: 1px solid rgba(44, 27, 24, 0.12);
-      background: rgba(250, 249, 246, 0.72);
-      transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
-    }
-    .chip:hover {
-      transform: translateY(-1px);
-      border-color: rgba(212, 163, 115, 0.4);
-      background: rgba(255, 253, 250, 0.9);
-    }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
 
-    @keyframes dot-pulse {
-      0%, 100% { box-shadow: 0 0 0 6px rgba(212, 163, 115, 0.15); }
-      50%       { box-shadow: 0 0 0 10px rgba(212, 163, 115, 0.05); }
-    }
+      img {
+        max-width: 100%;
+        display: block;
+      }
 
-    .dot {
-      width: 0.55rem;
-      height: 0.55rem;
-      border-radius: 999px;
-      background: #D4A373;
-      box-shadow: 0 0 0 6px rgba(212, 163, 115, 0.15);
-      animation: dot-pulse 2.4s ease-in-out infinite;
-    }
+      .page {
+        width: min(var(--container), calc(100% - 32px));
+        margin: 0 auto;
+        padding: 42px 0 72px;
+      }
 
-    .fab-wa {
-      position: fixed;
-      bottom: 1.5rem;
-      right: 1.5rem;
-      z-index: 50;
-      width: 3.25rem;
-      height: 3.25rem;
-      border-radius: 999px;
-      background: #25D366;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 20px rgba(37, 211, 102, 0.38);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .fab-wa:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 28px rgba(37, 211, 102, 0.48);
-    }
+      .hero {
+        text-align: center;
+        padding: 8px 0 44px;
+      }
 
-    .reveal {
-      opacity: 1;
-      transform: translateY(0);
-      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-    }
+      .logo-wrap {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 16px;
+      }
 
-  </style>
-</head>
+      .logo-main {
+        font-family: "Avenir Next", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: clamp(4rem, 11vw, 8rem);
+        line-height: 0.88;
+        letter-spacing: -0.08em;
+        font-weight: 500;
+        color: #6d4a37;
+        text-shadow:
+          0 1px 0 rgba(255,255,255,0.55),
+          0 2px 0 rgba(108, 77, 58, 0.08),
+          0 14px 24px rgba(78, 54, 42, 0.12);
+      }
 
-<body class="antialiased min-h-screen overflow-x-hidden">
-  <div class="fixed inset-0 -z-20 overflow-hidden" aria-hidden="true">
-    <picture class="absolute inset-0 block h-full w-full">
-      <source srcset="assets/Gemini_Generated_Image_zdr2uuzdr2uuzdr2.avif" type="image/avif">
-      <source srcset="assets/Gemini_Generated_Image_zdr2uuzdr2uuzdr2.webp" type="image/webp">
-      <img
-        src="assets/Gemini_Generated_Image_zdr2uuzdr2uuzdr2.webp"
-        alt=""
-        class="page-photo h-full w-full object-cover object-center"
-      >
-    </picture>
-    <div class="absolute inset-0 bg-[linear-gradient(160deg,rgba(252,251,248,0.94)_0%,rgba(252,251,248,0.82)_40%,rgba(252,251,248,0.60)_100%)]"></div>
-  </div>
-  <div class="fixed inset-0 grain opacity-40 pointer-events-none"></div>
-  <div class="pointer-events-none fixed -left-28 top-24 h-72 w-72 rounded-full bg-dorado/10 blur-3xl float-slow"></div>
-  <div class="pointer-events-none fixed -right-32 bottom-4 h-96 w-96 rounded-full bg-cafe/10 blur-3xl"></div>
+      .logo-sub {
+        align-self: flex-end;
+        margin-top: -4px;
+        margin-right: 2%;
+        font-family: "Avenir Next", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: clamp(1.5rem, 4vw, 3.1rem);
+        line-height: 1;
+        letter-spacing: 0.02em;
+        color: #734e3a;
+        text-shadow: 0 8px 16px rgba(78, 54, 42, 0.08);
+      }
 
-  <main class="relative min-h-screen">
-    <header class="max-w-7xl mx-auto px-6 pt-6 sm:pt-8">
-      <a href="#">
-        <picture>
-          <source srcset="assets/logo.avif" type="image/avif">
-          <source srcset="assets/logo.webp" type="image/webp">
-          <img src="assets/logo.png" alt="Ameno Café" class="h-9 sm:h-10 w-auto">
-        </picture>
-      </a>
-    </header>
+      .eyebrow {
+        margin: 8px 0 8px;
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-style: italic;
+        font-weight: 500;
+        font-size: clamp(2.5rem, 6vw, 4.4rem);
+        line-height: 1;
+        color: var(--text-soft);
+      }
 
-    <section class="max-w-7xl mx-auto px-6 pb-10 pt-8 sm:pt-14 lg:pt-20">
-      <div class="grid items-center gap-6 lg:gap-10 lg:grid-cols-[0.8fr_1.2fr]">
-        <div class="max-w-2xl">
-          <p class="fade-up text-dorado font-medium tracking-[0.24em] uppercase text-xs sm:text-sm mb-6">
-            Minatitlán, Veracruz
-          </p>
-          <h1 class="fade-up delay-1 font-serif text-5xl sm:text-6xl lg:text-7xl font-medium leading-[0.95] tracking-[-0.02em] mb-7">
-            Estamos
-            preparando
-            algo <span class="italic text-dorado">especial</span>.
-          </h1>
-          <a href="#" class="wa-link fade-up delay-2 inline-flex items-center gap-2 self-start rounded-full bg-cafe text-hueso px-5 py-3 text-sm font-semibold shadow-lg shadow-cafe/10 mb-5 no-underline" aria-label="Cotizar por WhatsApp">
-            <svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-              <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.557 4.12 1.527 5.845L.057 23.5l5.797-1.448A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.838 0-3.563-.5-5.055-1.37l-.361-.214-3.44.859.874-3.353-.235-.374A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+      .divider {
+        width: min(360px, 72vw);
+        height: 1px;
+        margin: 0 auto 16px;
+        background: linear-gradient(90deg, transparent, rgba(127, 103, 88, 0.42), transparent);
+        position: relative;
+      }
+
+      .divider::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 14px;
+        height: 14px;
+        transform: translate(-50%, -50%) rotate(45deg);
+        border: 1px solid rgba(127, 103, 88, 0.35);
+        background: rgba(255,255,255,0.5);
+        border-radius: 2px;
+      }
+
+      .hero-copy {
+        max-width: 760px;
+        margin: 0 auto 24px;
+      }
+
+      .hero-copy p {
+        margin: 0;
+        font-size: clamp(1.1rem, 2.3vw, 1.75rem);
+        line-height: 1.45;
+        color: var(--text);
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-weight: 500;
+      }
+
+      .notify-form {
+        width: min(680px, 100%);
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 0;
+        background: rgba(255,255,255,0.22);
+        border-radius: 18px;
+        overflow: hidden;
+        border: 1px solid rgba(127, 103, 88, 0.16);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(8px);
+      }
+
+      .notify-form input {
+        min-width: 0;
+        border: 0;
+        background: rgba(255,255,255,0.42);
+        color: var(--text);
+        padding: 18px 22px;
+        font-size: 1rem;
+        outline: none;
+      }
+
+      .notify-form input::placeholder {
+        color: rgba(95, 69, 54, 0.55);
+      }
+
+      .notify-form button {
+        border: 0;
+        background: linear-gradient(180deg, var(--accent-2), var(--accent));
+        color: #fffaf5;
+        padding: 18px 28px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.18s ease, filter 0.18s ease, box-shadow 0.18s ease;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.18);
+      }
+
+      .notify-form button:hover,
+      .notify-form button:focus-visible {
+        transform: translateY(-1px);
+        filter: brightness(1.03);
+      }
+
+      .socials {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 18px;
+        margin-top: 22px;
+      }
+
+      .social-link {
+        width: 52px;
+        height: 52px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.45);
+        border: 1px solid rgba(127, 103, 88, 0.14);
+        color: var(--text);
+        box-shadow: 0 8px 20px rgba(95, 69, 54, 0.06);
+        transition: transform 0.18s ease, background 0.18s ease;
+      }
+
+      .social-link:hover,
+      .social-link:focus-visible {
+        transform: translateY(-2px);
+        background: rgba(255,255,255,0.68);
+      }
+
+      .social-link svg {
+        width: 24px;
+        height: 24px;
+      }
+
+      .services {
+        padding-top: 22px;
+      }
+
+      .section-head {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .section-kicker {
+        margin: 0 0 10px;
+        font-size: 0.95rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--text-soft);
+        font-weight: 700;
+      }
+
+      .section-title {
+        margin: 0;
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: clamp(2.6rem, 5vw, 4.3rem);
+        line-height: 0.98;
+        font-weight: 500;
+      }
+
+      .section-intro {
+        max-width: 900px;
+        margin: 18px auto 0;
+        font-size: clamp(1rem, 2vw, 1.35rem);
+        line-height: 1.65;
+        color: var(--text-soft);
+      }
+
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 18px;
+        align-items: stretch;
+      }
+
+      .card {
+        padding: 28px 22px 24px;
+        border-radius: var(--radius-xl);
+        border: 1px solid var(--border);
+        background:
+          linear-gradient(180deg, rgba(255,255,255,0.52), rgba(255,255,255,0.32)),
+          var(--surface);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(8px);
+        min-height: 100%;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      }
+
+      .card:hover,
+      .card:focus-within {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 44px rgba(95, 69, 54, 0.1);
+        border-color: rgba(127, 103, 88, 0.26);
+      }
+
+      .icon-badge {
+        width: 74px;
+        height: 74px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 18px;
+        background: rgba(233, 219, 206, 0.75);
+        color: var(--accent);
+      }
+
+      .icon-badge svg {
+        width: 34px;
+        height: 34px;
+      }
+
+      .card h3 {
+        margin: 0 0 12px;
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: clamp(1.9rem, 2.5vw, 2.35rem);
+        line-height: 0.98;
+        font-weight: 600;
+      }
+
+      .card-divider {
+        width: 100%;
+        height: 1px;
+        margin: 14px 0 16px;
+        background: linear-gradient(90deg, rgba(127,103,88,0.22), rgba(127,103,88,0.1), rgba(127,103,88,0.22));
+      }
+
+      .card p {
+        margin: 0;
+        font-size: 1rem;
+        line-height: 1.7;
+        color: var(--text-soft);
+      }
+
+      .footer-line {
+        margin-top: 34px;
+        padding-top: 16px;
+        text-align: center;
+        color: var(--text-soft);
+        position: relative;
+        font-size: 1rem;
+      }
+
+      .footer-line::before {
+        content: "";
+        display: block;
+        width: min(480px, 74vw);
+        height: 1px;
+        margin: 0 auto 18px;
+        background: linear-gradient(90deg, transparent, rgba(127,103,88,0.4), transparent);
+      }
+
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      @media (max-width: 1080px) {
+        .cards {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 720px) {
+        .page {
+          width: min(var(--container), calc(100% - 20px));
+          padding-top: 28px;
+          padding-bottom: 52px;
+        }
+
+        .hero {
+          padding-bottom: 34px;
+        }
+
+        .notify-form {
+          grid-template-columns: 1fr;
+          gap: 10px;
+          background: transparent;
+          border: 0;
+          box-shadow: none;
+          backdrop-filter: none;
+        }
+
+        .notify-form input,
+        .notify-form button {
+          border-radius: 16px;
+          border: 1px solid rgba(127, 103, 88, 0.16);
+          box-shadow: var(--shadow);
+        }
+
+        .cards {
+          grid-template-columns: 1fr;
+        }
+
+        .card {
+          padding: 24px 20px;
+        }
+
+        .hero-copy p,
+        .section-intro {
+          line-height: 1.55;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="logo-wrap" aria-label="Ameno Café">
+          <div class="logo-main">ameno</div>
+          <div class="logo-sub">CAFÉ</div>
+        </div>
+
+        <p class="eyebrow">Próximamente</p>
+        <div class="divider" aria-hidden="true"></div>
+
+        <div class="hero-copy">
+          <p id="hero-title">Llevamos la experiencia del café a tu evento</p>
+        </div>
+
+        <form class="notify-form" action="#" method="post">
+          <label class="sr-only" for="email">Correo electrónico</label>
+          <input id="email" name="email" type="email" placeholder="Ingresa tu email..." autocomplete="email" />
+          <button type="submit">Notificarme</button>
+        </form>
+
+        <div class="socials" aria-label="Redes sociales">
+          <a class="social-link" href="https://wa.me/0000000000" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M20 11.5a8 8 0 0 1-11.78 7.05L4 20l1.62-4.02A8 8 0 1 1 20 11.5Z" />
+              <path d="M8.7 9.9c0-.4.2-.7.5-.9.2-.1.5-.1.7.1l1.1 1.3c.2.2.2.5.1.7l-.4.8c.7 1.3 1.8 2.4 3.1 3.1l.8-.4c.3-.1.5-.1.7.1l1.3 1.1c.2.2.2.5.1.7-.2.3-.5.5-.9.5h-.6c-3.9-.5-7-3.6-7.5-7.5v-.6Z" />
             </svg>
-            Cotizar evento
           </a>
-          <div class="fade-up delay-3 flex items-center flex-wrap gap-3">
-            <div class="chip inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs sm:text-sm font-medium tracking-[0.18em] uppercase text-cafe/80">
-              <span class="dot"></span>
-              Próximamente
-            </div>
-            <a href="https://www.instagram.com/_amenocafe/" target="_blank" rel="noopener noreferrer" class="chip inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs sm:text-sm font-medium text-cafe/70 no-underline">
-              <svg class="shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
-              </svg>
-              @_amenocafe
-            </a>
-          </div>
+          <a class="social-link" href="https://instagram.com/amenocafe" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+            </svg>
+          </a>
+        </div>
+      </section>
+
+      <section class="services" aria-labelledby="services-title">
+        <div class="section-head">
+          <p class="section-kicker">Servicios próximamente disponibles</p>
+          <h2 class="section-title" id="services-title">Una barra de café cuidada, elegante y memorable</h2>
+          <p class="section-intro">
+            Llevamos una barra de café de especialidad a tus eventos privados, corporativos y celebraciones especiales.
+          </p>
         </div>
 
-        <div class="relative flex justify-center lg:justify-end lg:-mr-6">
-          <div class="pointer-events-none absolute inset-0 -z-10 rounded-full bg-dorado/10 blur-3xl scale-110"></div>
-          <picture class="relative block w-full">
-            <source srcset="assets/hero-art.webp" type="image/webp">
-            <img
-              src="assets/hero-art.webp"
-              alt="Ameno Café"
-              class="w-full h-auto max-h-[65vw] object-contain lg:max-h-none"
-            >
-          </picture>
-        </div>
-      </div>
-    </section>
-
-    <!-- LO QUE SE VIENE -->
-    <section class="max-w-7xl mx-auto px-6 pb-16 sm:pb-20">
-      <div class="border-t border-cafe/10 pt-14 sm:pt-20">
-        <div class="mb-10 sm:mb-14">
-          <p class="reveal text-dorado font-medium tracking-[0.24em] uppercase text-xs mb-3">Lo que se viene</p>
-          <h2 class="reveal font-serif text-3xl sm:text-4xl lg:text-5xl font-medium leading-[1.05]">Una experiencia que<br class="hidden sm:block"> vale la pena esperar.</h2>
-        </div>
-        <div class="grid sm:grid-cols-3 gap-5">
-          <div class="reveal rounded-2xl border border-cafe/10 bg-crema/50 p-7">
-            <div class="w-9 h-9 rounded-full bg-dorado/15 flex items-center justify-center mb-5 text-dorado">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M17 8h1a4 4 0 0 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/>
+        <div class="cards">
+          <article class="card">
+            <div class="icon-badge" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 8h8a0 0 0 0 1 0 0v4a4 4 0 0 1-4 4h0a4 4 0 0 1-4-4V8a0 0 0 0 1 0 0Z" />
+                <path d="M15 10h1.5A2.5 2.5 0 0 1 19 12.5v0A2.5 2.5 0 0 1 16.5 15H15" />
+                <path d="M9 4v2" />
+                <path d="M12 4v2" />
               </svg>
             </div>
-            <h3 class="font-serif text-xl font-medium mb-2">Café de especialidad</h3>
-            <p class="text-cafe/60 text-sm leading-relaxed">Granos de origen, métodos cuidados y el ritual de una buena taza. La barra que Minatitlán estaba esperando.</p>
-          </div>
-          <div class="reveal rounded-2xl border border-cafe/10 bg-crema/50 p-7" style="transition-delay:100ms">
-            <div class="w-9 h-9 rounded-full bg-dorado/15 flex items-center justify-center mb-5 text-dorado">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            <h3>Barra de café para eventos privados</h3>
+            <div class="card-divider" aria-hidden="true"></div>
+            <p>Servicio de café de especialidad para bodas, reuniones, celebraciones y eventos sociales.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon-badge" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="4" y="7" width="16" height="11" rx="2" />
+                <path d="M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" />
+                <path d="M4 12h16" />
               </svg>
             </div>
-            <h3 class="font-serif text-xl font-medium mb-2">Eventos & catering</h3>
-            <p class="text-cafe/60 text-sm leading-relaxed">Bodas, reuniones corporativas y celebraciones privadas. Llevamos el café de especialidad a tu evento.</p>
-          </div>
-          <div class="reveal rounded-2xl border border-cafe/10 bg-crema/50 p-7" style="transition-delay:200ms">
-            <div class="w-9 h-9 rounded-full bg-dorado/15 flex items-center justify-center mb-5 text-dorado">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+            <h3>Eventos corporativos</h3>
+            <div class="card-divider" aria-hidden="true"></div>
+            <p>Una barra de café elegante para conferencias, oficinas, activaciones y encuentros empresariales.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon-badge" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 14h14" />
+                <path d="M7 14a5 5 0 0 1 10 0" />
+                <path d="M12 4v2" />
+                <path d="M4 18h16" />
               </svg>
             </div>
-            <h3 class="font-serif text-xl font-medium mb-2">Dos ciudades</h3>
-            <p class="text-cafe/60 text-sm leading-relaxed">Minatitlán y Coatzacoalcos. Porque el buen café merece alcanzar a más personas en el sureste.</p>
-          </div>
+            <h3>Catering de café</h3>
+            <div class="card-divider" aria-hidden="true"></div>
+            <p>Bebidas preparadas al momento para complementar tu evento con hospitalidad, detalle y calidez.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon-badge" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3l1.6 3.4L17 8l-3.4 1.6L12 13l-1.6-3.4L7 8l3.4-1.6L12 3Z" />
+                <path d="M19 14l.9 1.9 1.9.9-1.9.9-.9 1.9-.9-1.9-1.9-.9 1.9-.9.9-1.9Z" />
+                <path d="M6 15l1.1 2.2L9.3 18l-2.2 1.1L6 21.3l-1.1-2.2L2.7 18l2.2-1.1L6 15Z" />
+              </svg>
+            </div>
+            <h3>Experiencias personalizadas</h3>
+            <div class="card-divider" aria-hidden="true"></div>
+            <p>Adaptamos la propuesta al estilo, tamaño y atmósfera de tu evento para que todo se sienta coherente y especial.</p>
+          </article>
         </div>
-      </div>
-    </section>
 
-    <!-- SÍGUENOS -->
-    <section class="max-w-7xl mx-auto px-6 pb-16 sm:pb-20 text-center">
-      <div class="border-t border-cafe/10 pt-14 sm:pt-20">
-        <p class="reveal text-dorado font-medium tracking-[0.24em] uppercase text-xs mb-4">Síguenos</p>
-        <h2 class="reveal font-serif text-2xl sm:text-3xl font-medium mb-3">Sé el primero en enterarte.</h2>
-        <p class="reveal text-cafe/60 text-sm mb-8 max-w-sm mx-auto leading-relaxed">Fechas de apertura, menú y novedades — todo en nuestro Instagram.</p>
-        <a href="https://www.instagram.com/_amenocafe/" target="_blank" rel="noopener noreferrer" class="reveal chip inline-flex items-center gap-2.5 rounded-full px-6 py-3 text-sm font-medium text-cafe/80 no-underline">
-          <svg class="shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
-          </svg>
-          @_amenocafe
-        </a>
-      </div>
-    </section>
-
-    <footer class="max-w-7xl mx-auto px-6 pb-8 pt-6 border-t border-cafe/10">
-      <div class="flex flex-wrap items-start justify-between gap-x-8 gap-y-4 text-sm">
-        <div class="flex flex-wrap gap-x-8 gap-y-4 text-cafe/60">
-          <div>
-            <p class="font-semibold text-cafe mb-1">Minatitlán</p>
-            <p>Restaurante Katz · Av. 18 de Octubre 93, Santa Clara</p>
-            <p>Mar, Mié y Jue — 4:00 a 9:00 pm</p>
-          </div>
-          <div>
-            <p class="font-semibold text-cafe mb-1">Coatzacoalcos</p>
-            <p>Pop-ups en sedes rotativas</p>
-            <p>Vie, Sab y Dom — Síguenos en redes</p>
-          </div>
-        </div>
-        <p class="text-cafe/40">© 2026 Ameno Café</p>
-      </div>
-    </footer>
-  </main>
-
-  <a href="#" class="wa-link fab-wa" aria-label="Cotizar por WhatsApp">
-    <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-      <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.557 4.12 1.527 5.845L.057 23.5l5.797-1.448A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.838 0-3.563-.5-5.055-1.37l-.361-.214-3.44.859.874-3.353-.235-.374A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
-    </svg>
-  </a>
-
-  <script>
-    var whatsappNumber = '5215578688247';
-    var waMsg = encodeURIComponent('Hola Ameno Café, me gustaría cotizar un evento.');
-    var waUrl = 'https://wa.me/' + whatsappNumber + '?text=' + waMsg;
-    document.querySelectorAll('.wa-link').forEach(function(el) {
-      el.setAttribute('href', waUrl);
-    });
-
-    // Scroll reveal for storytelling sections
-    var io = new IntersectionObserver(function(entries) {
-      entries.forEach(function(e) {
-        if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
-      });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
-  </script>
-</body>
+        <div class="footer-line">Café de especialidad • Momentos inolvidables</div>
+      </section>
+    </main>
+  </body>
 </html>
