@@ -1,516 +1,366 @@
-
 <!doctype html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ameno Café | Próximamente</title>
-    <meta
-      name="description"
-      content="Ameno Café llevará la experiencia del café de especialidad a tu evento. Próximamente: barra de café para eventos privados, corporativos y celebraciones."
-    />
+    <meta name="description" content="Ameno Café llevará la experiencia del café de especialidad a tu evento. Próximamente: barra de café para eventos privados, corporativos y celebraciones." />
+    <meta property="og:title" content="Ameno Café — Próximamente" />
+    <meta property="og:description" content="Una nueva etapa para Ameno Café está en camino. Café de especialidad para eventos y celebraciones." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://amenocafe.com/assets/share-image.webp" />
+    <link rel="canonical" href="https://amenocafe.com" />
+    <link rel="icon" type="image/png" href="assets/logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet" />
     <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
       :root {
-        --bg: #e2d8cc;
-        --bg-2: #ece6dc;
-        --surface: rgba(236, 230, 220, 0.58);
-        --surface-strong: rgba(240, 235, 226, 0.72);
-        --text: #5f4536;
-        --text-soft: #7f6758;
-        --border: rgba(145, 114, 92, 0.18);
-        --accent: #7f573d;
-        --accent-2: #96684a;
-        --shadow: 0 14px 40px rgba(95, 69, 54, 0.08);
-        --radius-xl: 32px;
-        --radius-lg: 18px;
-        --container: 1160px;
+        --text:       #3a2a1e;
+        --text-soft:  #6b5040;
+        --accent:     #7a5339;
+        --border:     rgba(90, 62, 42, 0.18);
+        --surface:    rgba(255, 251, 246, 0.62);
+        --serif: 'Cormorant Garamond', Georgia, serif;
       }
 
-      * {
-        box-sizing: border-box;
-      }
-
-      html {
-        scroll-behavior: smooth;
-      }
+      html { scroll-behavior: smooth; }
 
       body {
-        margin: 0;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
         color: var(--text);
-        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        background:
-          radial-gradient(circle at top, rgba(255,255,255,0.28), transparent 34%),
-          radial-gradient(circle at 20% 30%, rgba(255,255,255,0.14), transparent 18%),
-          radial-gradient(circle at 80% 20%, rgba(255,255,255,0.10), transparent 22%),
-          linear-gradient(180deg, #ece6dc 0%, var(--bg) 52%, #d6ccc0 100%);
         min-height: 100vh;
-        position: relative;
-      }
-
-      body::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        pointer-events: none;
-        opacity: 0.18;
-        background-image:
-          repeating-radial-gradient(circle at 50% 50%, rgba(120, 92, 75, 0.04) 0 2px, transparent 2px 24px),
-          repeating-linear-gradient(0deg, rgba(120, 92, 75, 0.02) 0 1px, transparent 1px 5px),
-          repeating-linear-gradient(90deg, rgba(120, 92, 75, 0.015) 0 1px, transparent 1px 4px);
-        mix-blend-mode: multiply;
-      }
-
-      a {
-        color: inherit;
-        text-decoration: none;
-      }
-
-      img {
-        max-width: 100%;
-        display: block;
-      }
-
-      .page {
-        width: min(var(--container), calc(100% - 32px));
-        margin: 0 auto;
-        padding: 42px 0 72px;
-      }
-
-      .hero {
-        text-align: center;
-        padding: 8px 0 44px;
-        border-radius: var(--radius-xl);
         background-image: image-set(
           url("assets/hero-bg.avif") type("image/avif"),
           url("assets/hero-bg.webp") type("image/webp")
         );
         background-size: cover;
+        background-attachment: fixed;
         background-position: center;
-        overflow: hidden;
       }
 
-      .logo-wrap {
-        display: inline-flex;
+      a { color: inherit; text-decoration: none; }
+
+      /* ── HERO ─────────────────────────────────────────── */
+      .hero {
+        min-height: 100svh;
+        display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
-        margin-bottom: 16px;
+        padding: 64px 24px 80px;
+        text-align: center;
       }
 
       .logo-img {
-        height: clamp(72px, 18vw, 160px);
-        width: auto;
+        width: min(560px, 80vw);
+        height: auto;
+        margin-bottom: 36px;
+        filter: drop-shadow(0 8px 32px rgba(50, 30, 15, 0.18));
+      }
+
+      .rule {
+        width: min(280px, 60vw);
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(90,62,42,0.45), transparent);
+        margin-bottom: 20px;
+        position: relative;
+      }
+      .rule::after {
+        content: "";
+        position: absolute;
+        top: 50%; left: 50%;
+        width: 10px; height: 10px;
+        transform: translate(-50%,-50%) rotate(45deg);
+        border: 1px solid rgba(90,62,42,0.35);
+        background: rgba(226, 216, 204, 0.7);
       }
 
       .eyebrow {
-        margin: 8px 0 8px;
-        font-family: "Cormorant Garamond", Georgia, serif;
+        font-family: var(--serif);
         font-style: italic;
-        font-weight: 500;
-        font-size: clamp(2.5rem, 6vw, 4.4rem);
+        font-weight: 400;
+        font-size: clamp(2.8rem, 7vw, 5rem);
         line-height: 1;
         color: var(--text-soft);
+        margin-bottom: 20px;
+        letter-spacing: 0.01em;
       }
 
-      .divider {
-        width: min(360px, 72vw);
-        height: 1px;
-        margin: 0 auto 16px;
-        background: linear-gradient(90deg, transparent, rgba(127, 103, 88, 0.42), transparent);
-        position: relative;
-      }
-
-      .divider::after {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 14px;
-        height: 14px;
-        transform: translate(-50%, -50%) rotate(45deg);
-        border: 1px solid rgba(127, 103, 88, 0.35);
-        background: rgba(255,255,255,0.5);
-        border-radius: 2px;
-      }
-
-      .hero-copy {
-        max-width: 760px;
-        margin: 0 auto 24px;
-      }
-
-      .hero-copy p {
-        margin: 0;
-        font-size: clamp(1.1rem, 2.3vw, 1.75rem);
+      .tagline {
+        font-family: var(--serif);
+        font-weight: 400;
+        font-size: clamp(1.15rem, 2.4vw, 1.65rem);
         line-height: 1.45;
         color: var(--text);
-        font-family: "Cormorant Garamond", Georgia, serif;
-        font-weight: 500;
+        max-width: 540px;
+        margin-bottom: 40px;
+        opacity: 0.82;
       }
 
-      .notify-form {
-        width: min(680px, 100%);
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: 1fr auto;
-        gap: 0;
-        background: rgba(255,255,255,0.22);
-        border-radius: 18px;
-        overflow: hidden;
-        border: 1px solid rgba(127, 103, 88, 0.16);
-        box-shadow: var(--shadow);
-        backdrop-filter: blur(8px);
-      }
-
-      .notify-form input {
-        min-width: 0;
-        border: 0;
-        background: rgba(255,255,255,0.42);
-        color: var(--text);
-        padding: 18px 22px;
-        font-size: 1rem;
-        outline: none;
-      }
-
-      .notify-form input::placeholder {
-        color: rgba(95, 69, 54, 0.55);
-      }
-
-      .notify-form button {
-        border: 0;
-        background: linear-gradient(180deg, var(--accent-2), var(--accent));
-        color: #fffaf5;
-        padding: 18px 28px;
-        font-size: 1rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: transform 0.18s ease, filter 0.18s ease, box-shadow 0.18s ease;
-        box-shadow: inset 0 1px 0 rgba(255,255,255,0.18);
-      }
-
-      .notify-form button:hover,
-      .notify-form button:focus-visible {
-        transform: translateY(-1px);
-        filter: brightness(1.03);
-      }
-
-      .socials {
+      .cta-row {
         display: flex;
-        justify-content: center;
         align-items: center;
-        gap: 18px;
-        margin-top: 22px;
+        gap: 14px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 32px;
       }
 
-      .social-link {
-        width: 52px;
-        height: 52px;
+      .btn-wa {
         display: inline-flex;
         align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        background: rgba(255,255,255,0.45);
-        border: 1px solid rgba(127, 103, 88, 0.14);
-        color: var(--text);
-        box-shadow: 0 8px 20px rgba(95, 69, 54, 0.06);
-        transition: transform 0.18s ease, background 0.18s ease;
-      }
-
-      .social-link:hover,
-      .social-link:focus-visible {
-        transform: translateY(-2px);
-        background: rgba(255,255,255,0.68);
-      }
-
-      .social-link svg {
-        width: 24px;
-        height: 24px;
-      }
-
-      .services {
-        padding-top: 22px;
-      }
-
-      .section-head {
-        text-align: center;
-        margin-bottom: 30px;
-      }
-
-      .section-kicker {
-        margin: 0 0 10px;
+        gap: 9px;
+        background: var(--accent);
+        color: #fdf8f3;
+        border-radius: 999px;
+        padding: 14px 26px;
         font-size: 0.95rem;
-        letter-spacing: 0.14em;
+        font-weight: 600;
+        letter-spacing: 0.01em;
+        box-shadow: 0 8px 28px rgba(90,50,28,0.22);
+        transition: transform 0.18s ease, box-shadow 0.18s ease;
+      }
+      .btn-wa:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(90,50,28,0.28); }
+      .btn-wa svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+      .btn-ig {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid rgba(90,62,42,0.3);
+        border-radius: 999px;
+        padding: 13px 22px;
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: var(--text-soft);
+        background: rgba(255,251,246,0.45);
+        backdrop-filter: blur(6px);
+        transition: background 0.18s ease, border-color 0.18s ease;
+      }
+      .btn-ig:hover { background: rgba(255,251,246,0.72); border-color: rgba(90,62,42,0.5); }
+      .btn-ig svg { width: 17px; height: 17px; flex-shrink: 0; }
+
+      .location {
+        font-size: 0.82rem;
+        letter-spacing: 0.16em;
         text-transform: uppercase;
         color: var(--text-soft);
-        font-weight: 700;
+        opacity: 0.7;
+      }
+
+      /* ── SERVICES ─────────────────────────────────────── */
+      .services {
+        backdrop-filter: blur(2px);
+        background: rgba(226, 216, 204, 0.55);
+        border-top: 1px solid rgba(90,62,42,0.12);
+        padding: 80px 24px 96px;
+      }
+
+      .services-inner {
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+
+      .section-label {
+        text-align: center;
+        font-size: 0.78rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--text-soft);
+        margin-bottom: 12px;
+        opacity: 0.75;
       }
 
       .section-title {
-        margin: 0;
-        font-family: "Cormorant Garamond", Georgia, serif;
-        font-size: clamp(2.6rem, 5vw, 4.3rem);
-        line-height: 0.98;
-        font-weight: 500;
+        text-align: center;
+        font-family: var(--serif);
+        font-weight: 400;
+        font-size: clamp(2.4rem, 5vw, 4rem);
+        line-height: 1;
+        margin-bottom: 14px;
       }
 
-      .section-intro {
-        max-width: 900px;
-        margin: 18px auto 0;
-        font-size: clamp(1rem, 2vw, 1.35rem);
-        line-height: 1.65;
+      .section-sub {
+        text-align: center;
+        font-family: var(--serif);
+        font-size: clamp(1rem, 1.8vw, 1.3rem);
         color: var(--text-soft);
+        max-width: 680px;
+        margin: 0 auto 56px;
+        line-height: 1.6;
       }
 
       .cards {
         display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 18px;
-        align-items: stretch;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
       }
 
       .card {
-        padding: 28px 22px 24px;
-        border-radius: var(--radius-xl);
-        border: 1px solid var(--border);
-        background:
-          linear-gradient(180deg, rgba(255,255,255,0.52), rgba(255,255,255,0.32)),
-          var(--surface);
-        box-shadow: var(--shadow);
-        backdrop-filter: blur(8px);
-        min-height: 100%;
-        transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        background: rgba(255,251,246,0.68);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(90,62,42,0.12);
+        border-radius: 24px;
+        padding: 32px 24px 28px;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
       }
-
-      .card:hover,
-      .card:focus-within {
+      .card:hover {
         transform: translateY(-4px);
-        box-shadow: 0 20px 44px rgba(95, 69, 54, 0.1);
-        border-color: rgba(127, 103, 88, 0.26);
+        box-shadow: 0 18px 40px rgba(60,38,22,0.1);
       }
 
-      .icon-badge {
-        width: 74px;
-        height: 74px;
+      .card-icon {
+        width: 52px; height: 52px;
         border-radius: 50%;
-        display: inline-flex;
+        background: rgba(122, 83, 57, 0.12);
+        display: flex;
         align-items: center;
         justify-content: center;
-        margin-bottom: 18px;
-        background: rgba(233, 219, 206, 0.75);
         color: var(--accent);
+        margin-bottom: 20px;
       }
-
-      .icon-badge svg {
-        width: 34px;
-        height: 34px;
-      }
+      .card-icon svg { width: 26px; height: 26px; }
 
       .card h3 {
-        margin: 0 0 12px;
-        font-family: "Cormorant Garamond", Georgia, serif;
-        font-size: clamp(1.9rem, 2.5vw, 2.35rem);
-        line-height: 0.98;
-        font-weight: 600;
+        font-family: var(--serif);
+        font-weight: 500;
+        font-size: clamp(1.5rem, 2vw, 1.9rem);
+        line-height: 1.05;
+        margin-bottom: 10px;
       }
 
-      .card-divider {
-        width: 100%;
+      .card-line {
         height: 1px;
-        margin: 14px 0 16px;
-        background: linear-gradient(90deg, rgba(127,103,88,0.22), rgba(127,103,88,0.1), rgba(127,103,88,0.22));
+        background: linear-gradient(90deg, rgba(90,62,42,0.2), rgba(90,62,42,0.06));
+        margin-bottom: 14px;
       }
 
       .card p {
-        margin: 0;
-        font-size: 1rem;
-        line-height: 1.7;
+        font-size: 0.94rem;
+        line-height: 1.72;
         color: var(--text-soft);
       }
 
-      .footer-line {
-        margin-top: 34px;
-        padding-top: 16px;
+      .services-footer {
         text-align: center;
+        margin-top: 56px;
+        font-family: var(--serif);
+        font-style: italic;
+        font-size: 1.1rem;
         color: var(--text-soft);
-        position: relative;
-        font-size: 1rem;
+        opacity: 0.65;
       }
 
-      .footer-line::before {
-        content: "";
-        display: block;
-        width: min(480px, 74vw);
-        height: 1px;
-        margin: 0 auto 18px;
-        background: linear-gradient(90deg, transparent, rgba(127,103,88,0.4), transparent);
+      /* ── RESPONSIVE ───────────────────────────────────── */
+      @media (max-width: 960px) {
+        .cards { grid-template-columns: repeat(2, 1fr); }
       }
 
-      .sr-only {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        padding: 0;
-        margin: -1px;
-        overflow: hidden;
-        clip: rect(0, 0, 0, 0);
-        white-space: nowrap;
-        border: 0;
-      }
-
-      @media (max-width: 1080px) {
-        .cards {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-      }
-
-      @media (max-width: 720px) {
-        .page {
-          width: min(var(--container), calc(100% - 20px));
-          padding-top: 28px;
-          padding-bottom: 52px;
-        }
-
-        .hero {
-          padding-bottom: 34px;
-        }
-
-        .notify-form {
-          grid-template-columns: 1fr;
-          gap: 10px;
-          background: transparent;
-          border: 0;
-          box-shadow: none;
-          backdrop-filter: none;
-        }
-
-        .notify-form input,
-        .notify-form button {
-          border-radius: 16px;
-          border: 1px solid rgba(127, 103, 88, 0.16);
-          box-shadow: var(--shadow);
-        }
-
-        .cards {
-          grid-template-columns: 1fr;
-        }
-
-        .card {
-          padding: 24px 20px;
-        }
-
-        .hero-copy p,
-        .section-intro {
-          line-height: 1.55;
-        }
+      @media (max-width: 560px) {
+        .hero { padding: 48px 20px 64px; }
+        .cards { grid-template-columns: 1fr; gap: 14px; }
+        .services { padding: 60px 20px 72px; }
+        .cta-row { flex-direction: column; align-items: stretch; }
+        .btn-wa, .btn-ig { justify-content: center; }
       }
     </style>
   </head>
   <body>
-    <main class="page">
-      <section class="hero" aria-labelledby="hero-title">
-        <div class="logo-wrap">
-          <picture>
-            <source srcset="assets/logo-3d.avif" type="image/avif">
-            <source srcset="assets/logo-3d.webp" type="image/webp">
-            <img src="assets/logo-3d.webp" alt="Ameno Café" class="logo-img">
-          </picture>
-        </div>
 
-        <p class="eyebrow">Próximamente</p>
-        <div class="divider" aria-hidden="true"></div>
+    <!-- HERO -->
+    <section class="hero">
+      <picture>
+        <source srcset="assets/logo-3d.avif" type="image/avif" />
+        <source srcset="assets/logo-3d.webp" type="image/webp" />
+        <img src="assets/logo-3d.webp" alt="Ameno Café" class="logo-img" />
+      </picture>
 
-        <div class="hero-copy">
-          <p id="hero-title">Llevamos la experiencia del café a tu evento</p>
-        </div>
+      <div class="rule" aria-hidden="true"></div>
 
-        <form class="notify-form" action="#" method="post">
-          <label class="sr-only" for="email">Correo electrónico</label>
-          <input id="email" name="email" type="email" placeholder="Ingresa tu email..." autocomplete="email" />
-          <button type="submit">Notificarme</button>
-        </form>
+      <p class="eyebrow">Próximamente</p>
 
-        <div class="socials" aria-label="Redes sociales">
-          <a class="social-link" href="https://wa.me/0000000000" aria-label="WhatsApp">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M20 11.5a8 8 0 0 1-11.78 7.05L4 20l1.62-4.02A8 8 0 1 1 20 11.5Z" />
-              <path d="M8.7 9.9c0-.4.2-.7.5-.9.2-.1.5-.1.7.1l1.1 1.3c.2.2.2.5.1.7l-.4.8c.7 1.3 1.8 2.4 3.1 3.1l.8-.4c.3-.1.5-.1.7.1l1.3 1.1c.2.2.2.5.1.7-.2.3-.5.5-.9.5h-.6c-3.9-.5-7-3.6-7.5-7.5v-.6Z" />
-            </svg>
-          </a>
-          <a class="social-link" href="https://instagram.com/amenocafe" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect x="3" y="3" width="18" height="18" rx="5" />
-              <circle cx="12" cy="12" r="4" />
-              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
-            </svg>
-          </a>
-        </div>
-      </section>
+      <p class="tagline">Llevamos la experiencia del café de especialidad a tu evento.</p>
 
-      <section class="services" aria-labelledby="services-title">
-        <div class="section-head">
-          <p class="section-kicker">Servicios próximamente disponibles</p>
-          <h2 class="section-title" id="services-title">Una barra de café cuidada, elegante y memorable</h2>
-          <p class="section-intro">
-            Llevamos una barra de café de especialidad a tus eventos privados, corporativos y celebraciones especiales.
-          </p>
-        </div>
+      <div class="cta-row">
+        <a class="btn-wa" href="https://wa.me/5215578688247?text=Hola%20Ameno%20Caf%C3%A9%2C%20me%20gustar%C3%ADa%20cotizar%20un%20evento." aria-label="Cotizar por WhatsApp">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.557 4.12 1.527 5.845L.057 23.5l5.797-1.448A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.838 0-3.563-.5-5.055-1.37l-.361-.214-3.44.859.874-3.353-.235-.374A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+          </svg>
+          Cotizar evento
+        </a>
+        <a class="btn-ig" href="https://www.instagram.com/_amenocafe/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+          </svg>
+          @_amenocafe
+        </a>
+      </div>
+
+      <p class="location">Minatitlán &amp; Coatzacoalcos, Veracruz</p>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="services">
+      <div class="services-inner">
+        <p class="section-label">Servicios</p>
+        <h2 class="section-title">Una barra que marca la diferencia</h2>
+        <p class="section-sub">Café de especialidad para bodas, corporativos y celebraciones — preparado al momento, con detalle y calidez.</p>
 
         <div class="cards">
           <article class="card">
-            <div class="icon-badge" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M7 8h8a0 0 0 0 1 0 0v4a4 4 0 0 1-4 4h0a4 4 0 0 1-4-4V8a0 0 0 0 1 0 0Z" />
-                <path d="M15 10h1.5A2.5 2.5 0 0 1 19 12.5v0A2.5 2.5 0 0 1 16.5 15H15" />
-                <path d="M9 4v2" />
-                <path d="M12 4v2" />
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 8h8v4a4 4 0 0 1-8 0V8z"/><path d="M15 10h1.5A2.5 2.5 0 0 1 19 12.5A2.5 2.5 0 0 1 16.5 15H15"/>
+                <path d="M9 4v2"/><path d="M12 4v2"/>
               </svg>
             </div>
-            <h3>Barra de café para eventos privados</h3>
-            <div class="card-divider" aria-hidden="true"></div>
-            <p>Servicio de café de especialidad para bodas, reuniones, celebraciones y eventos sociales.</p>
+            <h3>Eventos privados</h3>
+            <div class="card-line" aria-hidden="true"></div>
+            <p>Bodas, reuniones y celebraciones con una barra de café de especialidad como protagonista.</p>
           </article>
 
           <article class="card">
-            <div class="icon-badge" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="4" y="7" width="16" height="11" rx="2" />
-                <path d="M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" />
-                <path d="M4 12h16" />
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="4" y="7" width="16" height="11" rx="2"/><path d="M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/><path d="M4 12h16"/>
               </svg>
             </div>
             <h3>Eventos corporativos</h3>
-            <div class="card-divider" aria-hidden="true"></div>
-            <p>Una barra de café elegante para conferencias, oficinas, activaciones y encuentros empresariales.</p>
+            <div class="card-line" aria-hidden="true"></div>
+            <p>Conferencias, oficinas y activaciones empresariales con servicio elegante y puntual.</p>
           </article>
 
           <article class="card">
-            <div class="icon-badge" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 14h14" />
-                <path d="M7 14a5 5 0 0 1 10 0" />
-                <path d="M12 4v2" />
-                <path d="M4 18h16" />
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 14h14"/><path d="M7 14a5 5 0 0 1 10 0"/><path d="M12 4v2"/><path d="M4 18h16"/>
               </svg>
             </div>
             <h3>Catering de café</h3>
-            <div class="card-divider" aria-hidden="true"></div>
-            <p>Bebidas preparadas al momento para complementar tu evento con hospitalidad, detalle y calidez.</p>
+            <div class="card-line" aria-hidden="true"></div>
+            <p>Bebidas preparadas al momento para complementar tu evento con hospitalidad y calidez.</p>
           </article>
 
           <article class="card">
-            <div class="icon-badge" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 3l1.6 3.4L17 8l-3.4 1.6L12 13l-1.6-3.4L7 8l3.4-1.6L12 3Z" />
-                <path d="M19 14l.9 1.9 1.9.9-1.9.9-.9 1.9-.9-1.9-1.9-.9 1.9-.9.9-1.9Z" />
-                <path d="M6 15l1.1 2.2L9.3 18l-2.2 1.1L6 21.3l-1.1-2.2L2.7 18l2.2-1.1L6 15Z" />
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3l1.6 3.4L17 8l-3.4 1.6L12 13l-1.6-3.4L7 8l3.4-1.6L12 3Z"/>
+                <path d="M19 14l.9 1.9 1.9.9-1.9.9-.9 1.9-.9-1.9-1.9-.9 1.9-.9.9-1.9Z"/>
               </svg>
             </div>
-            <h3>Experiencias personalizadas</h3>
-            <div class="card-divider" aria-hidden="true"></div>
-            <p>Adaptamos la propuesta al estilo, tamaño y atmósfera de tu evento para que todo se sienta coherente y especial.</p>
+            <h3>Experiencias a medida</h3>
+            <div class="card-line" aria-hidden="true"></div>
+            <p>Adaptamos cada propuesta al estilo, tamaño y atmósfera de tu evento.</p>
           </article>
         </div>
 
-        <div class="footer-line">Café de especialidad • Momentos inolvidables</div>
-      </section>
-    </main>
+        <p class="services-footer">Café de especialidad &nbsp;·&nbsp; Momentos inolvidables</p>
+      </div>
+    </section>
+
   </body>
 </html>
