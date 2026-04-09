@@ -80,7 +80,7 @@
         opacity: 0.12;
         background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
         mix-blend-mode: multiply;
-        z-index: 0;
+        z-index: 9999;
       }
 
       body.is-booting .reveal,
@@ -232,7 +232,6 @@
         width: min(620px, 88vw);
         height: auto;
         margin-bottom: 12px;
-        mix-blend-mode: multiply;
         filter: drop-shadow(0 4px 18px rgba(40,22,8,0.2));
         transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1), filter 380ms ease;
       }
