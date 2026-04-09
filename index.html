@@ -79,6 +79,14 @@
       .hero {
         text-align: center;
         padding: 8px 0 44px;
+        border-radius: var(--radius-xl);
+        background-image: image-set(
+          url("assets/hero-bg.avif") type("image/avif"),
+          url("assets/hero-bg.webp") type("image/webp")
+        );
+        background-size: cover;
+        background-position: center;
+        overflow: hidden;
       }
 
       .logo-wrap {
