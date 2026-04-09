@@ -5,7 +5,7 @@ export const DEFAULT_CLIENT_INTAKE = {
     businessName: 'Ameno Cafe',
     ownerName: '',
     businessSummary: '',
-    cityAndRegion: 'Minatitlan y Coatzacoalcos, Veracruz',
+    cityAndRegion: 'Minatitlán y Coatzacoalcos, Veracruz',
     targetAudience: '',
     differentiators: '',
   },

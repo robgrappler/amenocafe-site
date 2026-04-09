@@ -96,7 +96,7 @@ export function ClientIntakeApp() {
   }
 
   function resetDraft() {
-    const confirmed = window.confirm('Esto limpiara el formulario actual. ¿Continuar?');
+    const confirmed = window.confirm('Esto limpiará el formulario actual. ¿Continuar?');
     if (!confirmed) {
       return;
     }
@@ -106,7 +106,7 @@ export function ClientIntakeApp() {
     window.localStorage.removeItem(STORAGE_KEYS.intake);
     setSaveState({
       status: 'dirty',
-      message: 'El intake se reseteo localmente. Guarda si quieres subir esta version a Netlify.',
+      message: 'El intake se reseteó localmente. Guarda si quieres subir esta versión a Netlify.',
     });
   }
 
@@ -167,7 +167,7 @@ export function ClientIntakeApp() {
             <div className="space-y-2">
               <h1 className="ameno-serif text-4xl leading-tight md:text-5xl">Onboarding simple para aterrizar el nuevo copy</h1>
               <p className="max-w-3xl text-sm leading-7 text-[color:rgba(44,27,24,0.68)]">
-                Este formulario guarda avances automaticamente. Cuando termines, abre el copy editor para revisar la redaccion directamente sobre el diseno actual.
+                Este formulario guarda avances automáticamente. Cuando termines, abre el copy editor para revisar la redacción directamente sobre el diseño actual.
               </p>
               <p className="max-w-3xl text-xs leading-6 text-[color:rgba(44,27,24,0.56)]">
                 El autosave local sigue activo en este navegador. Usa Guardar borrador para enviar una copia recuperable a Netlify sin descargar archivos.
@@ -189,8 +189,8 @@ export function ClientIntakeApp() {
       <main className="mx-auto max-w-7xl space-y-6 px-5 pb-10 md:px-6">
         <${IntakeSection}
           eyebrow="Base del negocio"
-          title="Informacion principal"
-          description="Cuanta mas claridad haya aqui, mas facil sera convertirla en copy util para el sitio."
+          title="Información principal"
+          description="Cuanta más claridad haya aquí, más fácil será convertirla en copy útil para el sitio."
         >
           <div className="grid gap-4 md:grid-cols-2">
             <${TextInput} label="Nombre del negocio" value=${intake.business.businessName} onChange=${(value) => updateValue('business.businessName', value)} />
@@ -212,17 +212,17 @@ export function ClientIntakeApp() {
           >
             <div className="grid gap-4 md:grid-cols-2">
               <${TextInput} label="Email" type="email" value=${intake.contact.email} onChange=${(value) => updateValue('contact.email', value)} />
-              <${TextInput} label="Telefono" value=${intake.contact.phone} onChange=${(value) => updateValue('contact.phone', value)} />
+              <${TextInput} label="Teléfono" value=${intake.contact.phone} onChange=${(value) => updateValue('contact.phone', value)} />
             </div>
             <div className="grid gap-4 md:grid-cols-2">
               <${TextInput} label="WhatsApp" value=${intake.contact.whatsapp} onChange=${(value) => updateValue('contact.whatsapp', value)} />
-              <${TextInput} label="Metodo de contacto preferido" value=${intake.contact.preferredContactMethod} onChange=${(value) => updateValue('contact.preferredContactMethod', value)} />
+              <${TextInput} label="Método de contacto preferido" value=${intake.contact.preferredContactMethod} onChange=${(value) => updateValue('contact.preferredContactMethod', value)} />
             </div>
           </${IntakeSection}>
 
           <${IntakeSection}
             eyebrow="Redes y horarios"
-            title="Operacion publica"
+            title="Operación pública"
             description="Usa texto simple. No hace falta tener todo perfecto para avanzar."
           >
             <div className="grid gap-4 md:grid-cols-2">
@@ -235,7 +235,7 @@ export function ClientIntakeApp() {
             </div>
             <${TextArea} label="Horarios regulares" rows=${3} value=${intake.hours.regularHours} onChange=${(value) => updateValue('hours.regularHours', value)} />
             <${TextArea} label="Disponibilidad para eventos" rows=${3} value=${intake.hours.eventAvailability} onChange=${(value) => updateValue('hours.eventAvailability', value)} />
-            <${TextInput} label="Tiempo ideal de anticipacion para reservar" value=${intake.hours.bookingLeadTime} onChange=${(value) => updateValue('hours.bookingLeadTime', value)} />
+            <${TextInput} label="Tiempo ideal de anticipación para reservar" value=${intake.hours.bookingLeadTime} onChange=${(value) => updateValue('hours.bookingLeadTime', value)} />
           </${IntakeSection}>
         </div>
 
@@ -253,18 +253,18 @@ export function ClientIntakeApp() {
           <${IntakeSection}
             eyebrow="Voz"
             title="Tono de voz deseado"
-            description="Sirve para orientar la redaccion del sitio sin perder la esencia de la marca."
+            description="Sirve para orientar la redacción del sitio sin perder la esencia de la marca."
           >
-            <${TextArea} label="Como debe sonar la marca" rows=${4} value=${intake.voice.brandTone} onChange=${(value) => updateValue('voice.brandTone', value)} />
-            <${TextArea} label="Palabras o ideas que si quieres usar" rows=${3} value=${intake.voice.wordsToUse} onChange=${(value) => updateValue('voice.wordsToUse', value)} />
+            <${TextArea} label="Cómo debe sonar la marca" rows=${4} value=${intake.voice.brandTone} onChange=${(value) => updateValue('voice.brandTone', value)} />
+            <${TextArea} label="Palabras o ideas que sí quieres usar" rows=${3} value=${intake.voice.wordsToUse} onChange=${(value) => updateValue('voice.wordsToUse', value)} />
             <${TextArea} label="Palabras o ideas que quieres evitar" rows=${3} value=${intake.voice.wordsToAvoid} onChange=${(value) => updateValue('voice.wordsToAvoid', value)} />
           </${IntakeSection}>
         </div>
 
         <${IntakeSection}
           eyebrow="Cambios requeridos"
-          title="Que debe cambiar si o si"
-          description="Prioriza las correcciones o mensajes mas importantes para esta version del sitio."
+          title="Qué debe cambiar sí o sí"
+          description="Prioriza las correcciones o mensajes más importantes para esta versión del sitio."
         >
           <${TextArea} label="Cambios requeridos" rows=${4} value=${intake.requests.requiredChanges} onChange=${(value) => updateValue('requests.requiredChanges', value)} />
           <div className="grid gap-4 md:grid-cols-2">
@@ -282,7 +282,7 @@ export function ClientIntakeApp() {
           <${TextArea} label="Links a assets o carpetas" rows=${4} value=${intake.notesAndAssets.linksToAssets} onChange=${(value) => updateValue('notesAndAssets.linksToAssets', value)} />
           <div className="grid gap-4 md:grid-cols-2">
             <${TextArea} label="Solicitudes de foto o material visual" rows=${3} value=${intake.notesAndAssets.photoRequests} onChange=${(value) => updateValue('notesAndAssets.photoRequests', value)} />
-            <${TextArea} label="Estatus de aprobacion" rows=${3} value=${intake.notesAndAssets.approvalStatus} onChange=${(value) => updateValue('notesAndAssets.approvalStatus', value)} />
+            <${TextArea} label="Estatus de aprobación" rows=${3} value=${intake.notesAndAssets.approvalStatus} onChange=${(value) => updateValue('notesAndAssets.approvalStatus', value)} />
           </div>
         </${IntakeSection}>
       </main>

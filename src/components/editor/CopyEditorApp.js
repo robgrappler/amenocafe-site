@@ -104,7 +104,7 @@ function ScreenshotReference({ imageSrc, imageAlt, device }) {
       <div>
         <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[var(--color-dorado)]">Referencia visual</p>
         <p className="mt-1 text-xs leading-5 text-[color:rgba(44,27,24,0.58)]">
-          Screenshot actual del sitio en ${device === 'mobile' ? 'movil' : 'desktop'}.
+          Screenshot actual del sitio en ${device === 'mobile' ? 'móvil' : 'desktop'}.
         </p>
       </div>
       <div className=${`reference-shot ${device === 'mobile' ? 'reference-shot--mobile' : ''}`}>
@@ -133,10 +133,10 @@ function FeatureFields({ content, updateValue }) {
       <div className="rounded-[1.25rem] border border-[rgba(44,27,24,0.08)] p-4">
         <div className="grid gap-4 sm:grid-cols-2">
           <${TextInput} label=${`Feature ${index + 1} titulo`} value=${feature.title} onChange=${(value) => updateValue(['specialty', 'features', index, 'title'], value)} />
-          <${TextInput} label=${`Feature ${index + 1} numero`} value=${feature.number} onChange=${(value) => updateValue(['specialty', 'features', index, 'number'], value)} />
+          <${TextInput} label=${`Feature ${index + 1} número`} value=${feature.number} onChange=${(value) => updateValue(['specialty', 'features', index, 'number'], value)} />
         </div>
         <div className="mt-4">
-          <${TextArea} label=${`Feature ${index + 1} descripcion`} rows=${3} value=${feature.body} onChange=${(value) => updateValue(['specialty', 'features', index, 'body'], value)} />
+          <${TextArea} label=${`Feature ${index + 1} descripción`} rows=${3} value=${feature.body} onChange=${(value) => updateValue(['specialty', 'features', index, 'body'], value)} />
         </div>
       </div>
     `,
@@ -152,9 +152,9 @@ function EventCardFields({ content, updateLines, updateValue }) {
           <${TextInput} label=${`Tarjeta ${index + 1} badge`} value=${card.badge} onChange=${(value) => updateValue(['events', 'cards', index, 'badge'], value)} />
         </div>
         <div className="mt-4 space-y-4">
-          <${TextArea} label="Descripcion" rows=${4} value=${card.body} onChange=${(value) => updateValue(['events', 'cards', index, 'body'], value)} />
+          <${TextArea} label="Descripción" rows=${4} value=${card.body} onChange=${(value) => updateValue(['events', 'cards', index, 'body'], value)} />
           <${TextArea}
-            label="Bullets (uno por linea)"
+            label="Bullets (uno por línea)"
             rows=${4}
             value=${card.bullets.join('\n')}
             onChange=${(value) => updateLines(['events', 'cards', index, 'bullets'], value)}
@@ -174,7 +174,7 @@ function FooterLocationFields({ content, updateValue }) {
           <${TextInput} label="Sede" value=${location.venue} onChange=${(value) => updateValue(['footer', 'locations', index, 'venue'], value)} />
         </div>
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
-          <${TextInput} label="Direccion" value=${location.address} onChange=${(value) => updateValue(['footer', 'locations', index, 'address'], value)} />
+          <${TextInput} label="Dirección" value=${location.address} onChange=${(value) => updateValue(['footer', 'locations', index, 'address'], value)} />
           <${TextInput} label="Horario" value=${location.hours} onChange=${(value) => updateValue(['footer', 'locations', index, 'hours'], value)} />
         </div>
       </div>
@@ -258,7 +258,7 @@ export function CopyEditorApp() {
   }
 
   function resetDefaults() {
-    const confirmed = window.confirm('Esto reemplazara el borrador actual con el copy original del sitio. ¿Continuar?');
+    const confirmed = window.confirm('Esto reemplazará el borrador actual con el copy original del sitio. ¿Continuar?');
     if (!confirmed) {
       return;
     }
@@ -267,7 +267,7 @@ export function CopyEditorApp() {
     window.localStorage.removeItem(STORAGE_KEYS.copyEditor);
     setSaveState({
       status: 'dirty',
-      message: 'El copy se reseteo localmente. Guarda si quieres subir esta version a Netlify.',
+      message: 'El copy se reseteó localmente. Guarda si quieres subir esta versión a Netlify.',
     });
   }
 
@@ -275,7 +275,7 @@ export function CopyEditorApp() {
     setContent(createCopyEditorState(null, storedIntakeDraft));
     setSaveState({
       status: 'dirty',
-      message: 'Se aplico el intake local. Guarda para enviar esta version a Netlify.',
+      message: 'Se aplicó el intake local. Guarda para enviar esta versión a Netlify.',
     });
   }
 
@@ -290,10 +290,10 @@ export function CopyEditorApp() {
             <div className="space-y-2">
               <h1 className="ameno-serif text-4xl leading-tight md:text-5xl">Edita cada seccion con su referencia visual</h1>
               <p className="max-w-3xl text-sm leading-7 text-[color:rgba(44,27,24,0.68)]">
-                Cada bloque mantiene la captura del sitio actual dentro de la misma tarjeta para editar el copy con contexto visual, pero en un flujo mas limpio y continuo.
+                Cada bloque mantiene la captura del sitio actual dentro de la misma tarjeta para editar el copy con contexto visual, pero en un flujo más limpio y continuo.
               </p>
               <p className="max-w-3xl text-xs leading-6 text-[color:rgba(44,27,24,0.56)]">
-                El autosave local sigue activo en este navegador. Usa Guardar borrador para enviar esta version a Netlify sin descargar JSON.
+                El autosave local sigue activo en este navegador. Usa Guardar borrador para enviar esta versión a Netlify sin descargar JSON.
               </p>
               ${saveState.message
                 ? html`<p className=${`max-w-3xl text-xs leading-6 ${getSaveMessageClass(saveState.status)}`}>${saveState.message}</p>`
@@ -313,19 +313,19 @@ export function CopyEditorApp() {
         <${CopyEditorSection}
           eyebrow="Control"
           title="Secciones y referencias"
-          description="Activa u oculta bloques opcionales del editor y cambia la referencia visual entre desktop y movil."
+          description="Activa u oculta bloques opcionales del editor y cambia la referencia visual entre desktop y móvil."
         >
           <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
             <${TogglePill} label="Barra de especialidad" checked=${content.visibility.specialty} onToggle=${() => updateValue('visibility.specialty', !content.visibility.specialty)} />
             <${TogglePill} label="Eventos" checked=${content.visibility.events} onToggle=${() => updateValue('visibility.events', !content.visibility.events)} />
             <${TogglePill} label="Frase" checked=${content.visibility.quote} onToggle=${() => updateValue('visibility.quote', !content.visibility.quote)} />
-            <${TogglePill} label="Galeria" checked=${content.visibility.gallery} onToggle=${() => updateValue('visibility.gallery', !content.visibility.gallery)} />
-            <${TogglePill} label="Cotizacion" checked=${content.visibility.contact} onToggle=${() => updateValue('visibility.contact', !content.visibility.contact)} />
+            <${TogglePill} label="Galería" checked=${content.visibility.gallery} onToggle=${() => updateValue('visibility.gallery', !content.visibility.gallery)} />
+            <${TogglePill} label="Cotización" checked=${content.visibility.contact} onToggle=${() => updateValue('visibility.contact', !content.visibility.contact)} />
             <${TogglePill} label="Footer" checked=${content.visibility.footer} onToggle=${() => updateValue('visibility.footer', !content.visibility.footer)} />
           </div>
           <div className="grid gap-3 sm:grid-cols-2">
             <${ActionButton} label="Referencia desktop" variant=${device === 'desktop' ? 'primary' : 'secondary'} onClick=${() => setDevice('desktop')} />
-            <${ActionButton} label="Referencia movil" variant=${device === 'mobile' ? 'primary' : 'secondary'} onClick=${() => setDevice('mobile')} />
+            <${ActionButton} label="Referencia móvil" variant=${device === 'mobile' ? 'primary' : 'secondary'} onClick=${() => setDevice('mobile')} />
           </div>
           <p className="text-xs leading-6 text-[color:rgba(44,27,24,0.56)]">Autosave local activo. Los screenshots son referencias fijas tomadas de la landing actual.</p>
         </${CopyEditorSection}>
@@ -336,14 +336,14 @@ export function CopyEditorApp() {
             device=${device}
             eyebrow="Hero"
             title="Inicio"
-            description="Ajusta la promesa principal y los CTAs sin perder la composicion actual."
-            imageAlt="Screenshot de la seccion hero de Ameno Cafe"
+            description="Ajusta la promesa principal y los CTAs sin perder la composición actual."
+            imageAlt="Screenshot de la sección hero de Ameno Cafe"
           >
             <${TextInput} label="Eyebrow" value=${content.hero.eyebrow} onChange=${(value) => updateValue('hero.eyebrow', value)} />
-            <${TextInput} label="Titulo linea 1" value=${content.hero.titleLineOne} onChange=${(value) => updateValue('hero.titleLineOne', value)} />
+            <${TextInput} label="Título línea 1" value=${content.hero.titleLineOne} onChange=${(value) => updateValue('hero.titleLineOne', value)} />
             <${TextInput} label="Palabra destacada" value=${content.hero.titleAccent} onChange=${(value) => updateValue('hero.titleAccent', value)} />
-            <${TextInput} label="Titulo linea 2" value=${content.hero.titleLineTwo} onChange=${(value) => updateValue('hero.titleLineTwo', value)} />
-            <${TextArea} label="Descripcion" rows=${4} value=${content.hero.body} onChange=${(value) => updateValue('hero.body', value)} />
+            <${TextInput} label="Título línea 2" value=${content.hero.titleLineTwo} onChange=${(value) => updateValue('hero.titleLineTwo', value)} />
+            <${TextArea} label="Descripción" rows=${4} value=${content.hero.body} onChange=${(value) => updateValue('hero.body', value)} />
             <div className="grid gap-4 sm:grid-cols-2">
               <${TextInput} label="CTA principal" value=${content.hero.primaryCta} onChange=${(value) => updateValue('hero.primaryCta', value)} />
               <${TextInput} label="CTA secundario" value=${content.hero.secondaryCta} onChange=${(value) => updateValue('hero.secondaryCta', value)} />
@@ -358,14 +358,14 @@ export function CopyEditorApp() {
                   eyebrow="Especialidad"
                   title="Barra de especialidad"
                   description="Edita el bloque que explica el producto central."
-                  imageAlt="Screenshot de la seccion barra de especialidad"
+                  imageAlt="Screenshot de la sección barra de especialidad"
                 >
                   <div className="grid gap-4 sm:grid-cols-2">
-                    <${TextInput} label="Titulo lead" value=${content.specialty.titleLead} onChange=${(value) => updateValue('specialty.titleLead', value)} />
-                    <${TextInput} label="Linea dos" value=${content.specialty.titleLineTwo} onChange=${(value) => updateValue('specialty.titleLineTwo', value)} />
+                    <${TextInput} label="Título lead" value=${content.specialty.titleLead} onChange=${(value) => updateValue('specialty.titleLead', value)} />
+                    <${TextInput} label="Línea dos" value=${content.specialty.titleLineTwo} onChange=${(value) => updateValue('specialty.titleLineTwo', value)} />
                   </div>
                   <${TextInput} label="Acento" value=${content.specialty.titleAccent} onChange=${(value) => updateValue('specialty.titleAccent', value)} />
-                  <${TextArea} label="Descripcion" rows=${5} value=${content.specialty.body} onChange=${(value) => updateValue('specialty.body', value)} />
+                  <${TextArea} label="Descripción" rows=${5} value=${content.specialty.body} onChange=${(value) => updateValue('specialty.body', value)} />
                   <${TextInput} label="Badge" value=${content.specialty.badge} onChange=${(value) => updateValue('specialty.badge', value)} />
                   <${FeatureFields} content=${content} updateValue=${updateValue} />
                 </${EditorSectionLayout}>
@@ -380,13 +380,13 @@ export function CopyEditorApp() {
                   eyebrow="Eventos"
                   title="Catering premium"
                   description="Edita el intro y cada tarjeta de servicio."
-                  imageAlt="Screenshot de la seccion eventos"
+                  imageAlt="Screenshot de la sección eventos"
                 >
                   <div className="grid gap-4 sm:grid-cols-2">
-                    <${TextInput} label="Titulo lead" value=${content.events.titleLead} onChange=${(value) => updateValue('events.titleLead', value)} />
-                    <${TextInput} label="Titulo acento" value=${content.events.titleAccent} onChange=${(value) => updateValue('events.titleAccent', value)} />
+                    <${TextInput} label="Título lead" value=${content.events.titleLead} onChange=${(value) => updateValue('events.titleLead', value)} />
+                    <${TextInput} label="Título acento" value=${content.events.titleAccent} onChange=${(value) => updateValue('events.titleAccent', value)} />
                   </div>
-                  <${TextArea} label="Descripcion" rows=${4} value=${content.events.body} onChange=${(value) => updateValue('events.body', value)} />
+                  <${TextArea} label="Descripción" rows=${4} value=${content.events.body} onChange=${(value) => updateValue('events.body', value)} />
                   <${EventCardFields} content=${content} updateLines=${updateLines} updateValue=${updateValue} />
                 </${EditorSectionLayout}>
               `
@@ -399,8 +399,8 @@ export function CopyEditorApp() {
                   device=${device}
                   eyebrow="Frase"
                   title="Frase divisoria"
-                  description="Edita el momento editorial que separa la oferta de la galeria."
-                  imageAlt="Screenshot de la frase divisoria"
+                  description="Edita el momento editorial que separa la oferta de la galería."
+                  imageAlt="Screenshot de la sección de frase divisoria"
                 >
                   <${TextArea} label="Frase principal" rows=${3} value=${content.quote.text} onChange=${(value) => updateValue('quote.text', value)} />
                   <${TextInput} label="Palabra a destacar" value=${content.quote.accent} onChange=${(value) => updateValue('quote.accent', value)} />
@@ -413,14 +413,14 @@ export function CopyEditorApp() {
                 <${EditorSectionLayout}
                   sectionKey="gallery"
                   device=${device}
-                  eyebrow="Galeria"
-                  title="Galeria"
-                  description="Solo ajusta el copy de entrada para no complicar la edicion de assets."
-                  imageAlt="Screenshot de la seccion galeria"
+                  eyebrow="Galería"
+                  title="Galería"
+                  description="Solo ajusta el copy de entrada para no complicar la edición de assets."
+                  imageAlt="Screenshot de la sección galería"
                 >
                   <div className="grid gap-4 sm:grid-cols-2">
-                    <${TextInput} label="Galeria lead" value=${content.gallery.titleLead} onChange=${(value) => updateValue('gallery.titleLead', value)} />
-                    <${TextInput} label="Galeria acento" value=${content.gallery.titleAccent} onChange=${(value) => updateValue('gallery.titleAccent', value)} />
+                    <${TextInput} label="Galería lead" value=${content.gallery.titleLead} onChange=${(value) => updateValue('gallery.titleLead', value)} />
+                    <${TextInput} label="Galería acento" value=${content.gallery.titleAccent} onChange=${(value) => updateValue('gallery.titleAccent', value)} />
                   </div>
                 </${EditorSectionLayout}>
               `
@@ -432,24 +432,24 @@ export function CopyEditorApp() {
                   sectionKey="contact"
                   device=${device}
                   eyebrow="Contacto"
-                  title="Cotizacion"
+                  title="Cotización"
                   description="Ajusta el cierre comercial y el lenguaje del contacto."
-                  imageAlt="Screenshot de la seccion de cotizacion"
+                  imageAlt="Screenshot de la sección de cotización"
                 >
                   <div className="grid gap-4 sm:grid-cols-2">
                     <${TextInput} label="Contacto lead" value=${content.contact.titleLead} onChange=${(value) => updateValue('contact.titleLead', value)} />
-                    <${TextInput} label="Contacto linea dos" value=${content.contact.titleLineTwo} onChange=${(value) => updateValue('contact.titleLineTwo', value)} />
+                    <${TextInput} label="Contacto línea dos" value=${content.contact.titleLineTwo} onChange=${(value) => updateValue('contact.titleLineTwo', value)} />
                   </div>
                   <${TextInput} label="Contacto acento" value=${content.contact.titleAccent} onChange=${(value) => updateValue('contact.titleAccent', value)} />
-                  <${TextArea} label="Descripcion de contacto" rows=${4} value=${content.contact.body} onChange=${(value) => updateValue('contact.body', value)} />
+                  <${TextArea} label="Descripción de contacto" rows=${4} value=${content.contact.body} onChange=${(value) => updateValue('contact.body', value)} />
                   <${TextArea}
-                    label="Beneficios (uno por linea)"
+                    label="Beneficios (uno por línea)"
                     rows=${3}
                     value=${content.contact.benefits.join('\n')}
                     onChange=${(value) => updateLines(['contact', 'benefits'], value)}
                   />
                   <${TextArea}
-                    label="Tipos de evento (uno por linea)"
+                    label="Tipos de evento (uno por línea)"
                     rows=${3}
                     value=${content.contact.eventTypes.join('\n')}
                     onChange=${(value) => updateLines(['contact', 'eventTypes'], value)}
@@ -467,10 +467,10 @@ export function CopyEditorApp() {
                   device=${device}
                   eyebrow="Footer"
                   title="Remate final"
-                  description="Edita el cierre institucional y la informacion util del pie de pagina."
+                  description="Edita el cierre institucional y la información útil del pie de página."
                   imageAlt="Screenshot del footer"
                 >
-                  <${TextArea} label="Footer descripcion" rows=${4} value=${content.footer.body} onChange=${(value) => updateValue('footer.body', value)} />
+                  <${TextArea} label="Footer descripción" rows=${4} value=${content.footer.body} onChange=${(value) => updateValue('footer.body', value)} />
                   <${FooterLocationFields} content=${content} updateValue=${updateValue} />
                   <${TextInput} label="WhatsApp" value=${content.brand.whatsappNumber} onChange=${(value) => updateValue('brand.whatsappNumber', value)} />
                   <${TextInput} label="Instagram" value=${content.brand.socialLinks.instagram} onChange=${(value) => updateValue('brand.socialLinks.instagram', value)} />
