@@ -1,0 +1,839 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ameno Café | Próximamente</title>
+    <meta name="description" content="Ameno Café llevará la experiencia del café de especialidad a tu evento. Próximamente: barra de café para eventos privados, corporativos y celebraciones." />
+    <meta property="og:title" content="Ameno Café — Próximamente" />
+    <meta property="og:description" content="Una nueva etapa para Ameno Café está en camino. Café de especialidad para eventos y celebraciones." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://amenocafe.com/assets/share-image.webp" />
+    <meta property="og:image:width" content="2572" />
+    <meta property="og:image:height" content="1664" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://amenocafe.com/assets/share-image.webp" />
+    <link rel="canonical" href="https://amenocafe.com" />
+    <link rel="icon" type="image/png" href="assets/logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:wght@400;500;600&family=Cinzel:wght@600;700&display=swap" rel="stylesheet" />
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      :root {
+        --brown:      #3d2612;
+        --brown-soft: #6b4f38;
+        --brown-mid:  #8c6448;
+        --accent:     #5a3e28;
+        --card-bg:    rgba(248, 242, 234, 0.78);
+        --border:     rgba(120, 90, 62, 0.2);
+      }
+
+      html { scroll-behavior: smooth; }
+
+      body {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        color: var(--brown);
+        min-height: 100vh;
+        background-image: url("assets/hero-bg.webp");
+        background-image: -webkit-image-set(
+          url("assets/hero-bg.avif") type("image/avif") 1x,
+          url("assets/hero-bg.webp") type("image/webp") 1x
+        );
+        background-image: image-set(
+          url("assets/hero-bg.avif") type("image/avif") 1x,
+          url("assets/hero-bg.webp") type("image/webp") 1x
+        );
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center;
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: -12vh -8vw;
+        pointer-events: none;
+        background:
+          radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.18), transparent 36%),
+          radial-gradient(circle at 82% 22%, rgba(197, 149, 101, 0.12), transparent 30%),
+          radial-gradient(circle at 50% 88%, rgba(96, 53, 22, 0.08), transparent 34%);
+        opacity: 0.65;
+        mix-blend-mode: soft-light;
+        animation: ambient-drift 56s ease-in-out infinite alternate;
+        transform: translate3d(0, 0, 0);
+        z-index: 0;
+      }
+
+      @keyframes ambient-drift {
+        from { transform: translate3d(-0.75%, -0.5%, 0) scale(1); }
+        to { transform: translate3d(0.9%, 0.65%, 0) scale(1.03); }
+      }
+
+      body > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      body.is-booting .reveal,
+      body.is-booting .logo-img,
+      body.is-booting .tagline,
+      body.is-booting .notify-form,
+      body.is-booting .socials,
+      body.is-booting .section-title,
+      body.is-booting .section-sub,
+      body.is-booting .card,
+      body.is-booting .services-footer {
+        opacity: 0;
+        transform: translateY(28px) scale(0.98);
+      }
+
+      body.is-ready .reveal,
+      body.is-ready .logo-img,
+      body.is-ready .tagline,
+      body.is-ready .notify-form,
+      body.is-ready .socials,
+      body.is-ready .section-title,
+      body.is-ready .section-sub,
+      body.is-ready .card,
+      body.is-ready .services-footer {
+        transition:
+          opacity 1200ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms),
+          transform 1200ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms);
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+
+      a { color: inherit; text-decoration: none; }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(26px) scale(0.985);
+      }
+
+      .reveal--soft {
+        transform: translateY(18px) scale(0.99);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .reveal,
+        .logo-img,
+        .notify-form,
+        .notify-form button,
+        .notify-status,
+        .social-circle,
+        .card {
+          animation: none !important;
+          transition: none !important;
+        }
+
+        .reveal {
+          opacity: 1;
+          transform: none;
+          will-change: auto;
+        }
+
+        body.is-booting .reveal,
+        body.is-booting .logo-img,
+        body.is-booting .tagline,
+        body.is-booting .notify-form,
+        body.is-booting .socials,
+        body.is-booting .section-title,
+        body.is-booting .section-sub,
+        body.is-booting .card,
+        body.is-booting .services-footer,
+        body.is-ready .reveal,
+        body.is-ready .logo-img,
+        body.is-ready .tagline,
+        body.is-ready .notify-form,
+        body.is-ready .socials,
+        body.is-ready .section-title,
+        body.is-ready .section-sub,
+        body.is-ready .card,
+        body.is-ready .services-footer {
+          opacity: 1;
+          transform: none;
+          transition: none;
+        }
+
+        body::before {
+          animation: none;
+        }
+
+        .mandala-bg { animation: none; }
+        .wisp { animation: none; opacity: 0; }
+      }
+
+      /* ── ORNAMENT DIVIDER ─────────────────────────────── */
+      .ornament {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        justify-content: center;
+        margin: 18px auto;
+        width: min(420px, 80vw);
+        color: #6b3d1a;
+      }
+      .ornament::before,
+      .ornament::after {
+        content: "";
+        flex: 1;
+        height: 2px;
+        border-radius: 1px;
+        background: linear-gradient(90deg, transparent, rgba(90,50,18,0.65));
+      }
+      .ornament::after {
+        background: linear-gradient(90deg, rgba(90,50,18,0.65), transparent);
+      }
+      .ornament-icon {
+        width: 20px; height: 20px;
+        opacity: 0.88;
+        flex-shrink: 0;
+      }
+
+      /* ── HERO ─────────────────────────────────────────── */
+      .hero {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 56px 24px 64px;
+        text-align: center;
+        position: relative;
+      }
+
+      /* ── MANDALA ─────────────────────────────────────── */
+      .mandala-bg {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: min(520px, 90vw);
+        aspect-ratio: 1;
+        opacity: 0.09;
+        mix-blend-mode: multiply;
+        pointer-events: none;
+        will-change: transform;
+        animation: mandala-spin 60s linear infinite;
+      }
+
+      @keyframes mandala-spin {
+        from { transform: translate(-50%, -50%) rotate(0deg); }
+        to   { transform: translate(-50%, -50%) rotate(360deg); }
+      }
+
+      .logo-img {
+        width: min(620px, 88vw);
+        height: auto;
+        margin-bottom: 12px;
+        mix-blend-mode: multiply;
+        filter: drop-shadow(0 4px 18px rgba(40,22,8,0.2));
+        transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1), filter 380ms ease;
+      }
+
+      .logo-img:hover {
+        transform: translateY(-1px) scale(1.01);
+        filter: drop-shadow(0 10px 24px rgba(40,22,8,0.24));
+      }
+
+      .proximamente {
+        font-family: 'Pinyon Script', cursive;
+        font-size: clamp(3.6rem, 9vw, 5.6rem);
+        line-height: 1;
+        color: #7a4a1e;
+        margin-bottom: 4px;
+        text-shadow:
+          1px 2px 0 rgba(80,44,12,0.7),
+          2px 4px 0 rgba(60,32,8,0.5),
+          3px 6px 14px rgba(25,12,3,0.35);
+      }
+
+      .tagline {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: clamp(1.15rem, 2.6vw, 1.6rem);
+        font-weight: 400;
+        color: var(--brown);
+        margin-bottom: 28px;
+        line-height: 1.4;
+      }
+
+      /* notify form */
+      .notify-form {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        width: min(560px, 90vw);
+        border-radius: 14px;
+        overflow: hidden;
+        border: 1px solid rgba(120,90,62,0.22);
+        box-shadow: 0 8px 28px rgba(60,38,20,0.08);
+        margin-bottom: 28px;
+        background: rgba(255,252,248,0.6);
+        backdrop-filter: blur(8px);
+        transition: opacity 420ms ease, transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .notify-form.is-exiting {
+        opacity: 0;
+        transform: translateY(-8px);
+      }
+      .notify-form.is-complete {
+        opacity: 0.9;
+        transform: translateY(-1px);
+      }
+      .notify-form.is-complete input {
+        color: rgba(61, 38, 18, 0.72);
+      }
+      .notify-form.is-complete button {
+        cursor: default;
+        opacity: 0.9;
+      }
+      .notify-form input {
+        border: none;
+        background: transparent;
+        padding: 15px 18px;
+        font-size: 0.97rem;
+        color: var(--brown);
+        outline: none;
+        min-width: 0;
+      }
+      .notify-form input::placeholder { color: rgba(90,62,38,0.52); }
+      .notify-form button {
+        border: none;
+        background: linear-gradient(135deg, #7a4820 0%, #3d2210 100%);
+        color: #f0d8b8;
+        padding: 15px 24px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1), filter 280ms ease;
+        box-shadow: inset 0 1px 0 rgba(240,200,140,0.18), inset 0 -2px 0 rgba(0,0,0,0.18);
+      }
+      .notify-form button:hover {
+        filter: brightness(1.12);
+        transform: translateY(-1px);
+      }
+      .notify-form button:disabled {
+        cursor: wait;
+        opacity: 0.82;
+      }
+
+      .notify-status {
+        width: min(560px, 90vw);
+        margin-bottom: 28px;
+        border-radius: 14px;
+        border: 1px solid rgba(120,90,62,0.2);
+        background: rgba(255,252,248,0.72);
+        backdrop-filter: blur(8px);
+        box-shadow: 0 8px 28px rgba(60,38,20,0.08);
+        padding: 16px 18px;
+        text-align: left;
+        color: var(--brown);
+        line-height: 1.5;
+        opacity: 0;
+        transform: translateY(10px);
+        transition:
+          opacity 520ms cubic-bezier(0.22, 1, 0.36, 1),
+          transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .notify-status strong {
+        display: block;
+        margin-bottom: 4px;
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.15rem;
+        font-weight: 600;
+      }
+      .notify-status[data-state="success"] {
+        border-color: rgba(90,134,82,0.28);
+      }
+      .notify-status[data-state="error"] {
+        border-color: rgba(158,62,50,0.28);
+      }
+      .notify-status[data-state="preview"] {
+        border-color: rgba(120,90,62,0.24);
+        background: rgba(255,248,232,0.84);
+      }
+      .notify-status.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* social circles */
+      .socials {
+        display: flex;
+        gap: 18px;
+        justify-content: center;
+        margin-bottom: 8px;
+      }
+      .social-circle {
+        width: 58px; height: 58px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 280ms ease, filter 280ms ease;
+      }
+      .social-circle:hover {
+        transform: translateY(-2px) scale(1.02);
+        filter: brightness(1.03);
+      }
+      .social-circle svg { width: 30px; height: 30px; }
+      .social-wa  {
+        background: linear-gradient(145deg, #2e5e22 0%, #1a3c11 100%);
+        color: #cce8c0;
+        border: 1px solid rgba(10,28,6,0.45);
+        box-shadow: 0 5px 18px rgba(15,40,8,0.45), inset 0 1px 0 rgba(200,240,180,0.18), inset 0 -2px 0 rgba(0,0,0,0.2);
+      }
+      .social-ig  {
+        background: linear-gradient(145deg, #7a4820 0%, #4a2810 100%);
+        color: #f0d8b8;
+        border: 1px solid rgba(30,12,4,0.4);
+        box-shadow: 0 5px 18px rgba(40,18,6,0.45), inset 0 1px 0 rgba(240,200,150,0.15), inset 0 -2px 0 rgba(0,0,0,0.2);
+        backdrop-filter: none;
+      }
+
+      /* ── CUP SCENE ───────────────────────────────────── */
+      .cup-scene {
+        position: relative;
+        margin-top: 28px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .cup-frame {
+        width: min(180px, 46vw);
+        height: 200px;
+        border-radius: 14px 14px 0 0;
+        overflow: hidden;
+        position: relative;
+      }
+
+      /* vignette — blends cup edges into the plaster background */
+      .cup-frame::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(to right,
+            rgba(176, 127, 70, 0.55) 0%,
+            transparent 28%,
+            transparent 72%,
+            rgba(176, 127, 70, 0.55) 100%
+          ),
+          linear-gradient(to bottom,
+            transparent 50%,
+            rgba(110, 68, 24, 0.88) 100%
+          );
+        pointer-events: none;
+      }
+
+      .cup-photo {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top center;
+      }
+
+      .wisps {
+        display: flex;
+        gap: 9px;
+        align-items: flex-end;
+        height: 54px;
+      }
+
+      .wisp {
+        display: block;
+        border-radius: 4px;
+        background: linear-gradient(to top, rgba(255, 248, 235, 0.6), transparent);
+        filter: blur(2.5px);
+        animation: wisp-rise 3.8s ease-in-out infinite;
+      }
+      .wisp:nth-child(1) { width: 3px; height: 32px; animation-delay: 0s; }
+      .wisp:nth-child(2) { width: 5px; height: 40px; animation-delay: 0.9s; }
+      .wisp:nth-child(3) { width: 3px; height: 28px; animation-delay: 1.8s; }
+
+      @keyframes wisp-rise {
+        0%   { transform: translateY(0)     translateX(0)   scaleX(1);   opacity: 0; }
+        12%  {                                                             opacity: 0.75; }
+        80%  {                                                             opacity: 0.2; }
+        100% { transform: translateY(-52px) translateX(4px) scaleX(1.8); opacity: 0; }
+      }
+
+      /* ── SERVICES ─────────────────────────────────────── */
+      .services {
+        padding: 12px 24px 80px;
+        text-align: center;
+      }
+      .services-inner { max-width: 1100px; margin: 0 auto; }
+
+      .section-title {
+        font-family: 'Cinzel', 'Cormorant Garamond', Georgia, serif;
+        font-weight: 600;
+        font-size: clamp(1.7rem, 4.2vw, 2.9rem);
+        line-height: 1.1;
+        margin-bottom: 4px;
+        letter-spacing: 0.04em;
+        color: #4a2c0e;
+        text-shadow:
+          1px 1px 0 #8c5a2a,
+          2px 2px 0 #7a4d22,
+          3px 3px 0 #6b4018,
+          4px 4px 0 #5c3410,
+          4px 4px 10px rgba(20,8,2,0.45);
+      }
+
+      .section-sub {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: clamp(1rem, 2vw, 1.25rem);
+        color: var(--brown-soft);
+        max-width: 640px;
+        margin: 0 auto 40px;
+        line-height: 1.55;
+      }
+
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        text-align: left;
+      }
+
+      .card {
+        background: var(--card-bg);
+        backdrop-filter: blur(8px);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 24px 18px 22px;
+        transition:
+          transform 360ms cubic-bezier(0.22, 1, 0.36, 1),
+          box-shadow 360ms ease,
+          border-color 360ms ease;
+      }
+      .card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 40px rgba(60,38,20,0.12);
+        border-color: rgba(120, 90, 62, 0.28);
+      }
+
+      .card-icon {
+        width: 52px; height: 52px;
+        border-radius: 50%;
+        background: rgba(190,162,130,0.22);
+        display: flex; align-items: center; justify-content: center;
+        color: var(--brown-mid);
+        margin-bottom: 16px;
+      }
+      .card-icon svg { width: 26px; height: 26px; }
+
+      .card h3 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-weight: 600;
+        font-size: clamp(1.25rem, 1.8vw, 1.55rem);
+        line-height: 1.1;
+        margin-bottom: 10px;
+      }
+      .card-line {
+        height: 1px;
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='6'%3E%3Cpath d='M0 3 Q50 0 100 3 Q150 6 200 3' stroke='rgba(120,90,62,0.25)' fill='none' stroke-width='0.8'/%3E%3C/svg%3E") repeat-x center;
+        height: 6px;
+        margin-bottom: 12px;
+      }
+      .card p {
+        font-size: 0.88rem;
+        line-height: 1.72;
+        color: var(--brown-soft);
+      }
+
+      .services-footer {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.1rem;
+        color: var(--brown-soft);
+        opacity: 0.75;
+        margin-top: 8px;
+        letter-spacing: 0.03em;
+      }
+
+      /* ── RESPONSIVE ───────────────────────────────────── */
+      @media (max-width: 900px) {
+        .cards { grid-template-columns: repeat(2, 1fr); }
+        .cup-frame { width: min(150px, 46vw); height: 170px; }
+      }
+      @media (max-width: 520px) {
+        .cards { grid-template-columns: 1fr; }
+        .services { padding-bottom: 56px; }
+        .notify-form {
+          grid-template-columns: 1fr;
+          border-radius: 12px;
+        }
+        .notify-form button { padding: 14px; }
+        .cup-frame { width: min(120px, 44vw); height: 140px; }
+      }
+    </style>
+  </head>
+  <body class="is-booting">
+
+    <!-- HERO -->
+    <section class="hero">
+
+      <div class="mandala-bg" aria-hidden="true">
+        <img src="assets/hero-mandala.webp" alt="" width="520" height="520" style="width:100%;height:100%;object-fit:contain;" />
+      </div>
+
+      <picture>
+        <img src="assets/amenologo-nobg1.webp" alt="Ameno Café" class="logo-img reveal" style="--reveal-delay: 80ms;" />
+      </picture>
+
+      <p class="proximamente reveal" style="--reveal-delay: 220ms;">Próximamente</p>
+
+      <div class="ornament reveal reveal--soft" aria-hidden="true" style="--reveal-delay: 340ms;">
+        <svg class="ornament-icon" viewBox="0 0 20 14" fill="none">
+          <ellipse cx="10" cy="7" rx="8" ry="5.5" stroke="currentColor" stroke-width="1.8"/>
+          <path d="M10 1.5 C10 1.5 10 7 10 12.5" stroke="currentColor" stroke-width="1.8"/>
+        </svg>
+      </div>
+
+      <p class="tagline reveal" style="--reveal-delay: 500ms;">Llevamos la experiencia del café a tu evento</p>
+
+      <form class="notify-form reveal" style="--reveal-delay: 700ms;" name="captura-email" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="captura-email" />
+        <p style="position:absolute;width:1px;height:1px;overflow:hidden" aria-hidden="true">
+          <label for="bot-field">No llenar este campo</label>
+          <input id="bot-field" name="bot-field" type="text" tabindex="-1" autocomplete="off" />
+        </p>
+        <label style="position:absolute;width:1px;height:1px;overflow:hidden" for="email">Correo electrónico</label>
+        <input id="email" name="email" type="email" placeholder="Ingresa tu email..." autocomplete="email" required />
+        <button type="submit">Notificarme</button>
+      </form>
+
+      <div class="notify-status" id="notify-status" role="status" aria-live="polite" hidden></div>
+
+      <div class="socials reveal" style="--reveal-delay: 920ms;">
+        <a class="social-circle social-wa" href="https://wa.me/5215578688247?text=Hola%20Ameno%20Caf%C3%A9%2C%20me%20gustar%C3%ADa%20cotizar%20un%20evento." aria-label="WhatsApp">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.557 4.12 1.527 5.845L.057 23.5l5.797-1.448A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.838 0-3.563-.5-5.055-1.37l-.361-.214-3.44.859.874-3.353-.235-.374A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+          </svg>
+        </a>
+        <a class="social-circle social-ig" href="https://www.instagram.com/_amenocafe/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="cup-scene reveal" aria-hidden="true" style="--reveal-delay: 1100ms;">
+        <div class="wisps">
+          <span class="wisp"></span>
+          <span class="wisp"></span>
+          <span class="wisp"></span>
+        </div>
+        <div class="cup-frame">
+          <img src="assets/gallery-1.webp" alt="" class="cup-photo" loading="lazy" />
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SERVICES -->
+    <section class="services">
+      <div class="services-inner">
+
+        <div class="ornament reveal reveal--soft" aria-hidden="true" style="--reveal-delay: 120ms;">
+          <svg class="ornament-icon" viewBox="0 0 20 14" fill="none">
+            <ellipse cx="10" cy="7" rx="8" ry="5.5" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M10 1.5 C10 1.5 10 7 10 12.5" stroke="currentColor" stroke-width="1.8"/>
+          </svg>
+        </div>
+
+        <h2 class="section-title reveal" style="--reveal-delay: 240ms;">Servicios próximamente disponibles</h2>
+
+        <div class="ornament reveal reveal--soft" aria-hidden="true" style="--reveal-delay: 360ms;">
+          <svg class="ornament-icon" viewBox="0 0 20 14" fill="none">
+            <ellipse cx="10" cy="7" rx="8" ry="5.5" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M10 1.5 C10 1.5 10 7 10 12.5" stroke="currentColor" stroke-width="1.8"/>
+          </svg>
+        </div>
+
+        <p class="section-sub reveal" style="--reveal-delay: 500ms;">Llevamos una barra de café de especialidad a tus eventos privados, corporativos y celebraciones especiales.</p>
+
+        <div class="cards">
+          <article class="card reveal" style="--reveal-delay: 620ms;">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 8h8v4a4 4 0 0 1-8 0V8z"/><path d="M15 10h1.5A2.5 2.5 0 0 1 19 12.5A2.5 2.5 0 0 1 16.5 15H15"/>
+                <path d="M9 4v2"/><path d="M12 4v2"/>
+              </svg>
+            </div>
+            <h3>Barra de café para eventos privados</h3>
+            <div class="card-line" aria-hidden="true"></div>
+            <p>Servicio de café de especialidad para bodas, reuniones, celebraciones y eventos sociales con una experiencia cuidada y profesional.</p>
+          </article>
+
+          <article class="card reveal" style="--reveal-delay: 760ms;">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="4" y="7" width="16" height="11" rx="2"/><path d="M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/><path d="M4 12h16"/>
+              </svg>
+            </div>
+            <h3>Eventos corporativos</h3>
+            <div class="card-line" aria-hidden="true"></div>
+            <p>Una barra de café elegante para conferencias, oficinas, activaciones y encuentros empresariales.</p>
+          </article>
+
+          <article class="card reveal" style="--reveal-delay: 900ms;">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 14h14"/><path d="M7 14a5 5 0 0 1 10 0"/><path d="M12 4v2"/><path d="M4 18h16"/>
+              </svg>
+            </div>
+            <h3>Catering de café</h3>
+            <div class="card-line" aria-hidden="true"></div>
+            <p>Bebidas preparadas al momento para complementar tu evento con hospitalidad, detalle y calidez.</p>
+          </article>
+
+          <article class="card reveal" style="--reveal-delay: 1040ms;">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3l1.6 3.4L17 8l-3.4 1.6L12 13l-1.6-3.4L7 8l3.4-1.6L12 3Z"/>
+                <path d="M19 14l.9 1.9 1.9.9-1.9.9-.9 1.9-.9-1.9-1.9-.9 1.9-.9.9-1.9Z"/>
+              </svg>
+            </div>
+            <h3>Experiencias personalizadas</h3>
+            <div class="card-line" aria-hidden="true"></div>
+            <p>Adaptamos la propuesta al estilo, tamaño y atmósfera de tu evento para que todo se sienta coherente y especial.</p>
+          </article>
+        </div>
+
+        <div class="ornament reveal reveal--soft" style="margin-top:40px; --reveal-delay: 1180ms;" aria-hidden="true">
+          <svg class="ornament-icon" viewBox="0 0 20 14" fill="none">
+            <ellipse cx="10" cy="7" rx="8" ry="5.5" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M10 1.5 C10 1.5 10 7 10 12.5" stroke="currentColor" stroke-width="1.8"/>
+          </svg>
+        </div>
+        <p class="services-footer reveal" style="--reveal-delay: 1300ms;">Café de especialidad &nbsp;·&nbsp; Momentos inolvidables</p>
+
+      </div>
+    </section>
+
+    <script>
+      const form = document.querySelector('.notify-form');
+      const status = document.getElementById('notify-status');
+      const isLocalPreview = /^(localhost|127\.0\.0\.1|::1)$/.test(window.location.hostname) || window.location.protocol === 'file:';
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      window.addEventListener('load', () => {
+        if (prefersReducedMotion) {
+          document.body.classList.remove('is-booting');
+          document.body.classList.add('is-ready');
+          return;
+        }
+
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            document.body.classList.remove('is-booting');
+            document.body.classList.add('is-ready');
+          });
+        });
+      }, { once: true });
+
+      function showStatus(state, title, message) {
+        status.hidden = false;
+        status.dataset.state = state;
+        status.innerHTML = `<strong>${title}</strong>${message}`;
+        status.classList.remove('is-visible');
+
+        if (prefersReducedMotion) {
+          status.classList.add('is-visible');
+          return;
+        }
+
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            status.classList.add('is-visible');
+          });
+        });
+      }
+
+      if (form && status) {
+        const emailInput = form.querySelector('input[type="email"]');
+        const submitButton = form.querySelector('button[type="submit"]');
+        const originalButtonText = submitButton ? submitButton.textContent : 'Notificarme';
+
+        form.addEventListener('submit', async (event) => {
+          event.preventDefault();
+
+          if (!form.reportValidity()) {
+            return;
+          }
+
+          if (submitButton) {
+            submitButton.disabled = true;
+            submitButton.textContent = 'Enviando...';
+          }
+
+          if (isLocalPreview) {
+            if (submitButton) {
+              submitButton.disabled = false;
+              submitButton.textContent = originalButtonText;
+            }
+
+            showStatus(
+              'preview',
+              'Vista previa local.',
+              'El formulario está conectado a Netlify. Para guardar envíos reales, pruébalo en el sitio publicado.'
+            );
+            return;
+          }
+
+          try {
+            const formData = new FormData(form);
+            const response = await fetch('/', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+              body: new URLSearchParams(formData).toString(),
+            });
+
+            if (!response.ok) {
+              throw new Error('Netlify form submission failed');
+            }
+
+            form.classList.add('is-complete');
+
+            if (emailInput) {
+              emailInput.readOnly = true;
+            }
+
+            if (submitButton) {
+              submitButton.disabled = true;
+              submitButton.textContent = 'Enviado';
+            }
+
+            showStatus(
+              'success',
+              'Gracias.',
+              'Ya te agregamos a la lista. Te avisaremos por correo cuando Ameno Café esté listo.'
+            );
+          } catch (error) {
+            showStatus(
+              'error',
+              'No se pudo enviar.',
+              'Intenta otra vez o escríbenos por WhatsApp si prefieres.'
+            );
+
+            if (submitButton) {
+              submitButton.disabled = false;
+              submitButton.textContent = originalButtonText;
+            }
+
+            if (emailInput) {
+              emailInput.focus();
+            }
+          }
+        });
+      }
+    </script>
+
+  </body>
+</html>
+<!-- v2 -->
