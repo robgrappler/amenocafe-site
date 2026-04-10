@@ -436,37 +436,18 @@
       }
 
       .cup-frame {
-        width: min(180px, 46vw);
-        height: 200px;
-        border-radius: 14px 14px 0 0;
-        overflow: hidden;
+        width: min(280px, 70vw);
+        aspect-ratio: 3 / 2;
         position: relative;
-      }
-
-      /* vignette — blends cup edges into the plaster background */
-      .cup-frame::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background:
-          linear-gradient(to right,
-            rgba(176, 127, 70, 0.55) 0%,
-            transparent 28%,
-            transparent 72%,
-            rgba(176, 127, 70, 0.55) 100%
-          ),
-          linear-gradient(to bottom,
-            transparent 50%,
-            rgba(110, 68, 24, 0.88) 100%
-          );
-        pointer-events: none;
+        overflow: hidden;
       }
 
       .cup-photo {
         width: 100%;
         height: 100%;
-        object-fit: cover;
-        object-position: center 20%;
+        object-fit: contain;
+        object-position: center center;
+        mix-blend-mode: multiply;
       }
 
       .wisps {
@@ -592,7 +573,7 @@
       /* ── RESPONSIVE ───────────────────────────────────── */
       @media (max-width: 900px) {
         .cards { grid-template-columns: repeat(2, 1fr); }
-        .cup-frame { width: min(150px, 46vw); height: 170px; }
+        .cup-frame { width: min(240px, 70vw); }
       }
       @media (max-width: 520px) {
         .cards { grid-template-columns: 1fr; }
@@ -602,7 +583,7 @@
           border-radius: 12px;
         }
         .notify-form button { padding: 14px; }
-        .cup-frame { width: min(120px, 44vw); height: 140px; }
+        .cup-frame { width: min(200px, 70vw); }
       }
     </style>
   </head>
@@ -670,7 +651,7 @@
           <span class="wisp"></span>
         </div>
         <div class="cup-frame">
-          <img src="/assets/gallery-4.webp" alt="" class="cup-photo" loading="lazy" />
+          <img src="/assets/amenocafecup.webp" alt="" class="cup-photo" loading="lazy" />
         </div>
       </div>
 
