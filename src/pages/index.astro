@@ -657,6 +657,26 @@
         letter-spacing: 0.03em;
       }
 
+      .site-footer {
+        padding: 60px 24px 80px;
+        text-align: center;
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 0.95rem;
+        color: var(--brown-soft);
+        opacity: 0.8;
+      }
+      .site-footer a {
+        font-weight: 600;
+        transition: color 300ms ease, text-decoration-color 300ms ease;
+        text-decoration: underline;
+        text-underline-offset: 4px;
+        text-decoration-color: rgba(120, 90, 62, 0.3);
+      }
+      .site-footer a:hover {
+        color: #14b8a6; /* Teal */
+        text-decoration-color: #14b8a6;
+      }
+
       /* ── RESPONSIVE ───────────────────────────────────── */
       @media (max-width: 900px) {
         .cards { grid-template-columns: repeat(2, 1fr); }
@@ -829,6 +849,10 @@
       </div>
     </section>
 
+    <footer class="site-footer reveal" style="--reveal-delay: 1400ms;">
+      <p>Filtrado con prensa francesa por <a href="https://nodoalfa.com" target="_blank" rel="noopener noreferrer">Nodo Alfa</a></p>
+    </footer>
+
     <script>
       const form = document.querySelector('.notify-form');
       const status = document.getElementById('notify-status');
@@ -949,10 +973,4 @@
 
   </body>
 </html>
-<!-- v2 -->
->
-
-  </body>
-</html>
-<!-- v2 -->
->
+<!-- v3 -->
