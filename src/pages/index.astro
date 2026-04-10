@@ -168,7 +168,8 @@
         .notify-form button,
         .notify-status,
         .social-circle,
-        .card {
+        .card,
+        .logo-img.is-floating {
           animation: none !important;
           transition: none !important;
         }
@@ -242,14 +243,9 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 100px 24px 120px;
+        padding: 56px 24px 64px;
         text-align: center;
-        position: sticky;
-        top: 0;
-        z-index: 1;
-        min-height: 90vh;
-        justify-content: center;
-        background: transparent;
+        position: relative;
       }
 
       /* ── LOGO CONTAINER (mandala sits inside this) ───── */
@@ -484,19 +480,9 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 140px 24px 160px;
+        padding: 100px 24px 120px;
         position: relative;
-        z-index: 10;
-        background: linear-gradient(
-          to bottom,
-          #eedfcb 0%,
-          #2a1208 20%,
-          #120601 50%,
-          #2a1208 80%,
-          #eedfcb 100%
-        );
-        box-shadow: 0 -30px 60px rgba(0,0,0,0.18);
-        margin: 0; /* Remove margin so it covers hero from bottom to top cleanly */
+        background: transparent;
       }
 
       /* ── CUP SCENE ───────────────────────────────────── */
@@ -580,11 +566,8 @@
 
       /* ── SERVICES ─────────────────────────────────────── */
       .services {
-        padding: 80px 24px 100px;
+        padding: 12px 24px 80px;
         text-align: center;
-        position: relative;
-        z-index: 10;
-        background: #eedfcb;
       }
       .services-inner { max-width: 1100px; margin: 0 auto; }
 
@@ -919,18 +902,6 @@
             status.classList.add('is-visible');
           });
         });
-      }
-
-      // Parallax effect for the hero logo
-      const heroLogo = document.querySelector('.logo-container');
-      
-      if (heroLogo && !prefersReducedMotion) {
-        window.addEventListener('scroll', () => {
-          const scroll = window.scrollY;
-          // Apply a subtle upward drift and fade as the user scrolls
-          heroLogo.style.transform = `translateY(${scroll * 0.4}px) scale(${1 - scroll * 0.0005})`;
-          heroLogo.style.opacity = `${1 - scroll * 0.002}`;
-        }, { passive: true });
       }
 
       if (form && status) {
