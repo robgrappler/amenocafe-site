@@ -921,6 +921,18 @@
         });
       }
 
+      // Parallax effect for the hero logo
+      const heroLogo = document.querySelector('.logo-container');
+      
+      if (heroLogo && !prefersReducedMotion) {
+        window.addEventListener('scroll', () => {
+          const scroll = window.scrollY;
+          // Apply a subtle upward drift and fade as the user scrolls
+          heroLogo.style.transform = `translateY(${scroll * 0.4}px) scale(${1 - scroll * 0.0005})`;
+          heroLogo.style.opacity = `${1 - scroll * 0.002}`;
+        }, { passive: true });
+      }
+
       if (form && status) {
         const emailInput = form.querySelector('input[type="email"]');
         const submitButton = form.querySelector('button[type="submit"]');
