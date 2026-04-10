@@ -494,27 +494,26 @@
         z-index: 2;
         width: 100%;
         max-width: 600px;
-        /* Ensure that blurred elements can overflow without being clipped by the browser */
-        overflow: visible;
       }
 
-      /* Soft glow/shadow behind the cup to give depth and contrast for wisps */
+      /* Soft glow/shadow behind the cup - No blur filter to avoid "square" artifacts */
       .cup-scene::before {
         content: "";
         position: absolute;
-        top: 45%;
+        top: 50%;
         left: 50%;
-        width: min(500px, 95vw); /* Use a fixed max-width for better control */
+        width: min(600px, 120vw); 
         aspect-ratio: 1; 
+        /* Use a much smoother gradient that reaches 0 opacity well before the element edge */
         background: radial-gradient(
-          circle,
-          rgba(61, 38, 18, 0.22) 0%,
-          rgba(61, 38, 18, 0.04) 40%,
-          transparent 70%
+          circle at center,
+          rgba(61, 38, 18, 0.18) 0%,
+          rgba(61, 38, 18, 0.06) 30%,
+          rgba(61, 38, 18, 0.02) 50%,
+          transparent 75%
         );
         transform: translate(-50%, -50%);
         z-index: 1;
-        filter: blur(50px);
         border-radius: 50%;
         pointer-events: none;
       }
@@ -527,7 +526,6 @@
         align-items: center;
         justify-content: center;
         z-index: 5;
-        overflow: visible; /* Prevent clipping of internal effects */
       }
 
       /* Subtle glow at the cup mouth */
@@ -538,10 +536,25 @@
         left: 50%;
         width: 40%;
         height: 25%;
-        background: radial-gradient(ellipse, rgba(255, 250, 230, 0.25) 0%, transparent 80%);
+        background: radial-gradient(ellipse, rgba(255, 250, 230, 0.22) 0%, transparent 80%);
         transform: translateX(-50%);
         filter: blur(12px);
         z-index: 7;
+        pointer-events: none;
+      }
+
+      /* Dedicated shadow element instead of filter: drop-shadow to prevent box artifacts */
+      .cup-frame::before {
+        content: "";
+        position: absolute;
+        bottom: 5%;
+        left: 50%;
+        width: 70%;
+        height: 20%;
+        background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.4) 0%, transparent 80%);
+        transform: translateX(-50%);
+        filter: blur(20px);
+        z-index: 4;
         pointer-events: none;
       }
 
@@ -549,10 +562,11 @@
         width: 100%;
         height: 100%;
         object-fit: contain;
-        /* Simplify the shadow for better cross-browser rendering on desktop */
-        filter: drop-shadow(0 15px 35px rgba(0,0,0,0.38));
         position: relative;
-        background-color: transparent !important;
+        z-index: 5;
+        /* Remove the problematic filter */
+        filter: none;
+        background: transparent !important;
       }
 
       .wisps {
