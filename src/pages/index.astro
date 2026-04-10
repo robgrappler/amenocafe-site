@@ -579,28 +579,22 @@
       .services-inner { max-width: 1100px; margin: 0 auto; }
 
       .section-title {
-        font-family: 'Cinzel', 'Cormorant Garamond', Georgia, serif;
-        font-weight: 600;
-        font-size: clamp(1.7rem, 4.2vw, 2.9rem);
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-weight: 500;
+        font-size: clamp(2rem, 5vw, 3.2rem);
         line-height: 1.1;
-        margin-bottom: 4px;
-        letter-spacing: 0.04em;
+        margin-bottom: 12px;
+        letter-spacing: 0.02em;
         color: #4a2c0e;
-        text-shadow:
-          1px 1px 0 #8c5a2a,
-          2px 2px 0 #7a4d22,
-          3px 3px 0 #6b4018,
-          4px 4px 0 #5c3410,
-          4px 4px 10px rgba(20,8,2,0.45);
       }
 
       .section-sub {
         font-family: 'Cormorant Garamond', Georgia, serif;
-        font-size: clamp(1rem, 2vw, 1.25rem);
+        font-size: clamp(1.1rem, 2.2vw, 1.4rem);
         color: var(--brown-soft);
-        max-width: 640px;
-        margin: 0 auto 40px;
-        line-height: 1.55;
+        max-width: 680px;
+        margin: 0 auto 48px;
+        line-height: 1.6;
       }
 
       .cards {
@@ -676,23 +670,29 @@
       }
 
       .site-footer {
-        padding: 60px 24px 80px;
+        padding: 80px 24px 100px;
         text-align: center;
         font-family: 'Cormorant Garamond', Georgia, serif;
-        font-size: 0.95rem;
+        font-size: 1rem;
         color: var(--brown-soft);
-        opacity: 0.8;
+        opacity: 0.9;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
       }
       .site-footer a {
         font-weight: 600;
-        transition: color 300ms ease, text-decoration-color 300ms ease;
-        text-decoration: underline;
-        text-underline-offset: 4px;
-        text-decoration-color: rgba(120, 90, 62, 0.3);
+        transition: color 300ms ease;
+        text-decoration: none;
+        color: var(--brown);
       }
       .site-footer a:hover {
-        color: #14b8a6; /* Teal */
-        text-decoration-color: #14b8a6;
+        color: #0d9488; /* Slightly darker teal for better contrast */
+      }
+      .copyright {
+        font-size: 0.85rem;
+        opacity: 0.7;
+        letter-spacing: 0.02em;
       }
 
       /* ── RESPONSIVE ───────────────────────────────────── */
@@ -869,6 +869,7 @@
 
     <footer class="site-footer reveal" style="--reveal-delay: 1400ms;">
       <p>Filtrado con prensa francesa por <a href="https://nodoalfa.com" target="_blank" rel="noopener noreferrer">Nodo Alfa</a></p>
+      <p class="copyright">&copy; 2026 Ameno Café. Todos los derechos reservados.</p>
     </footer>
 
     <script>
