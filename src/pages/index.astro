@@ -496,22 +496,23 @@
         max-width: 600px;
       }
 
+      /* Soft glow/shadow behind the cup to give depth and contrast for wisps */
       .cup-scene::before {
         content: "";
         position: absolute;
-        top: 50%;
+        top: 45%;
         left: 50%;
-        width: 100%;
-        height: 120%;
+        width: 120%;
+        aspect-ratio: 1.2;
         background: radial-gradient(
           circle at center,
-          rgba(168, 98, 45, 0.4) 0%,
-          rgba(107, 53, 21, 0.2) 40%,
-          transparent 70%
+          rgba(61, 38, 18, 0.28) 0%,
+          rgba(61, 38, 18, 0.08) 40%,
+          transparent 72%
         );
         transform: translate(-50%, -50%);
         z-index: 1;
-        filter: blur(40px);
+        filter: blur(55px);
         pointer-events: none;
       }
 
@@ -525,11 +526,29 @@
         z-index: 5;
       }
 
+      /* Subtle glow at the cup mouth */
+      .cup-frame::after {
+        content: "";
+        position: absolute;
+        top: 20%;
+        left: 50%;
+        width: 50%;
+        height: 30%;
+        background: radial-gradient(ellipse at center, rgba(255, 250, 230, 0.3) 0%, transparent 75%);
+        transform: translateX(-50%);
+        filter: blur(15px);
+        z-index: 7;
+        pointer-events: none;
+      }
+
       .cup-photo {
         width: 100%;
         height: 100%;
         object-fit: contain;
-        filter: drop-shadow(0 25px 60px rgba(0,0,0,0.6));
+        /* Using multiple drop-shadows for a more organic feel that avoids a "boxy" look */
+        filter: 
+          drop-shadow(0 20px 40px rgba(0,0,0,0.45))
+          drop-shadow(0 0 15px rgba(139, 94, 60, 0.15));
         position: relative;
       }
 
@@ -550,7 +569,7 @@
         display: block;
         border-radius: 8px;
         background: linear-gradient(to top, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.1));
-        filter: blur(1.5px) drop-shadow(0 0 6px rgba(255, 252, 240, 0.9));
+        filter: blur(1.5px) drop-shadow(0 0 8px rgba(255, 252, 240, 0.8));
         animation: wisp-rise 5s ease-in-out infinite;
       }
       .wisp:nth-child(1) { width: 8px;  height: 46px; animation-delay: 0s; }
