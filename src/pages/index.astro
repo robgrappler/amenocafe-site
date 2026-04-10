@@ -209,6 +209,15 @@
         position: relative;
       }
 
+      /* ── LOGO CONTAINER (mandala sits inside this) ───── */
+      .logo-container {
+        position: relative;
+        width: min(900px, 95vw);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
       /* ── MANDALA ─────────────────────────────────────── */
       .mandala-bg {
         position: absolute;
@@ -426,10 +435,25 @@
         backdrop-filter: none;
       }
 
+      /* ── CUP SECTION ─────────────────────────────────── */
+      .cup-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 48px 24px 60px;
+        background: linear-gradient(
+          to bottom,
+          #120601 0%,
+          #2a1208 30%,
+          #6b3515 65%,
+          #9e5e2a 100%
+        );
+      }
+
       /* ── CUP SCENE ───────────────────────────────────── */
       .cup-scene {
         position: relative;
-        margin-top: 28px;
+        margin-top: 0;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -592,13 +616,14 @@
     <!-- HERO -->
     <section class="hero">
 
-      <div class="mandala-bg" aria-hidden="true">
-        <img src="/assets/hero-mandala.webp" alt="" width="520" height="520" style="width:100%;height:100%;object-fit:contain;" />
+      <div class="logo-container">
+        <div class="mandala-bg" aria-hidden="true">
+          <img src="/assets/hero-mandala.webp" alt="" width="520" height="520" style="width:100%;height:100%;object-fit:contain;" />
+        </div>
+        <picture>
+          <img src="/assets/AMENOCAFE.png" alt="Ameno Café" class="logo-img reveal" style="--reveal-delay: 80ms;" />
+        </picture>
       </div>
-
-      <picture>
-        <img src="/assets/AMENOCAFE.png" alt="Ameno Café" class="logo-img reveal" style="--reveal-delay: 80ms;" />
-      </picture>
 
       <p class="proximamente reveal" style="--reveal-delay: 220ms;">Próximamente</p>
 
@@ -644,7 +669,11 @@
         </div>
       </div>
 
-      <div class="cup-scene reveal" aria-hidden="true" style="--reveal-delay: 1100ms;">
+    </section>
+
+    <!-- CUP SCENE -->
+    <section class="cup-section">
+      <div class="cup-scene">
         <div class="wisps">
           <span class="wisp"></span>
           <span class="wisp"></span>
@@ -654,7 +683,6 @@
           <img src="/assets/amenocafecup.webp" alt="" class="cup-photo" loading="lazy" />
         </div>
       </div>
-
     </section>
 
     <!-- SERVICES -->
