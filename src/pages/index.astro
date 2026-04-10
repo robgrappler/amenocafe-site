@@ -17,14 +17,10 @@
     <link rel="icon" type="image/png" href="/assets/logo.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:wght@400;500;600&family=Cinzel:wght@600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet" />
     <noscript>
       <style>
         .reveal, .logo-img, .tagline, .notify-form, .socials, .section-title, .section-sub, .card, .services-footer {
-          opacity: 1 !important;
-          transform: none !important;
-        }
-        body.is-booting .reveal, body.is-booting .logo-img, body.is-booting .tagline, body.is-booting .notify-form, body.is-booting .socials, body.is-booting .section-title, body.is-booting .section-sub, body.is-booting .card, body.is-booting .services-footer {
           opacity: 1 !important;
           transform: none !important;
         }
@@ -34,54 +30,24 @@
       *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
       :root {
-        --brown:      #3d2612;
-        --brown-soft: #6b4f38;
-        --brown-mid:  #8c6448;
-        --accent:     #5a3e28;
-        --card-bg:    rgba(248, 242, 234, 0.78);
-        --border:     rgba(120, 90, 62, 0.2);
+        --bg-brand:   #E6E5E3;
+        --cafe:       #2c1b18;
+        --cafe-soft:  #4a3532;
+        --dorado:     #d4a373;
+        --border:     rgba(44, 27, 24, 0.12);
+        --font-serif: 'Cormorant Garamond', Georgia, serif;
+        --font-display: 'Playfair Display', serif;
       }
 
       html { scroll-behavior: smooth; }
 
       body {
-        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        color: var(--brown);
+        font-family: var(--font-serif);
+        color: var(--cafe);
         min-height: 100vh;
-        background:
-          radial-gradient(circle at top, rgba(255,255,255,0.6), transparent 34%),
-          radial-gradient(circle at 20% 30%, rgba(255,255,255,0.4), transparent 18%),
-          radial-gradient(circle at 80% 20%, rgba(255,255,255,0.2), transparent 22%),
-          linear-gradient(180deg, #fdfbf7 0%, #f6efe7 52%, #eedfcb 100%);
-        background-attachment: fixed;
+        background-color: var(--bg-brand);
         position: relative;
         overflow-x: hidden;
-      }
-
-      body::before {
-        content: "";
-        position: fixed;
-        inset: -12vh -8vw;
-        pointer-events: none;
-        background:
-          radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.18), transparent 36%),
-          radial-gradient(circle at 82% 22%, rgba(197, 149, 101, 0.12), transparent 30%),
-          radial-gradient(circle at 50% 88%, rgba(96, 53, 22, 0.08), transparent 34%);
-        opacity: 0.65;
-        mix-blend-mode: soft-light;
-        animation: ambient-drift 56s ease-in-out infinite alternate;
-        transform: translate3d(0, 0, 0);
-        z-index: 0;
-      }
-
-      @keyframes ambient-drift {
-        from { transform: translate3d(-0.75%, -0.5%, 0) scale(1); }
-        to { transform: translate3d(0.9%, 0.65%, 0) scale(1.03); }
-      }
-
-      body > * {
-        position: relative;
-        z-index: 1;
       }
 
       body::after {
@@ -89,7 +55,7 @@
         position: fixed;
         inset: 0;
         pointer-events: none;
-        opacity: 0.12;
+        opacity: 0.04;
         background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
         mix-blend-mode: multiply;
         z-index: 9999;
@@ -105,18 +71,7 @@
       body.is-booting .card,
       body.is-booting .services-footer {
         opacity: 0;
-        transform: translateY(28px) scale(0.98);
-      }
-
-      /* Basic focus styles for accessibility */
-      :focus-visible {
-        outline: 3px solid var(--brown-mid);
-        outline-offset: 3px;
-        border-radius: 4px;
-      }
-
-      .notify-form:focus-within {
-        box-shadow: 0 0 0 3px rgba(120, 90, 62, 0.25), 0 8px 32px rgba(60, 38, 20, 0.12);
+        transform: translateY(20px);
       }
 
       body.is-ready .reveal,
@@ -132,773 +87,270 @@
           opacity 1200ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms),
           transform 1200ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms);
         opacity: 1;
-        transform: translateY(0) scale(1);
+        transform: translateY(0);
       }
 
       .logo-img-wrapper {
         display: inline-block;
-        will-change: transform;
+        margin-bottom: 40px;
       }
 
-      /* Logo floating animation */
-      @keyframes floating {
-        0%, 100% { transform: translateY(0); }
-        50%      { transform: translateY(-16px); }
+      .logo-img {
+        width: min(480px, 85vw);
+        height: auto;
+        filter: brightness(0.95) contrast(1.05);
       }
-
-      .is-floating {
-        animation: floating 7s ease-in-out infinite;
-      }
-
-      a { color: inherit; text-decoration: none; }
 
       .reveal {
         opacity: 0;
-        transform: translateY(26px) scale(0.985);
+        transform: translateY(15px);
       }
 
-      .reveal--soft {
-        transform: translateY(18px) scale(0.99);
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        .reveal,
-        .logo-img,
-        .notify-form,
-        .notify-form button,
-        .notify-status,
-        .social-circle,
-        .card,
-        .logo-img.is-floating {
-          animation: none !important;
-          transition: none !important;
-        }
-
-        .reveal {
-          opacity: 1;
-          transform: none;
-          will-change: auto;
-        }
-
-        body.is-booting .reveal,
-        body.is-booting .logo-img,
-        body.is-booting .tagline,
-        body.is-booting .notify-form,
-        body.is-booting .socials,
-        body.is-booting .section-title,
-        body.is-booting .section-sub,
-        body.is-booting .card,
-        body.is-booting .services-footer,
-        body.is-ready .reveal,
-        body.is-ready .logo-img,
-        body.is-ready .tagline,
-        body.is-ready .notify-form,
-        body.is-ready .socials,
-        body.is-ready .section-title,
-        body.is-ready .section-sub,
-        body.is-ready .card,
-        body.is-ready .services-footer {
-          opacity: 1;
-          transform: none;
-          transition: none;
-        }
-
-        body::before {
-          animation: none;
-        }
-
-        .mandala-bg { animation: none; }
-        .wisp { animation: none; opacity: 0; }
-      }
-
-      /* ── ORNAMENT DIVIDER ─────────────────────────────── */
       .ornament {
         display: flex;
         align-items: center;
-        gap: 12px;
+        gap: 16px;
         justify-content: center;
-        margin: 18px auto;
-        width: min(420px, 80vw);
-        color: #6b3d1a;
+        margin: 24px auto;
+        width: min(320px, 70vw);
+        color: var(--cafe);
+        opacity: 0.6;
       }
       .ornament::before,
       .ornament::after {
         content: "";
         flex: 1;
-        height: 2px;
-        border-radius: 1px;
-        background: linear-gradient(90deg, transparent, rgba(90,50,18,0.65));
-      }
-      .ornament::after {
-        background: linear-gradient(90deg, rgba(90,50,18,0.65), transparent);
+        height: 1px;
+        background: currentColor;
       }
       .ornament-icon {
-        width: 20px; height: 20px;
-        opacity: 0.88;
+        width: 14px; height: 14px;
         flex-shrink: 0;
       }
 
-      /* ── HERO ─────────────────────────────────────────── */
       .hero {
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 56px 24px 64px;
+        padding: 80px 24px;
         text-align: center;
-        position: relative;
-      }
-
-      /* ── LOGO CONTAINER (mandala sits inside this) ───── */
-      .logo-container {
-        position: relative;
-        width: min(900px, 95vw);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      /* ── MANDALA ─────────────────────────────────────── */
-      .mandala-bg {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: min(900px, 95vw);
-        aspect-ratio: 1;
-        opacity: 0.25;
-        mix-blend-mode: multiply;
-        pointer-events: none;
-        will-change: transform;
-        animation: mandala-spin 180s linear infinite;
-      }
-
-      @keyframes mandala-spin {
-        from { transform: translate(-50%, -50%) rotate(0deg); }
-        to   { transform: translate(-50%, -50%) rotate(360deg); }
-      }
-
-      .logo-img {
-        width: min(760px, 92vw);
-        height: auto;
-        margin-bottom: 12px;
-        filter: drop-shadow(0 4px 18px rgba(40,22,8,0.2));
-        transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1), filter 380ms ease;
-        will-change: transform;
-      }
-
-      .logo-img:hover {
-        transform: translateY(-1px) scale(1.01) !important;
-        filter: drop-shadow(0 10px 24px rgba(40,22,8,0.24));
+        max-width: 800px;
+        margin: 0 auto;
       }
 
       .proximamente {
-        font-family: 'Cormorant Garamond', Georgia, serif;
-        font-style: italic;
+        font-family: var(--font-display);
         font-weight: 500;
-        font-size: clamp(2.4rem, 6vw, 4rem);
-        line-height: 1;
-        color: #7a4a1e;
-        margin-bottom: 16px;
-        text-shadow:
-          1px 2px 0 rgba(80,44,12,0.2),
-          2px 4px 0 rgba(60,32,8,0.1),
-          3px 6px 14px rgba(25,12,3,0.15);
+        font-size: clamp(2rem, 5vw, 3rem);
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: var(--cafe);
+        margin-bottom: 8px;
       }
 
       .tagline {
-        font-family: 'Cormorant Garamond', Georgia, serif;
-        font-size: clamp(1.15rem, 2.6vw, 1.6rem);
-        font-weight: 400;
-        color: var(--brown);
-        margin-bottom: 28px;
-        line-height: 1.4;
+        font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+        font-style: italic;
+        color: var(--cafe-soft);
+        margin-bottom: 48px;
+        line-height: 1.5;
       }
 
-      /* notify form */
       .notify-form {
         display: grid;
         grid-template-columns: 1fr auto;
-        width: min(560px, 90vw);
-        border-radius: 14px;
-        overflow: hidden;
-        border: 1px solid rgba(120,90,62,0.22);
-        box-shadow: 0 8px 28px rgba(60,38,20,0.08);
-        margin-bottom: 28px;
-        background: rgba(255,252,248,0.6);
-        backdrop-filter: blur(8px);
-        transition: opacity 420ms ease, transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
-      }
-      .notify-form.is-exiting {
-        opacity: 0;
-        transform: translateY(-8px);
-      }
-      .notify-form.is-complete {
-        opacity: 0.9;
-        transform: translateY(-1px);
-      }
-      .notify-form.is-complete input {
-        color: rgba(61, 38, 18, 0.72);
-      }
-      .notify-form.is-complete button {
-        cursor: default;
-        opacity: 0.9;
+        width: min(500px, 90vw);
+        border: 1px solid var(--cafe);
+        margin-bottom: 40px;
+        background: transparent;
       }
       .notify-form input {
         border: none;
         background: transparent;
-        padding: 15px 18px;
-        font-size: 0.97rem;
-        color: var(--brown);
+        padding: 18px 20px;
+        font-family: var(--font-serif);
+        font-size: 1.1rem;
+        color: var(--cafe);
         outline: none;
-        min-width: 0;
       }
-      .notify-form input::placeholder { color: rgba(90,62,38,0.52); }
+      .notify-form input::placeholder { color: rgba(44, 27, 24, 0.4); }
       .notify-form button {
         border: none;
-        background: linear-gradient(135deg, #7a4820 0%, #3d2210 100%);
-        color: #f0d8b8;
-        padding: 15px 24px;
-        font-size: 0.95rem;
+        background: var(--cafe);
+        color: var(--bg-brand);
+        padding: 0 32px;
+        font-family: var(--font-serif);
+        font-size: 1rem;
         font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
         cursor: pointer;
-        white-space: nowrap;
-        transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1), filter 280ms ease;
-        box-shadow: inset 0 1px 0 rgba(240,200,140,0.18), inset 0 -2px 0 rgba(0,0,0,0.18);
+        transition: opacity 200ms ease;
       }
-      .notify-form button:hover {
-        filter: brightness(1.12);
-        transform: translateY(-1px);
-      }
-      .notify-form button:disabled {
-        cursor: wait;
-        opacity: 0.82;
-      }
+      .notify-form button:hover { opacity: 0.9; }
 
       .notify-status {
-        width: min(560px, 90vw);
-        margin-bottom: 28px;
-        border-radius: 14px;
-        border: 1px solid rgba(120,90,62,0.2);
-        background: rgba(255,252,248,0.72);
-        backdrop-filter: blur(8px);
-        box-shadow: 0 8px 28px rgba(60,38,20,0.08);
-        padding: 16px 18px;
+        width: min(500px, 90vw);
+        margin-bottom: 40px;
+        padding: 16px;
+        border: 1px solid var(--cafe);
+        font-size: 0.95rem;
         text-align: left;
-        color: var(--brown);
-        line-height: 1.5;
         opacity: 0;
-        transform: translateY(10px);
-        transition:
-          opacity 520ms cubic-bezier(0.22, 1, 0.36, 1),
-          transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
       }
-      .notify-status strong {
-        display: block;
-        margin-bottom: 4px;
-        font-family: 'Cormorant Garamond', Georgia, serif;
-        font-size: 1.15rem;
-        font-weight: 600;
-      }
-      .notify-status[data-state="success"] {
-        border-color: rgba(90,134,82,0.28);
-      }
-      .notify-status[data-state="error"] {
-        border-color: rgba(158,62,50,0.28);
-      }
-      .notify-status[data-state="preview"] {
-        border-color: rgba(120,90,62,0.24);
-        background: rgba(255,248,232,0.84);
-      }
-      .notify-status.is-visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      .notify-status.is-visible { opacity: 1; }
 
-      .contact-meta {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 14px;
-        margin-bottom: 8px;
-      }
-
-      /* social circles */
       .socials {
         display: flex;
-        gap: 18px;
-        justify-content: center;
+        gap: 32px;
+        margin-top: 24px;
       }
+      .socials a {
+        transition: opacity 200ms ease;
+      }
+      .socials a:hover { opacity: 0.6; }
+      .socials svg { width: 24px; height: 24px; }
 
       .location {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 8px 14px;
-        border-radius: 999px;
-        border: 1px solid rgba(120,90,62,0.18);
-        background: rgba(255,252,248,0.52);
-        box-shadow: 0 8px 24px rgba(60,38,20,0.05);
-        color: rgba(76,48,28,0.84);
-        font-size: 0.88rem;
-        letter-spacing: 0.03em;
+        margin-top: 32px;
+        font-size: 0.9rem;
+        letter-spacing: 0.1em;
         text-transform: uppercase;
-      }
-      .location svg {
-        width: 13px;
-        height: 13px;
-        flex: 0 0 auto;
-        opacity: 0.72;
-      }
-      .social-circle {
-        width: 58px; height: 58px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 280ms ease, filter 280ms ease;
-      }
-      .social-circle:hover {
-        transform: translateY(-2px) scale(1.02);
-        filter: brightness(1.03);
-      }
-      .social-circle svg { width: 30px; height: 30px; }
-      .social-wa  {
-        background: linear-gradient(145deg, #2e5e22 0%, #1a3c11 100%);
-        color: #cce8c0;
-        border: 1px solid rgba(10,28,6,0.45);
-        box-shadow: 0 5px 18px rgba(15,40,8,0.45), inset 0 1px 0 rgba(200,240,180,0.18), inset 0 -2px 0 rgba(0,0,0,0.2);
-      }
-      .social-ig  {
-        background: linear-gradient(145deg, #7a4820 0%, #4a2810 100%);
-        color: #f0d8b8;
-        border: 1px solid rgba(30,12,4,0.4);
-        box-shadow: 0 5px 18px rgba(40,18,6,0.45), inset 0 1px 0 rgba(240,200,150,0.15), inset 0 -2px 0 rgba(0,0,0,0.2);
-        backdrop-filter: none;
+        opacity: 0.7;
       }
 
-      /* ── CUP SECTION ─────────────────────────────────── */
-      .cup-section {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 100px 24px 120px;
-        position: relative;
-        background: transparent;
-      }
-
-      /* ── CUP SCENE ───────────────────────────────────── */
-      .cup-scene {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        z-index: 2;
-        width: 100%;
-        max-width: 600px;
-      }
-
-      /* Soft glow/shadow behind the cup - No blur filter to avoid "square" artifacts */
-      .cup-scene::before {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: min(600px, 120vw); 
-        aspect-ratio: 1; 
-        /* Use a much smoother gradient that reaches 0 opacity well before the element edge */
-        background: radial-gradient(
-          circle at center,
-          rgba(61, 38, 18, 0.18) 0%,
-          rgba(61, 38, 18, 0.06) 30%,
-          rgba(61, 38, 18, 0.02) 50%,
-          transparent 75%
-        );
-        transform: translate(-50%, -50%);
-        z-index: 1;
-        border-radius: 50%;
-        pointer-events: none;
-      }
-
-      .cup-frame {
-        width: min(340px, 80vw);
-        aspect-ratio: 1;
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 5;
-      }
-
-      /* Subtle glow at the cup mouth */
-      .cup-frame::after {
-        content: "";
-        position: absolute;
-        top: 20%;
-        left: 50%;
-        width: 40%;
-        height: 25%;
-        background: radial-gradient(ellipse, rgba(255, 250, 230, 0.22) 0%, transparent 80%);
-        transform: translateX(-50%);
-        filter: blur(12px);
-        z-index: 7;
-        pointer-events: none;
-      }
-
-      /* Dedicated shadow element instead of filter: drop-shadow to prevent box artifacts */
-      .cup-frame::before {
-        content: "";
-        position: absolute;
-        bottom: 5%;
-        left: 50%;
-        width: 70%;
-        height: 20%;
-        background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.4) 0%, transparent 80%);
-        transform: translateX(-50%);
-        filter: blur(20px);
-        z-index: 4;
-        pointer-events: none;
-      }
-
-      .cup-photo {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        position: relative;
-        z-index: 5;
-        /* Remove the problematic filter */
-        filter: none;
-        background: transparent !important;
-      }
-
-      .wisps {
-        position: absolute;
-        top: 5%;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        gap: 12px;
-        align-items: flex-end;
-        height: 100px;
-        z-index: 6;
-        pointer-events: none;
-      }
-
-      .wisp {
-        display: block;
-        border-radius: 8px;
-        background: linear-gradient(to top, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.1));
-        filter: blur(1.5px) drop-shadow(0 0 8px rgba(255, 252, 240, 0.8));
-        animation: wisp-rise 5s ease-in-out infinite;
-      }
-      .wisp:nth-child(1) { width: 8px;  height: 46px; animation-delay: 0s; }
-      .wisp:nth-child(2) { width: 10px; height: 58px; animation-delay: 1.4s; }
-      .wisp:nth-child(3) { width: 7px;  height: 40px; animation-delay: 2.8s; }
-
-      @keyframes wisp-rise {
-        0%   { transform: translateY(0)      translateX(0)    scaleX(1);   opacity: 0; }
-        10%  {                                                               opacity: 0.92; }
-        65%  {                                                               opacity: 0.55; }
-        100% { transform: translateY(-100px) translateX(10px) scaleX(2.5); opacity: 0; }
-      }
-
-      /* ── SERVICES ─────────────────────────────────────── */
       .services {
-        padding: 12px 24px 80px;
-        text-align: center;
+        padding: 80px 24px;
+        background-color: rgba(255, 255, 255, 0.2);
       }
-      .services-inner { max-width: 1100px; margin: 0 auto; }
+      .services-inner { max-width: 1000px; margin: 0 auto; text-align: center; }
 
       .section-title {
-        font-family: 'Cormorant Garamond', Georgia, serif;
-        font-weight: 500;
-        font-size: clamp(2rem, 5vw, 3.2rem);
-        line-height: 1.1;
-        margin-bottom: 12px;
-        letter-spacing: 0.02em;
-        color: #4a2c0e;
+        font-family: var(--font-display);
+        font-size: clamp(1.8rem, 4vw, 2.5rem);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 16px;
       }
 
       .section-sub {
-        font-family: 'Cormorant Garamond', Georgia, serif;
-        font-size: clamp(1.1rem, 2.2vw, 1.4rem);
-        color: var(--brown-soft);
-        max-width: 680px;
-        margin: 0 auto 48px;
-        line-height: 1.6;
+        font-size: 1.2rem;
+        font-style: italic;
+        max-width: 600px;
+        margin: 0 auto 64px;
+        opacity: 0.8;
       }
 
       .cards {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 16px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
         text-align: left;
       }
-
-      .card {
-        background: var(--card-bg);
-        backdrop-filter: blur(8px);
-        border: 1px solid var(--border);
-        border-radius: 18px;
-        padding: 24px 18px 22px;
-        transition:
-          transform 360ms cubic-bezier(0.22, 1, 0.36, 1),
-          box-shadow 360ms ease,
-          border-color 360ms ease;
-      }
-      .card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 16px 40px rgba(60,38,20,0.12);
-        border-color: rgba(120, 90, 62, 0.35);
-      }
-
-      .card-icon {
-        width: 52px; height: 52px;
-        border-radius: 50%;
-        background: rgba(190,162,130,0.22);
-        display: flex; align-items: center; justify-content: center;
-        color: var(--brown-mid);
-        margin-bottom: 16px;
-        transition: transform 400ms cubic-bezier(0.22, 1, 0.36, 1), background 400ms ease;
-      }
-      .card:hover .card-icon {
-        transform: scale(1.1) rotate(5deg);
-        background: rgba(190,162,130,0.32);
-      }
-      .card-icon svg { width: 26px; height: 26px; }
-
       .card h3 {
-        font-family: 'Cormorant Garamond', Georgia, serif;
-        font-weight: 600;
-        font-size: clamp(1.25rem, 1.8vw, 1.55rem);
-        line-height: 1.1;
-        margin-bottom: 10px;
-      }
-      .card-line {
-        height: 1px;
-        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='6'%3E%3Cpath d='M0 3 Q50 0 100 3 Q150 6 200 3' stroke='rgba(120,90,62,0.25)' fill='none' stroke-width='0.8'/%3E%3C/svg%3E") repeat-x center;
-        height: 6px;
+        font-family: var(--font-display);
+        font-size: 1.4rem;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
         margin-bottom: 12px;
-        transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
-        transform-origin: left;
-      }
-      .card:hover .card-line {
-        transform: scaleX(1.1);
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 8px;
       }
       .card p {
-        font-size: 0.88rem;
-        line-height: 1.72;
-        color: var(--brown-soft);
-      }
-
-      .services-footer {
-        font-family: 'Cormorant Garamond', Georgia, serif;
-        font-size: 1.1rem;
-        color: var(--brown-soft);
-        opacity: 0.75;
-        margin-top: 8px;
-        letter-spacing: 0.03em;
+        font-size: 1.05rem;
+        line-height: 1.6;
+        opacity: 0.85;
       }
 
       .site-footer {
-        padding: 80px 24px 100px;
+        padding: 80px 24px;
         text-align: center;
-        font-family: 'Cormorant Garamond', Georgia, serif;
-        font-size: 1rem;
-        color: var(--brown-soft);
-        opacity: 0.9;
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
+        border-top: 1px solid var(--border);
+        font-size: 0.9rem;
+        opacity: 0.6;
       }
-      .site-footer a {
-        font-weight: 600;
-        transition: color 300ms ease;
-        text-decoration: none;
-        color: var(--brown);
-      }
-      .site-footer a:hover {
-        color: #0d9488; /* Slightly darker teal for better contrast */
-      }
-      .copyright {
-        font-size: 0.85rem;
-        opacity: 0.7;
-        letter-spacing: 0.02em;
-      }
+      .site-footer a { text-decoration: underline; }
 
-      /* ── RESPONSIVE ───────────────────────────────────── */
-      @media (max-width: 900px) {
-        .cards { grid-template-columns: repeat(2, 1fr); }
-        .cup-frame { width: min(240px, 70vw); }
-      }
-      @media (max-width: 520px) {
-        .cards { grid-template-columns: 1fr; }
-        .services { padding-bottom: 56px; }
-        .notify-form {
-          grid-template-columns: 1fr;
-          border-radius: 12px;
-        }
-        .notify-form button { padding: 14px; }
-        .cup-frame { width: min(200px, 70vw); }
+      @media (max-width: 700px) {
+        .cards { grid-template-columns: 1fr; gap: 32px; }
+        .notify-form { grid-template-columns: 1fr; }
+        .notify-form button { padding: 18px; }
       }
     </style>
   </head>
   <body class="is-booting">
 
-    <!-- HERO -->
     <section class="hero">
+      <div class="logo-img-wrapper reveal" style="--reveal-delay: 100ms;">
+        <img src="/assets/AMENOCAFE.png" alt="Ameno Café" class="logo-img" />
+      </div>
 
-      <div class="logo-container">
-        <div class="mandala-bg" aria-hidden="true">
-          <img src="/assets/hero-mandala.webp" alt="" width="520" height="520" style="width:100%;height:100%;object-fit:contain;" fetchpriority="high" />
+      <h1 class="proximamente reveal" style="--reveal-delay: 300ms;">Próximamente</h1>
+      
+      <div class="ornament reveal" style="--reveal-delay: 450ms;">
+        <div class="ornament-icon">
+          <svg viewBox="0 0 20 14" fill="none">
+            <ellipse cx="10" cy="7" rx="8" ry="5.5" stroke="currentColor" stroke-width="1.2"/>
+          </svg>
         </div>
-        <picture class="logo-img-wrapper is-floating">
-          <img src="/assets/AMENOCAFE.png" alt="Ameno Café" class="logo-img reveal" style="--reveal-delay: 80ms;" fetchpriority="high" />
-        </picture>
       </div>
 
-      <p class="proximamente reveal" style="--reveal-delay: 220ms;">Próximamente</p>
+      <p class="tagline reveal" style="--reveal-delay: 600ms;">Llevamos la experiencia del café de especialidad a tu evento.</p>
 
-      <div class="ornament reveal reveal--soft" aria-hidden="true" style="--reveal-delay: 340ms;">
-        <svg class="ornament-icon" viewBox="0 0 20 14" fill="none">
-          <ellipse cx="10" cy="7" rx="8" ry="5.5" stroke="currentColor" stroke-width="1.8"/>
-          <path d="M10 1.5 C10 1.5 10 7 10 12.5" stroke="currentColor" stroke-width="1.8"/>
-        </svg>
-      </div>
-
-      <p class="tagline reveal" style="--reveal-delay: 500ms;">Llevamos la experiencia del café a tu evento</p>
-
-      <form class="notify-form reveal" style="--reveal-delay: 700ms;" name="captura-email" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <form class="notify-form reveal" style="--reveal-delay: 800ms;" name="captura-email" method="POST" data-netlify="true" netlify-honeypot="bot-field">
         <input type="hidden" name="form-name" value="captura-email" />
-        <p style="position:absolute;width:1px;height:1px;overflow:hidden" aria-hidden="true">
-          <label for="bot-field">No llenar este campo</label>
-          <input id="bot-field" name="bot-field" type="text" tabindex="-1" autocomplete="off" />
-        </p>
-        <label style="position:absolute;width:1px;height:1px;overflow:hidden" for="email">Correo electrónico</label>
-        <input id="email" name="email" type="email" placeholder="Ingresa tu email..." autocomplete="email" required />
-        <button type="submit">Notificarme</button>
+        <input id="email" name="email" type="email" placeholder="TU CORREO ELECTRÓNICO" required />
+        <button type="submit">Suscribirme</button>
       </form>
 
       <div class="notify-status" id="notify-status" role="status" aria-live="polite" hidden></div>
 
-      <div class="contact-meta">
-        <div class="socials reveal" style="--reveal-delay: 920ms;">
-          <a class="social-circle social-wa" href="https://wa.me/5215578688247?text=Hola%20Ameno%20Caf%C3%A9%2C%20me%20gustar%C3%ADa%20cotizar%20un%20evento." aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-              <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.557 4.12 1.527 5.845L.057 23.5l5.797-1.448A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.838 0-3.563-.5-5.055-1.37l-.361-.214-3.44.859.874-3.353-.235-.374A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
-            </svg>
-          </a>
-          <a class="social-circle social-ig" href="https://www.instagram.com/_amenocafe/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
-            </svg>
-          </a>
-        </div>
-        <div class="location reveal reveal--soft" style="--reveal-delay: 1020ms;">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21a9 9 0 1 0 0-18"/><path d="M3 12h18"/><path d="M12 3a15.3 15.3 0 0 1 0 18"/></svg>
-          <span>Con base en Minatitlán, Veracruz</span>
-        </div>
+      <div class="socials reveal" style="--reveal-delay: 1000ms;">
+        <a href="https://wa.me/5215578688247" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.557 4.12 1.527 5.845L.057 23.5l5.797-1.448A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.838 0-3.563-.5-5.055-1.37l-.361-.214-3.44.859.874-3.353-.235-.374A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/_amenocafe/" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </a>
       </div>
 
-    </section>
-
-    <!-- CUP SCENE -->
-    <section class="cup-section">
-      <div class="cup-scene">
-        <div class="wisps">
-          <span class="wisp"></span>
-          <span class="wisp"></span>
-          <span class="wisp"></span>
-        </div>
-        <div class="cup-frame">
-          <img src="/assets/amenocafecup.webp" alt="" class="cup-photo" loading="lazy" />
-        </div>
+      <div class="location reveal" style="--reveal-delay: 1200ms;">
+        Con base en Minatitlán, Veracruz
       </div>
     </section>
 
-    <!-- SERVICES -->
     <section class="services">
       <div class="services-inner">
-
-        <div class="ornament reveal reveal--soft" aria-hidden="true" style="--reveal-delay: 120ms;">
-          <svg class="ornament-icon" viewBox="0 0 20 14" fill="none">
-            <ellipse cx="10" cy="7" rx="8" ry="5.5" stroke="currentColor" stroke-width="1.8"/>
-            <path d="M10 1.5 C10 1.5 10 7 10 12.5" stroke="currentColor" stroke-width="1.8"/>
-          </svg>
-        </div>
-
-        <h2 class="section-title reveal" style="--reveal-delay: 240ms;">Servicios próximamente disponibles</h2>
-
-        <div class="ornament reveal reveal--soft" aria-hidden="true" style="--reveal-delay: 360ms;">
-          <svg class="ornament-icon" viewBox="0 0 20 14" fill="none">
-            <ellipse cx="10" cy="7" rx="8" ry="5.5" stroke="currentColor" stroke-width="1.8"/>
-            <path d="M10 1.5 C10 1.5 10 7 10 12.5" stroke="currentColor" stroke-width="1.8"/>
-          </svg>
-        </div>
-
-        <p class="section-sub reveal" style="--reveal-delay: 500ms;">Llevamos una barra de café de especialidad a tus eventos privados, corporativos y celebraciones especiales.</p>
+        <h2 class="section-title reveal" style="--reveal-delay: 200ms;">Nuestros Servicios</h2>
+        <p class="section-sub reveal" style="--reveal-delay: 400ms;">Llevamos una barra de café de especialidad a tus momentos más importantes.</p>
 
         <div class="cards">
-          <article class="card reveal" style="--reveal-delay: 620ms;">
-            <div class="card-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M7 8h8v4a4 4 0 0 1-8 0V8z"/><path d="M15 10h1.5A2.5 2.5 0 0 1 19 12.5A2.5 2.5 0 0 1 16.5 15H15"/>
-                <path d="M9 4v2"/><path d="M12 4v2"/>
-              </svg>
-            </div>
-            <h3>Barra de café para eventos privados</h3>
-            <div class="card-line" aria-hidden="true"></div>
-            <p>Servicio de café de especialidad para bodas, reuniones, celebraciones y eventos sociales con una experiencia cuidada y profesional.</p>
+          <article class="card reveal" style="--reveal-delay: 600ms;">
+            <h3>Eventos Privados</h3>
+            <p>Servicio de café para bodas, celebraciones y reuniones sociales con una estética cuidada y profesional.</p>
           </article>
 
-          <article class="card reveal" style="--reveal-delay: 760ms;">
-            <div class="card-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="4" y="7" width="16" height="11" rx="2"/><path d="M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/><path d="M4 12h16"/>
-              </svg>
-            </div>
-            <h3>Eventos corporativos</h3>
-            <div class="card-line" aria-hidden="true"></div>
-            <p>Una barra de café elegante para conferencias, oficinas, activaciones y encuentros empresariales.</p>
+          <article class="card reveal" style="--reveal-delay: 750ms;">
+            <h3>Corporativos</h3>
+            <p>Barra de café elegante para conferencias, oficinas y activaciones empresariales.</p>
           </article>
 
           <article class="card reveal" style="--reveal-delay: 900ms;">
-            <div class="card-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 14h14"/><path d="M7 14a5 5 0 0 1 10 0"/><path d="M12 4v2"/><path d="M4 18h16"/>
-              </svg>
-            </div>
-            <h3>Catering de café</h3>
-            <div class="card-line" aria-hidden="true"></div>
-            <p>Bebidas preparadas al momento para complementar tu evento con hospitalidad, detalle y calidez.</p>
+            <h3>Catering</h3>
+            <p>Bebidas preparadas al momento con hospitalidad y detalle para complementar tu evento.</p>
           </article>
 
-          <article class="card reveal" style="--reveal-delay: 1040ms;">
-            <div class="card-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 3l1.6 3.4L17 8l-3.4 1.6L12 13l-1.6-3.4L7 8l3.4-1.6L12 3Z"/>
-                <path d="M19 14l.9 1.9 1.9.9-1.9.9-.9 1.9-.9-1.9-1.9-.9 1.9-.9.9-1.9Z"/>
-              </svg>
-            </div>
-            <h3>Experiencias personalizadas</h3>
-            <div class="card-line" aria-hidden="true"></div>
-            <p>Adaptamos la propuesta al estilo, tamaño y atmósfera de tu evento para que todo se sienta coherente y especial.</p>
+          <article class="card reveal" style="--reveal-delay: 1050ms;">
+            <h3>Personalizado</h3>
+            <p>Adaptamos nuestra propuesta al estilo y atmósfera de tu evento para una experiencia coherente.</p>
           </article>
         </div>
-
-        <div class="ornament reveal reveal--soft" style="margin-top:40px; --reveal-delay: 1180ms;" aria-hidden="true">
-          <svg class="ornament-icon" viewBox="0 0 20 14" fill="none">
-            <ellipse cx="10" cy="7" rx="8" ry="5.5" stroke="currentColor" stroke-width="1.8"/>
-            <path d="M10 1.5 C10 1.5 10 7 10 12.5" stroke="currentColor" stroke-width="1.8"/>
-          </svg>
-        </div>
-        <p class="services-footer reveal" style="--reveal-delay: 1300ms;">Café de especialidad &nbsp;·&nbsp; Momentos inolvidables</p>
-
       </div>
     </section>
 
-    <footer class="site-footer reveal" style="--reveal-delay: 1400ms;">
-      <p>Filtrado con prensa francesa por <a href="https://nodoalfa.com" target="_blank" rel="noopener noreferrer">Nodo Alfa</a></p>
-      <p class="copyright">&copy; 2026 Ameno Café. Todos los derechos reservados.</p>
+    <footer class="site-footer">
+      <p>&copy; 2026 Ameno Café &nbsp;·&nbsp; Minatitlán, Veracruz</p>
+      <p style="margin-top: 10px;">Diseño por <a href="https://nodoalfa.com" target="_blank" rel="noopener noreferrer">Nodo Alfa</a></p>
     </footer>
 
     <script>
