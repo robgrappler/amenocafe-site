@@ -1,3 +1,15 @@
 [build]
   command = "npm run build"
   publish = "dist"
+
+[[redirects]]
+  from = "https://amenocafe.net/*"
+  to = "https://amenocafe.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.amenocafe.net/*"
+  to = "https://amenocafe.com/:splat"
+  status = 301
+  force = true
